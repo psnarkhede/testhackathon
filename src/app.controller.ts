@@ -6,7 +6,7 @@ import { BookingRequestDto } from './dto/booking-request.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get("/bookings")
+  @Get("bookings")
   GetBookings(request: BookingRequestDto): string {
     return this.appService.getHello();
   }
