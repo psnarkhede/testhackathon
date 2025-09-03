@@ -7,6 +7,11 @@ import { BookingResponseDto } from './dto/bookinig-response.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Get("/")
+  Get(): string {
+    return 'Hello World!';
+  }
+
   @Get("bookings")
   GetBookings(request: BookingRequestDto): BookingResponseDto {
     return this.appService.getHello();
