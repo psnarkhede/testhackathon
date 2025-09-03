@@ -9,7 +9,7 @@ export class AppController {
 
   @Get("/")
   Get(): string {
-    return 'Hello World!';
+    return 'Hello World';
   }
 
   @Get("bookings")
