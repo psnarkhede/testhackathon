@@ -1,3 +1,9 @@
+Of course. Here is the human-readable API documentation and the corresponding Swagger YAML file generated from your provided schema.
+
+***
+
+### 1. Human-Readable API Documentation
+
 ## API Endpoints
 
 ### 1. Root Endpoint
@@ -18,3 +24,40 @@ curl -X GET http://localhost:3000/
 ```
 
 ---
+
+### 2. Get Bookings
+**Retrieves booking information for a user identified by their mobile number and a unique identifier (UUID).**
+
+*   **URL:** `/bookings`
+*   **Method:** `GET`
+*   **Controller:** `AppController`
+*   **Query Parameters:**
+    *   `mobileNumber`: (string, required) The user's mobile number.
+    *   `uuid`: (string, required) A unique identifier for the user or request.
+
+*   **Request Body:** None (Parameters are passed via the query string).
+
+*   **Success Response:**
+    *   **Code:** `200 OK`
+    *   **Content:** `application/json`
+    *   **Body (BookingResponseDto):** An object containing the booking details.
+
+    **Example Response Body:**
+    ```json
+    {
+      "vehicle": "Sedan XYZ-123",
+      "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "amount": 29.99
+    }
+    ```
+    *Note: The `amount` field is optional and may not be present in all responses.*
+
+*   **Error Responses:**
+    *   `400 Bad Request`: If the required query parameters (`mobileNumber` or `uuid`) are missing.
+
+**Example Request:**
+```bash
+curl -X GET "http://localhost:3000/bookings?mobileNumber=1234567890&uuid=a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+```
+
+***
