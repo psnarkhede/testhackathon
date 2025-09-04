@@ -1,0 +1,84 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "cf075ea4011577b0ce6ed32fe177c04c2f1d5e53",
+    "title": "API Documentation"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "AppController"
+        ],
+        "operationId": "Get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/bookings": {
+      "get": {
+        "tags": [
+          "AppController"
+        ],
+        "operationId": "GetBookings",
+        "parameters": [
+          {
+            "name": "mobileNumber",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "vehicle": {
+                      "type": "string"
+                    },
+                    "uuid": {
+                      "type": "string"
+                    },
+                    "amount": {
+                      "type": "string"
+                    },
+                    "pinode": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "vehicle",
+                    "uuid"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AppController"
+    }
+  ]
+}
