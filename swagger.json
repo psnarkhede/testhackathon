@@ -1,9 +1,14 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "cf075ea4011577b0ce6ed32fe177c04c2f1d5e53",
-    "title": "API Documentation"
+    "title": "API Documentation",
+    "version": "80512041591af7fd14a3295ca673533725175997"
   },
+  "tags": [
+    {
+      "name": "AppController"
+    }
+  ],
   "paths": {
     "/": {
       "get": {
@@ -13,7 +18,7 @@
         "operationId": "Get",
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Success",
             "content": {}
           }
         }
@@ -45,7 +50,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -75,10 +80,5 @@
         }
       }
     }
-  },
-  "tags": [
-    {
-      "name": "AppController"
-    }
-  ]
+  }
 }
