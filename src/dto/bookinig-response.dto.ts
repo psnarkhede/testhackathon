@@ -11,4 +11,8 @@ export class BookingResponseDto {
   @IsNumber()
   @IsOptional()
   amount?: number;
+
+  @IsNumber()
+  @IsOptional()
+  pinode?: number;
 }
