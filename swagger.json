@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "964a91b62cc667a68ccd3af0c3732a0f7d318cf5",
-    "title": "API Documentation"
+    "version": "9eb6bb7e431559d5762feb2682989b06f26d0999",
+    "title": "API"
   },
   "paths": {
     "/": {
@@ -13,7 +13,8 @@
         "operationId": "Get",
         "responses": {
           "200": {
-            "description": "Successful Response"
+            "description": "Successful response",
+            "content": {}
           }
         }
       }
@@ -44,7 +45,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Successful response",
             "content": {
               "application/json": {
                 "schema": {
@@ -57,12 +58,10 @@
                       "type": "string"
                     },
                     "amount": {
-                      "type": "string",
-                      "nullable": true
+                      "type": "string"
                     },
                     "pinode": {
-                      "type": "string",
-                      "nullable": true
+                      "type": "string"
                     }
                   },
                   "required": [
