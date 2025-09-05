@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { BookingRequestDto } from './dto/booking-request.dto';
 import { BookingResponseDto } from './dto/bookinig-response.dto';
@@ -8,11 +8,11 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get("/")
-  Get(): string {
+  GetHelloWorld(): string {
     return 'Hello World';
   }
 
-  @Get("bookings")
+  @Post("bookings")
   GetBookings(request: BookingRequestDto): BookingResponseDto {
     return this.appService.getHello();
   }
