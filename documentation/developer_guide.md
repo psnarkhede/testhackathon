@@ -1,25 +1,32 @@
-# Developer Guide - Version: [object Object]
-
-## Setup Instructions
-
-1. Clone the repository.
-2. Run `npm install` to install dependencies.
-3. Run `npm start` to start the server.
+# Developer Guide - Version: 1.0.0
 
 ## Project Structure
 
-- `src/` - Source code
-- `tests/` - Test suites
+- `src/`
+  - `index.js`: Entry point of the application, sets up the server.
+  - `controllers/helloController.js`: Contains the function `sayHello` that handles GET requests to `/hello`.
 
-## Components
+## Setup Steps
 
-- API endpoints under `src/routes`
-- Data models under `src/models`
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Start the server using `node src/index.js`.
 
-## Code Example
+## Minimal Example
 
-```javascript
-fetch('/items')
-  .then(res => res.json())
-  .then(data => console.log(data));
+```js
+// src/controllers/helloController.js
+exports.sayHello = (req, res) => {
+  res.json({ message: 'Hello, World!' });
+};
+
+// src/index.js
+const express = require('express');
+const { sayHello } = require('./controllers/helloController');
+
+const app = express();
+
+app.get('/hello', sayHello);
+
+app.listen(3000, () => console.log('Server running on port 3000'));
 ```
