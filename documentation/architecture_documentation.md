@@ -1,39 +1,27 @@
-# Architecture Document
+# Architecture Documentation
 
 **Version:** 1.0.0
 
----
+## System Architecture
 
-## Overview
+- **main.ts**: Bootstrap file to start the NestJS application.
+- **app.module.ts**: Root module where controllers and services are registered.
+- **app.controller.ts**: Defines request handling routes.
+- **app.service.ts**: Contains business logic.
+- **DTOs**: Define the schema of data for requests and responses, enforcing structure and validation.
 
-This project is based on the NestJS framework, which organizes applications into **modules**, **controllers**, **services**, and **DTOs**.
+## Interaction Flow
 
+User Request → **Controller** → **Service** → **DTO**
 
-## Components
+1. The controller receives the incoming request and calls the respective service method.
+2. The service processes the request, performing business logic.
+3. DTOs are used to type-check both incoming requests and outgoing responses.
 
-- **main.ts:** Bootstraps and launches the NestJS application. Sets up the HTTP server.
+## Dependencies
 
-- **app.module.ts:** The root module of the app, which imports and ties together all components.
-
-- **Controllers (`app.controller.ts`):** Handle HTTP requests and route them. Example endpoints implemented include `GET /` and `POST /bookings`.
-    - The `AppController` defines handlers like `getHello()` which returns greeting and `createBooking()` which handles booking creation.
-
-- **Services (`app.service.ts`):** Contains business logic. `AppService` has methods that the controller calls to fulfill requests.
-
-- **DTOs (Data Transfer Objects):** Define request and response data shapes. Located in `dto/` folder:
-    - `HelloResponse` for returning greetings.
-    - `BookingRequest` for incoming booking data.
-    - `BookingResponse` for sending booking confirmations.
-
-## Interactions
-
-- When a client sends a request to the API, the **Controller** mapped to that route receives it.
-- The Controller method then uses the **Service** to process the business logic, for example, creating a booking or returning a hello message.
-- Inputs and outputs are validated/typed by **DTOs**.
-
-## Dependencies (from `package.json`)
-
-- **@nestjs/core, @nestjs/common, @nestjs/platform-express:** Core NestJS framework modules.
-- **Typescript:** For static typing.
-
-This setup ensures modularity, testability, and maintainability.
+- `@nestjs/common`, `@nestjs/core`, `@nestjs/platform-express` for the NestJS framework.
+- `class-validator` and `class-transformer` for validation and transformation of DTOs.
+- `reflect-metadata` for metadata reflection.
+- `rxjs` for reactive programming.
+- `typescript` and `ts-node` for TypeScript compilation and execution.
