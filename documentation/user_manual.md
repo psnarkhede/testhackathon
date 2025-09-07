@@ -1,65 +1,73 @@
-## User Manual
+# User Manual
 
-**Version:** 5c715563a7e7387859534267039d1b3b45b89854
+**Version:** 1.0.0
 
 ---
 
-This system allows you to login and manage your user profile via the provided API endpoints.
+## Using the API
 
-### Logging In
+This API exposes two main endpoints for end users:
 
-To use the system, you first need to authenticate by calling the `POST /api/auth/login` endpoint with your username and password.
+### 1. GET /
 
-**Example Request:**
+- **Description:** Returns a greeting message.
+- **How to call:** Send a GET request to the root path.
+
+#### Example Request
+```
+GET /
+```
+
+#### Example Response
 ```json
 {
-  "username": "johndoe",
-  "password": "mypassword123"
+  "message": "Hello World!"
 }
 ```
 
-On successful authentication, you will receive an access token and refresh token. Use the access token to authorize subsequent requests.
+---
 
-**Example Response:**
+### 2. POST /bookings
+
+- **Description:** Creates a new booking with given user, date, and location.
+- **How to call:** Send a POST request to `/bookings` with JSON body.
+
+#### Expected Request Body
 ```json
 {
-  "accessToken": "eyJhbGci...",
-  "refreshToken": "dGhpc2lz..."
+  "user": "string",
+  "date": "YYYY-MM-DD",
+  "location": "string"
 }
 ```
 
-### Viewing Your Profile
-
-Once logged in, you can retrieve your profile information by sending a GET request to `/api/users/profile` with your access token.
-
-**Example Response:**
+#### Example Request
 ```json
 {
-  "id": "12345",
-  "username": "johndoe",
-  "email": "johndoe@example.com",
-  "createdAt": "2023-05-01T10:00:00Z"
+  "user": "john.doe",
+  "date": "2023-08-15",
+  "location": "New York"
 }
 ```
 
-### Updating Your Profile
-
-You can update your email and password by sending a PUT request to `/api/users/profile` with the new values in the body.
-
-**Example Request:**
+#### Example Response
 ```json
 {
-  "email": "john.newemail@example.com",
-  "password": "newpassword456"
+  "id": "1",
+  "user": "john.doe",
+  "date": "2023-08-15",
+  "location": "New York",
+  "status": "confirmed"
 }
 ```
 
-**Example Response:**
-```json
-{
-  "success": true,
-  "message": "Profile updated successfully."
-}
-```
+---
 
-Use these endpoints responsibly and keep your authentication tokens secure.
+## Notes on Inputs and Outputs
+- `user`: a string identifying the user making the booking.
+- `date`: must be a valid date string formatted as ISO 8601 (YYYY-MM-DD).
+- `location`: a string representing the location of the booking.
+- `id`: string, unique booking identifier.
+- `status`: string, status of the booking (normally "confirmed").
+
+Make sure your requests have valid JSON and correct formatting.
