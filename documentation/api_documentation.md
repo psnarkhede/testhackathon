@@ -1,17 +1,3 @@
-# API Documentation
+# API Documentation - Version: 
 
-**Version:** Not Provided
-
-
-## Endpoints
-
-
-### HTTP Method: Not Provided
-
-**Path:** Not Provided
-
-**Function Name:** Not Provided
-
-**Request DTO:** Not Provided
-
-**Response DTO:** Not Provided
+_No input data provided; cannot list endpoints or DTO details._
