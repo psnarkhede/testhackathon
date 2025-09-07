@@ -1,105 +1,73 @@
-## API Documentation
+# API Documentation
 
-**Version:** 5c715563a7e7387859534267039d1b3b45b89854
+**Version:** 1.0.0
 
 ---
 
-### POST /api/auth/login
+## Endpoints
 
-**Description:** Authenticate user and obtain access token.
+### 1. GET /
 
-**Request DTO:**
+- **Method:** GET
+- **Path:** /
+- **Function:** getHello
+- **Request DTO:** None
+- **Response DTO:** HelloResponse
+
+#### HelloResponse DTO
+| Property | Type   |
+|----------|--------|
+| message  | string |
+
+#### Example Response
 ```json
 {
-  "username": "string",
-  "password": "string"
-}
-```
-
-**Response DTO:**
-```json
-{
-  "accessToken": "string",
-  "refreshToken": "string"
-}
-```
-
-**Example Request:**
-```json
-{
-  "username": "johndoe",
-  "password": "mypassword123"
-}
-```
-
-**Example Response:**
-```json
-{
-  "accessToken": "eyJhbGci...",
-  "refreshToken": "dGhpc2lz..."
+  "message": "Hello World!"
 }
 ```
 
 ---
 
-### GET /api/users/profile
+### 2. POST /bookings
 
-**Description:** Retrieve the profile information of the current user.
+- **Method:** POST
+- **Path:** /bookings
+- **Function:** createBooking
+- **Request DTO:** BookingRequest
+- **Response DTO:** BookingResponse
 
-**Response DTO:**
+#### BookingRequest DTO
+| Property   | Type   |
+|------------|--------|
+| user       | string |
+| date       | string (ISO 8601 date)
+| location   | string |
+
+#### BookingResponse DTO
+| Property   | Type   |
+|------------|--------|
+| id         | string |
+| user       | string |
+| date       | string (ISO 8601 date)
+| location   | string |
+| status     | string |
+
+#### Example Request
 ```json
 {
-  "id": "string",
-  "username": "string",
-  "email": "string",
-  "createdAt": "string"
+  "user": "john.doe",
+  "date": "2023-08-15",
+  "location": "New York"
 }
 ```
 
-**Example Response:**
+#### Example Response
 ```json
 {
-  "id": "12345",
-  "username": "johndoe",
-  "email": "johndoe@example.com",
-  "createdAt": "2023-05-01T10:00:00Z"
-}
-```
-
----
-
-### PUT /api/users/profile
-
-**Description:** Update current user profile information.
-
-**Request DTO:**
-```json
-{
-  "email": "string",
-  "password": "string"
-}
-```
-
-**Response DTO:**
-```json
-{
-  "success": true,
-  "message": "Profile updated successfully."
-}
-```
-
-**Example Request:**
-```json
-{
-  "email": "john.newemail@example.com",
-  "password": "newpassword456"
-}
-```
-
-**Example Response:**
-```json
-{
-  "success": true,
-  "message": "Profile updated successfully."
+  "id": "1",
+  "user": "john.doe",
+  "date": "2023-08-15",
+  "location": "New York",
+  "status": "confirmed"
 }
 ```
