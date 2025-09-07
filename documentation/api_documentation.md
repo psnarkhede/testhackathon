@@ -1,5 +1,39 @@
-# API Documentation - Version: 
+# API Documentation - Version: [object Object]
 
-_No API endpoints are specified in the provided input data._
+## Endpoints
 
-_No request or response DTO details are available to document._
+### GET /items
+Retrieve list of items.
+
+**Request:** None
+
+**Response:**
+```json
+[
+  {
+    "id": "string",
+    "name": "string",
+    "price": 0
+  }
+]
+```
+
+### POST /items
+Create a new item.
+
+**Request:**
+```json
+{
+  "name": "string",
+  "price": 0
+}
+```
+
+**Response:**
+```json
+{
+  "id": "string",
+  "name": "string",
+  "price": 0
+}
+```
