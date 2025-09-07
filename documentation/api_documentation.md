@@ -1,96 +1,78 @@
-# API Documentation
+## API Documentation
 
-**Version:** 7f2eec614b7c99282052440ca6a0ba82bee672fa
-
----
-
-## 1. User Management API
-
-### Endpoint: `/users`
-- **Method:** GET
-- **Description:** Retrieve a list of users.
-
-#### Request Parameters:
-- None
-
-#### Response DTO:
-```json
-[
-  {
-    "id": "string",
-    "name": "string",
-    "email": "string"
-  }
-]
-```
-
-#### Example Response:
-```json
-[
-  {
-    "id": "u123",
-    "name": "Alice Smith",
-    "email": "alice@example.com"
-  },
-  {
-    "id": "u124",
-    "name": "Bob Jones",
-    "email": "bob@example.com"
-  }
-]
-```
+**Version:** 5c715563a7e7387859534267039d1b3b45b89854
 
 ---
 
-### Endpoint: `/users`
-- **Method:** POST
-- **Description:** Create a new user.
+### POST /api/auth/login
 
-#### Request DTO:
+**Description:** Authenticate user and obtain access token.
+
+**Request DTO:**
 ```json
 {
-  "name": "string",
-  "email": "string",
+  "username": "string",
   "password": "string"
 }
 ```
 
-#### Response DTO:
+**Response DTO:**
 ```json
 {
-  "id": "string",
-  "name": "string",
-  "email": "string"
+  "accessToken": "string",
+  "refreshToken": "string"
 }
 ```
 
-#### Example Request:
+**Example Request:**
 ```json
 {
-  "name": "Charlie Brown",
-  "email": "charlie@example.com",
-  "password": "password123"
+  "username": "johndoe",
+  "password": "mypassword123"
 }
 ```
 
-#### Example Response:
+**Example Response:**
 ```json
 {
-  "id": "u125",
-  "name": "Charlie Brown",
-  "email": "charlie@example.com"
+  "accessToken": "eyJhbGci...",
+  "refreshToken": "dGhpc2lz..."
 }
 ```
 
 ---
 
-## 2. Authentication API
+### GET /api/users/profile
 
-### Endpoint: `/auth/login`
-- **Method:** POST
-- **Description:** Authenticate user and obtain JWT token.
+**Description:** Retrieve the profile information of the current user.
 
-#### Request DTO:
+**Response DTO:**
+```json
+{
+  "id": "string",
+  "username": "string",
+  "email": "string",
+  "createdAt": "string"
+}
+```
+
+**Example Response:**
+```json
+{
+  "id": "12345",
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "createdAt": "2023-05-01T10:00:00Z"
+}
+```
+
+---
+
+### PUT /api/users/profile
+
+**Description:** Update current user profile information.
+
+**Request DTO:**
 ```json
 {
   "email": "string",
@@ -98,57 +80,26 @@
 }
 ```
 
-#### Response DTO:
+**Response DTO:**
 ```json
 {
-  "token": "string",
-  "expiresIn": "number"
+  "success": true,
+  "message": "Profile updated successfully."
 }
 ```
 
-#### Example Request:
+**Example Request:**
 ```json
 {
-  "email": "alice@example.com",
-  "password": "password123"
+  "email": "john.newemail@example.com",
+  "password": "newpassword456"
 }
 ```
 
-#### Example Response:
+**Example Response:**
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR...",
-  "expiresIn": 3600
+  "success": true,
+  "message": "Profile updated successfully."
 }
 ```
-
----
-
-## 3. Profile API
-
-### Endpoint: `/profile`
-- **Method:** GET
-- **Description:** Fetch the logged in user's profile.
-- **Headers:** `Authorization: Bearer <token>`
-
-#### Response DTO:
-```json
-{
-  "id": "string",
-  "name": "string",
-  "email": "string"
-}
-```
-
-#### Example Response:
-```json
-{
-  "id": "u123",
-  "name": "Alice Smith",
-  "email": "alice@example.com"
-}
-```
-
----
-
-*Note: This documentation covers the primary API endpoints along with their methods, request and response data contracts, and sample data to guide consumers.*
