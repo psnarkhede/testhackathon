@@ -1,126 +1,107 @@
 ## API Documentation
 
-### Version: 1.4.2-release
+**Version:** {{version}}
 
 ---
 
-### 1. User Login
+### 1. GET /users
 
-- **Endpoint:** `/api/login`
-- **Method:** POST
+**Description:** Retrieves a list of users.
 
-#### Request DTO
+**Method:** GET
+
+**Request:** No body required.
+
+**Response:**
 ```json
-{
-  "username": "string",
-  "password": "string"
-}
+[
+  {
+    "id": "string",
+    "name": "string",
+    "email": "string"
+  }
+]
 ```
 
-#### Response DTO
-```json
-{
-  "token": "string",
-  "expiresIn": 3600
-}
+**Example:**
 ```
+GET /users
 
-#### Example Request
-```
-POST /api/login
-Content-Type: application/json
-
-{
-  "username": "john_doe",
-  "password": "s3cr3t"
-}
-```
-
-#### Example Response
-```
+Response:
 200 OK
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR...",
-  "expiresIn": 3600
-}
+[
+  {
+    "id": "123",
+    "name": "John Doe",
+    "email": "john@example.com"
+  },
+  {
+    "id": "456",
+    "name": "Jane Smith",
+    "email": "jane@example.com"
+  }
+]
 ```
 
 ---
 
-### 2. Get User Profile
+### 2. POST /users
 
-- **Endpoint:** `/api/users/{userId}`
-- **Method:** GET
+**Description:** Creates a new user.
 
-#### Path Parameters
-- `userId`: string (UUID)
+**Method:** POST
 
-#### Response DTO
+**Request Body:**
 ```json
 {
-  "userId": "string",
-  "username": "string",
-  "email": "string",
-  "createdAt": "string (ISO8601 date)"
-}
-```
-
-#### Example Request
-```
-GET /api/users/123e4567-e89b-12d3-a456-426614174000
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR...
-```
-
-#### Example Response
-```
-200 OK
-{
-  "userId": "123e4567-e89b-12d3-a456-426614174000",
-  "username": "john_doe",
-  "email": "john@example.com",
-  "createdAt": "2023-05-01T12:00:00Z"
-}
-```
-
----
-
-### 3. Update User Email
-
-- **Endpoint:** `/api/users/{userId}/email`
-- **Method:** PUT
-
-#### Path Parameters
-- `userId`: string (UUID)
-
-#### Request DTO
-```json
-{
+  "name": "string",
   "email": "string"
 }
 ```
 
-#### Response DTO
+**Response:**
 ```json
 {
-  "message": "string"
+  "id": "string",
+  "name": "string",
+  "email": "string"
 }
 ```
 
-#### Example Request
+**Example:**
 ```
-PUT /api/users/123e4567-e89b-12d3-a456-426614174000/email
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR...
-Content-Type: application/json
-
+POST /users
 {
-  "email": "john_new@example.com"
+  "name": "Alice Johnson",
+  "email": "alice@example.com"
+}
+
+Response:
+201 Created
+{
+  "id": "789",
+  "name": "Alice Johnson",
+  "email": "alice@example.com"
 }
 ```
 
-#### Example Response
-```
-200 OK
+---
+
+### DTOs
+
+**User DTO:**
+```json
 {
-  "message": "Email updated successfully"
+  "id": "string",
+  "name": "string",
+  "email": "string"
+}
+```
+
+**CreateUser DTO:**
+```json
+{
+  "name": "string",
+  "email": "string"
 }
 ```
