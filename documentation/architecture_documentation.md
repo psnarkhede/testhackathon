@@ -1,30 +1,43 @@
-**Architecture Documentation**
+## Architecture Documentation
 
-**Version:** {{version}}
+**Version:** 04d39232b7f955392abbb0a13145ce0e90ada880
 
 ---
 
-### Overview
-The system is designed as a modular web API application focused on user management.
+### System Overview
 
-### Modules
-- **Controllers:** Handle incoming API requests and respond.
-- **Services:** Contain business logic separate from the API layer.
-- **Models:** Define data structures and database schemas.
-- **DTOs:** Data Transfer Objects for validating incoming requests.
+The system is a modular backend application built on **NestJS** framework, using **TypeScript**. It follows the **layered architecture pattern** with clear separation of concerns among controllers, services, and data layers.
+
+### Module Structure
+
+- **Controllers:** Handle incoming HTTP requests and forward them to the appropriate services.
+- **Services:** Contain core business logic and interact with repositories for data handling.
+- **DTOs:** Define the structure of data for request validation and response shaping.
 
 ### Data Flow
-1. Client sends HTTP request to API endpoint.
-2. Controller receives the request and validates input using DTOs.
-3. Controller calls appropriate service methods.
-4. Services interact with Models/Database.
-5. Service returns data to Controller.
-6. Controller sends response back to client.
+
+1. **Incoming Request:** Hits the controller.
+2. **Validation:** Request DTOs validate and parse input data.
+3. **Business Logic:** Controllers call services to process data.
+4. **Persistence:** Services interact with database repositories.
+5. **Response:** Processed data returned to users via controllers.
 
 ### Configuration
-- Environment variables configure database, ports, and other settings.
-- Main entry file `src/main.ts` bootstraps the app.
+
+- Centralized config files manage environment variables and app settings.
+- Uses ORM for database abstraction.
+
+### Tests
+
+- Unit and integration tests cover controllers and services.
+- Tests use mocks and in-memory data stores for isolation.
+
+### README Highlights
+
+- Installation instructions
+- Environment variable requirements
+- How to run the project locally and deploy
 
 ---
 
-This layered design ensures separation of concerns, clean code, and scalability.
+The system emphasizes scalability and maintainability by strict adherence to clean code principles and design patterns.
