@@ -1,54 +1,70 @@
-**Onboarding Document**
+## Onboarding Document
 
-**Version:** {{version}}
+**Version:** 04d39232b7f955392abbb0a13145ce0e90ada880
 
 ---
 
-Welcome to the project! Follow these steps to set up your environment and run the project locally.
+Welcome aboard! This document will walk you through setting up your local environment to start developing.
 
-### Prerequisites
-- Node.js (version specified in `package.json` engines section, e.g., >=14.0.0).
-- npm or yarn package manager.
-- Git client.
+### Step 1: Clone the Repository
 
-### Steps
-
-1. **Clone the repository**
 ```bash
-git clone <repository_url>
-cd <repository_folder>
+git clone https://github.com/example/project.git
+cd project
 ```
 
-2. **Install dependencies**
+### Step 2: Install Dependencies
+
+Make sure you have **Node.js (v16 or later)** and **npm** installed.
+
 ```bash
 npm install
-# or
-# yarn install
 ```
 
-3. **Set up environment variables**
-- Copy `.env.example` to `.env`
-- Edit `.env` with your configuration (database URL, API keys, etc.)
+### Step 3: Set up Environment Variables
 
-4. **Run the application locally**
+Copy `.env.example` to `.env` and fill in necessary values:
+
 ```bash
-npm run start
-# or
-# yarn start
+cp .env.example .env
 ```
-- The server will start on the port specified in `.env` or default in `main.ts`.
 
-5. **Running tests**
+Edit `.env` to configure database connection, API keys, and other configs as per the README.
+
+### Step 4: Running the Application
+
+Start the backend server locally:
+
 ```bash
-npm run test
-# or
-# yarn test
+npm run start:dev
 ```
 
-### Notes from README.md
-- The main entry point is `src/main.ts`.
-- Use scripts defined in `package.json` for running, building, and testing.
+This uses **`main.ts`** as the entry point. You can access the API at `http://localhost:3000`.
+
+### Step 5: Running Tests
+
+To run all automated tests:
+
+```bash
+npm test
+```
+
+### Step 6: Linting and Formatting
+
+Check code style compliance:
+
+```bash
+npm run lint
+```
+
+Auto-format source files:
+
+```bash
+npm run format
+```
 
 ---
 
-You are ready to start developing!
+Consult the README.md in the root directory for more details or project-specific instructions.
+
+Welcome to the team!
