@@ -1,40 +1,30 @@
-## Architecture Documentation
+**Architecture Documentation**
 
-### Version: 1.4.2-release
-
-This document provides a high-level overview of the system's design and structure.
+**Version:** {{version}}
 
 ---
 
 ### Overview
-The system is built using a modular architecture with separation of concerns.
+The system is designed as a modular web API application focused on user management.
 
 ### Modules
-- **User Module**: Responsible for user management functions, including login, profile management, and updating user details.
-- **Auth Module**: Handles authentication, token generation, and validation.
-- **API Layer**: REST controllers expose services endpoints.
-
----
+- **Controllers:** Handle incoming API requests and respond.
+- **Services:** Contain business logic separate from the API layer.
+- **Models:** Define data structures and database schemas.
+- **DTOs:** Data Transfer Objects for validating incoming requests.
 
 ### Data Flow
-1. Client sends an HTTP request to the API server.
-2. API controllers receive and validate incoming data.
-3. Controllers delegate business logic to Services.
-4. Services interact with the database through repositories (not shown in detail here).
-5. Services return processed data to controllers.
-6. Controllers send JSON responses back to clients.
-
----
-
-### Technologies
-- **NestJS** framework provides the foundation.
-- **TypeScript** is the language for all codebase.
-- **JWT** for stateless user authentication.
-
----
+1. Client sends HTTP request to API endpoint.
+2. Controller receives the request and validates input using DTOs.
+3. Controller calls appropriate service methods.
+4. Services interact with Models/Database.
+5. Service returns data to Controller.
+6. Controller sends response back to client.
 
 ### Configuration
-- Environment variables control service configurations.
-- `config` module centralizes configuration access.
+- Environment variables configure database, ports, and other settings.
+- Main entry file `src/main.ts` bootstraps the app.
 
-For further details, please refer to the `README.md` and configuration files in the repository.
+---
+
+This layered design ensures separation of concerns, clean code, and scalability.
