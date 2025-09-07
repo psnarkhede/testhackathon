@@ -1,5 +1,20 @@
-# Onboarding Guide - Version: 
+# Onboarding Guide - Version: [object Object]
 
-_No quick start guides or environment setup steps are provided._
+## Quick Start
 
-_No key files or development workflow information is included in the input data._
+- Setup environment by running `npm install`.
+- Start the server with `npm start`.
+
+## Environment Setup
+
+- Node.js v12 or higher required.
+
+## Key Files
+
+- `src/index.js` - Application entry
+- `src/routes/items.js` - Items API routes
+
+## Development Workflow
+
+- Use Git for version control.
+- Run tests before commits.
