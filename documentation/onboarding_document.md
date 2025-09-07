@@ -1,19 +1,40 @@
-# Onboarding Guide - Version: 1.0.0
+**Onboarding Document**
 
-## Quick Start Guide
+**Version:** [object Object].version
 
-1. Ensure you have Node.js installed.
-2. Clone the project repository.
-3. Navigate to the project directory.
-4. Run `npm install` to install dependencies.
-5. Start the application with `node src/index.js`.
+Welcome aboard! Follow these steps to set up your development environment.
 
-## Environment Setup
+### Step 1: Prerequisites
+- Install Node.js (version 14 or higher).
+- Install npm (comes with Node.js).
+- Git installed.
 
-- Node.js runtime environment
-- No additional environment variables detected from source files
+### Step 2: Clone the repository
+```
+git clone [repository-url]
+cd [repository-folder]
+```
 
-## Key Files to Know
+### Step 3: Install dependencies
+```
+npm install
+```
 
-- `src/index.js`: Main server setup.
-- `src/controllers/helloController.js`: Contains the main controller function `sayHello`.
+### Step 4: Environment Setup
+- Copy `.env.example` to `.env`.
+- Configure environment variables as needed.
+
+### Step 5: Running the application locally
+```
+npm run start:dev
+```
+
+- This runs the app in development mode.
+- Navigate to `http://localhost:3000` to verify.
+
+### Additional Information
+- The main entry file is `src/main.ts` which boots the app.
+- Project scripts are defined in `package.json` including testing and building.
+- Read `README.md` for any project-specific information.
+
+You're ready to start coding!
