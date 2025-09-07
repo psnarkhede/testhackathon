@@ -1,60 +1,21 @@
-# Developer Guide
+## Developer Guide
 
-**Version:** 1.0.0
+### Version: Not Provided
 
-## Code Structure
+### Code Structure
 
-- **Controllers:** Handle incoming HTTP requests and return responses. Located in `app.controller.ts`.
-- **Services:** Contain business logic and interact with data or other services. Located in `app.service.ts`.
-- **DTOs:** Data Transfer Objects define the shape of request and response data.
-- **Modules:** Define the application structure and dependency injection. Located in `app.module.ts`.
+- **Controllers:** Not Provided
+- **Services:** Not Provided
+- **DTOs:** Not Provided
+- **Modules:** Not Provided
 
-## How to Extend
+### Extending the Project
 
-### Adding a New Controller
+To extend the project with an additional controller, service, or DTO, you would typically:
 
-1. Create a new controller file, e.g., `new-feature.controller.ts`.
-2. Define your routes and methods using decorators like `@Get()`, `@Post()`, etc.
-3. Register the controller in the relevant module.
+- Define the new DTO structures as needed.
+- Create a new service containing the business logic.
+- Create a new controller that routes HTTP requests to the service.
+- Register the new components in the module system.
 
-### Adding a New Service
-
-1. Create a new service file, e.g., `new-feature.service.ts`.
-2. Implement business logic methods.
-3. Inject this service into controllers or other services as needed.
-4. Register the service in the relevant module.
-
-### Adding a New DTO
-
-1. Create a new class file for the DTO, e.g., `create-new-feature.dto.ts`.
-2. Define the properties and apply validation decorators if necessary.
-
-## Code Snippets
-
-### Sample Controller Method
-```typescript
-@Get()
-getHome(): HomeResponseDto {
-  return this.appService.getHome();
-}
-```
-
-### Sample Service Method
-```typescript
-createBooking(dto: CreateBookingDto): BookingResponseDto {
-  // Logic to create booking
-  return {
-    bookingId: 'booking789',
-    status: 'confirmed',
-  };
-}
-```
-
-### Sample DTO Definition
-```typescript
-export class CreateBookingDto {
-  userId: string;
-  roomId: string;
-  date: string;
-}
-```
+Note: Specific file content and code examples are not available.
