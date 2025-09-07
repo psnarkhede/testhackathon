@@ -1,53 +1,48 @@
 ## Architecture Documentation
 
-**Version:** 7f2eec614b7c99282052440ca6a0ba82bee672fa
+**Version:** 5c715563a7e7387859534267039d1b3b45b89854
 
 ---
 
-### Overview
+### High-Level Overview
 
-The system is designed as a modular backend API application leveraging a layered architecture:
+This project is a RESTful API server that provides user authentication and profile management functionalities. It follows a modular architecture with clear separation of concerns between authentication, user management, and token handling.
 
-- **Controllers:** API-entry points that handle HTTP requests and responses.
-- **Services:** Contain business logic, orchestrate data manipulation and validation.
-- **Data Transfer Objects (DTOs):** Define the shape of data flowing through the system.
-- **Authentication Module:** Provides secure token-based authentication using JWT.
+---
 
 ### Project Structure
 
 ```
 /src
-  /controllers    # API route handlers
-  /services       # Business logic
-  /dtos           # Data schemas
-  /auth           # Authentication handling
-  main.ts         # Application entry
-/tests           # Unit and integration tests
-package.json      # Project dependencies and scripts
-README.md         # Project overview and docs
+  /auth
+    auth.service.ts
+    auth.controller.ts
+  /users
+    user.service.ts
+    user.controller.ts
+  /common
+    dto
+    guards
+  main.ts
+/package.json
+/README.md
 ```
+
+- `auth/`: Handles authentication logic.
+- `users/`: Manages user profiles.
+- `common/`: Contains shared DTOs and guards.
+
+---
 
 ### Configuration
 
-- Environment variables are used to keep secrets and configuration flexible.
-- The JWT secret and database URLs must be set in `.env`.
+- Environment variables control JWT secrets, database connections, and port numbers.
+- `main.ts` bootstrap the application and applies global middleware.
 
-### Data Flow
+---
 
-1. API clients send HTTP requests to **Controllers**.
-2. Controllers validate inputs via DTOs.
-3. Requests are passed to **Services** for core logic.
-4. Services interact with data stores or other services.
-5. Responses are formed and returned through Controllers to the client.
+### Tests & Miscellaneous Files
 
-### Authentication Flow
-
-- The `/auth/login` endpoint issues JWTs after validating user credentials.
-- Protected routes (e.g., `/profile`) require a valid token in HTTP headers.
-
-### Testing
-
-- Tests are structured to cover controllers and services.
-- Continuous integration setup ensures quality on code changes.
-
-This modular design ensures maintainability, scalability, and security of the system.
+- Unit tests are located alongside respective service and controller files.
+- Testing uses Jest framework.
+- Miscellaneous scripts for deployment and linting are included as npm scripts in `package.json`.
