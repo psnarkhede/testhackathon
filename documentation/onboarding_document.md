@@ -1,55 +1,25 @@
-# Onboarding Document
+## Onboarding Document
 
-**Version:** 1.0.0
+### Version: Not Provided
 
-## Setup Instructions
+### Installation
 
-### Install Dependencies
-```bash
-npm install
-```
+Not Provided
 
-### Available Scripts
+### Scripts
 
-From `package.json`, the scripts are:
+Not Provided
 
-- **start:** Runs the app in production mode
-- **start:dev:** Runs the app with hot reload for development
-- **test:** Runs the test suite
+### Running
 
-### How to Run
+- **Development:** Not Provided
+- **Production:** Not Provided
+- **Testing:** Not Provided
 
-#### Development Mode
-```bash
-npm run start:dev
-```
-Starts the server with live reload to facilitate development.
+### Dependencies
 
-#### Production Mode
-```bash
-npm start
-```
-Starts the server optimized for production.
+Not Provided
 
-#### Testing
-```bash
-npm test
-```
-Runs automated tests.
+### DevDependencies
 
-## Dependencies
-
-From `package.json`:
-
-- `@nestjs/common`
-- `@nestjs/core`
-- `@nestjs/platform-express`
-- `class-validator`
-- `class-transformer`
-- `reflect-metadata`
-- `rxjs`
-- `typescript`
-- `ts-node`
-- `@types/node`
-
-These ensure framework core functionality, validation, type support, and runtime.
+Not Provided
