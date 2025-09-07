@@ -1,17 +1,24 @@
-# User Manual - Version: [object Object]
+# User Manual - Version: 1.0.0
 
 ## Using the API
 
-- **Get Items:**
+### Endpoint: GET /hello
 
-  `GET /items` to list all items.
+#### Description:
+Returns a welcome message.
 
-- **Create Item:**
+#### Request:
+```
+GET /hello HTTP/1.1
+Host: {server_host}
+```
 
-  `POST /items` with body `{ "name": "item name", "price": 100 }`.
+#### Response:
+```json
+{
+  "message": "Hello, World!"
+}
+```
 
-## Error Handling
-
-- Responses include HTTP status codes.
-- 400 for bad requests.
-- 500 for server errors.
+#### Errors:
+No error handling was defined in the source code.
