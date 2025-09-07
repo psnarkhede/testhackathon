@@ -1,107 +1,125 @@
 ## API Documentation
 
-**Version:** {{version}}
+**Version:** 04d39232b7f955392abbb0a13145ce0e90ada880
 
 ---
 
-### 1. GET /users
+### 1. `/users` - User Management Endpoint
 
-**Description:** Retrieves a list of users.
+- **Method:** GET
+- **Description:** Retrieves a list of all users.
+- **Response DTO:**
+  ```json
+  [
+    {
+      "id": "string",
+      "name": "string",
+      "email": "string"
+    }
+  ]
+  ```
 
-**Method:** GET
+- **Example:**
+  ```http
+  GET /users HTTP/1.1
+  Host: api.example.com
+  ```
 
-**Request:** No body required.
+  **Response:**
+  ```json
+  [
+    {
+      "id": "u1",
+      "name": "Alice Smith",
+      "email": "alice.smith@example.com"
+    },
+    {
+      "id": "u2",
+      "name": "Bob Jones",
+      "email": "bob.jones@example.com"
+    }
+  ]
+  ```
 
-**Response:**
-```json
-[
+---
+
+### 2. `/users/{id}` - Get User Details
+
+- **Method:** GET
+- **Description:** Retrieves detailed information about a single user by their ID.
+- **Request DTO:**
+  - `id` (path parameter): string
+
+- **Response DTO:**
+  ```json
+  {
+    "id": "string",
+    "name": "string",
+    "email": "string",
+    "createdAt": "string (ISO 8601 date)"
+  }
+  ```
+
+- **Example:**
+  ```http
+  GET /users/u1 HTTP/1.1
+  Host: api.example.com
+  ```
+
+  **Response:**
+  ```json
+  {
+    "id": "u1",
+    "name": "Alice Smith",
+    "email": "alice.smith@example.com",
+    "createdAt": "2023-04-15T12:00:00Z"
+  }
+  ```
+
+---
+
+### 3. `/users` - Create New User
+
+- **Method:** POST
+- **Description:** Creates a new user in the system.
+- **Request DTO:**
+  ```json
+  {
+    "name": "string",
+    "email": "string"
+  }
+  ```
+
+- **Response DTO:**
+  ```json
   {
     "id": "string",
     "name": "string",
     "email": "string"
   }
-]
-```
+  ```
 
-**Example:**
-```
-GET /users
+- **Example:**
+  ```http
+  POST /users HTTP/1.1
+  Host: api.example.com
+  Content-Type: application/json
 
-Response:
-200 OK
-[
   {
-    "id": "123",
-    "name": "John Doe",
-    "email": "john@example.com"
-  },
-  {
-    "id": "456",
-    "name": "Jane Smith",
-    "email": "jane@example.com"
+    "name": "Charlie Brown",
+    "email": "charlie.brown@example.com"
   }
-]
-```
+  ```
+
+  **Response:**
+  ```json
+  {
+    "id": "u3",
+    "name": "Charlie Brown",
+    "email": "charlie.brown@example.com"
+  }
+  ```
 
 ---
 
-### 2. POST /users
-
-**Description:** Creates a new user.
-
-**Method:** POST
-
-**Request Body:**
-```json
-{
-  "name": "string",
-  "email": "string"
-}
-```
-
-**Response:**
-```json
-{
-  "id": "string",
-  "name": "string",
-  "email": "string"
-}
-```
-
-**Example:**
-```
-POST /users
-{
-  "name": "Alice Johnson",
-  "email": "alice@example.com"
-}
-
-Response:
-201 Created
-{
-  "id": "789",
-  "name": "Alice Johnson",
-  "email": "alice@example.com"
-}
-```
-
----
-
-### DTOs
-
-**User DTO:**
-```json
-{
-  "id": "string",
-  "name": "string",
-  "email": "string"
-}
-```
-
-**CreateUser DTO:**
-```json
-{
-  "name": "string",
-  "email": "string"
-}
-```
+(Additional endpoints can be documented similarly based on the full API documentation input.)
