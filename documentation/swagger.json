@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "User Management API",
-    "version": "{{version}}",
-    "description": "API for managing users."
+    "version": "04d39232b7f955392abbb0a13145ce0e90ada880",
+    "description": "API for managing users in the system."
   },
   "paths": {
     "/users": {
@@ -11,7 +11,7 @@
         "summary": "Get all users",
         "responses": {
           "200": {
-            "description": "List of users",
+            "description": "A list of users",
             "content": {
               "application/json": {
                 "schema": {
@@ -29,18 +29,46 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/CreateUser" }
+              "schema": { "$ref": "#/components/schemas/CreateUserRequest" }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "User created",
+            "description": "User created successfully",
             "content": {
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/User" }
               }
             }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "summary": "Get user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDetails" }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
           }
         }
       }
@@ -57,7 +85,19 @@
         },
         "required": ["id", "name", "email"]
       },
-      "CreateUser": {
+      "UserDetails": {
+        "allOf": [
+          { "$ref": "#/components/schemas/User" },
+          {
+            "type": "object",
+            "properties": {
+              "createdAt": { "type": "string", "format": "date-time" }
+            },
+            "required": ["createdAt"]
+          }
+        ]
+      },
+      "CreateUserRequest": {
         "type": "object",
         "properties": {
           "name": { "type": "string" },
