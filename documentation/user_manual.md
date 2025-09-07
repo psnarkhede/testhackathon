@@ -1,87 +1,34 @@
-## User Manual
+**User Manual**
 
-### Version: 1.4.2-release
-
-Welcome to our system! This guide will help you understand how to interact with the services provided.
+**Version:** {{version}}
 
 ---
 
-### Logging In
+Welcome to the User Management System! This guide will help you understand how to interact with the system in simple terms.
 
-To start using the system, you need to log in using your username and password.
+### What can you do?
+- View a list of users.
+- Add new users to the system.
 
-**How to log in:**
-- Send your username and password in a login request.
-- If successful, you will receive a token.
-- Keep this token safe because you will need it to access other parts of the system.
+### How to use?
+You can use simple commands to talk to the system.
+
+#### Viewing Users
+- You send a request to get the list of people.
+- You will receive names, emails, and IDs.
 
 **Example:**
+- Ask: "Show me all users."
+- The system replies with a list of users.
 
-Request:
-```
-POST /api/login
-{
-  "username": "john_doe",
-  "password": "your_password"
-}
-```
+#### Adding a New User
+- Tell the system the name and email of the new person.
+- The system will create the user and give you back the new user's info.
 
-Response:
-```
-{
-  "token": "your_access_token_here",
-  "expiresIn": 3600
-}
-```
+**Example:**
+- Tell the system: "Add a user named Alice Johnson with email alice@example.com"
+- The system replies: "User created with ID 789"
 
 ---
 
-### Viewing Your Profile
-
-Once logged in, you can request your profile information.
-
-Just send a request with your user ID and the token you received.
-
-**Example:**
-
-Request:
-```
-GET /api/users/your_user_id
-Authorization: Bearer your_access_token_here
-```
-
-Response:
-```
-{
-  "userId": "your_user_id",
-  "username": "your_username",
-  "email": "your_email@example.com",
-  "createdAt": "date_of_account_creation"
-}
-```
-
----
-
-### Updating Your Email
-
-You can update your email address by sending a request with your new email.
-
-**Example:**
-
-Request:
-```
-PUT /api/users/your_user_id/email
-Authorization: Bearer your_access_token_here
-{
-  "email": "new_email@example.com"
-}
-```
-
-Response:
-```
-{
-  "message": "Email updated successfully"
-}
-```
-
-That's it! You can now use the system with ease.
+If you have access to the system interface or a tool to send requests (like a button or form), use it to send these commands or fill in the information accordingly. No technical experience is needed beyond providing names and emails.
