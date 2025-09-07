@@ -1,139 +1,107 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "User Management API",
-    "version": "5c715563a7e7387859534267039d1b3b45b89854"
+    "title": "Booking API",
+    "version": "1.0.0"
   },
   "paths": {
-    "/api/auth/login": {
-      "post": {
-        "summary": "Authenticate user and obtain access token",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": { "type": "string" },
-                  "password": { "type": "string" }
-                },
-                "required": ["username", "password"]
-              },
-              "example": {
-                "username": "johndoe",
-                "password": "mypassword123"
-              }
-            }
-          }
-        },
+    "/": {
+      "get": {
+        "summary": "Get Home",
+        "operationId": "getHome",
         "responses": {
           "200": {
-            "description": "Successful login",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "accessToken": { "type": "string" },
-                    "refreshToken": { "type": "string" }
-                  },
-                  "required": ["accessToken", "refreshToken"]
+                  "$ref": "#/components/schemas/HomeResponseDto"
                 },
-                "example": {
-                  "accessToken": "eyJhbGci...",
-                  "refreshToken": "dGhpc2lz..."
+                "examples": {
+                  "example1": {
+                    "value": { "message": "Welcome to the Booking API!" }
+                  }
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
     },
-    "/api/users/profile": {
-      "get": {
-        "summary": "Retrieve current user profile",
-        "responses": {
-          "200": {
-            "description": "User profile retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": { "type": "string" },
-                    "username": { "type": "string" },
-                    "email": { "type": "string" },
-                    "createdAt": { "type": "string", "format": "date-time" }
-                  },
-                  "required": ["id", "username", "email", "createdAt"]
-                },
-                "example": {
-                  "id": "12345",
-                  "username": "johndoe",
-                  "email": "johndoe@example.com",
-                  "createdAt": "2023-05-01T10:00:00Z"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update current user profile",
+    "/bookings": {
+      "post": {
+        "summary": "Create Booking",
+        "operationId": "createBooking",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "email": { "type": "string" },
-                  "password": { "type": "string" }
-                }
+                "$ref": "#/components/schemas/CreateBookingDto"
               },
-              "example": {
-                "email": "john.newemail@example.com",
-                "password": "newpassword456"
+              "examples": {
+                "example1": {
+                  "value": {
+                    "userId": "user123",
+                    "roomId": "room456",
+                    "date": "2024-07-01"
+                  }
+                }
               }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Profile updated successfully",
+          "201": {
+            "description": "Booking Created",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": { "type": "boolean" },
-                    "message": { "type": "string" }
-                  },
-                  "required": ["success", "message"]
+                  "$ref": "#/components/schemas/BookingResponseDto"
                 },
-                "example": {
-                  "success": true,
-                  "message": "Profile updated successfully."
+                "examples": {
+                  "example1": {
+                    "value": {
+                      "bookingId": "booking789",
+                      "status": "confirmed"
+                    }
+                  }
                 }
               }
             }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
     }
   },
-  "components": {}
+  "components": {
+    "schemas": {
+      "HomeResponseDto": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": ["message"]
+      },
+      "CreateBookingDto": {
+        "type": "object",
+        "properties": {
+          "userId": { "type": "string" },
+          "roomId": { "type": "string" },
+          "date": { "type": "string", "format": "date" }
+        },
+        "required": ["userId", "roomId", "date"]
+      },
+      "BookingResponseDto": {
+        "type": "object",
+        "properties": {
+          "bookingId": { "type": "string" },
+          "status": { "type": "string" }
+        },
+        "required": ["bookingId", "status"]
+      }
+    }
+  }
 }
