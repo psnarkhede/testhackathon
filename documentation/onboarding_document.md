@@ -2,46 +2,54 @@
 
 **Version:** 1.0.0
 
----
+## Setup Instructions
 
-## Project Setup
+### Install Dependencies
+```bash
+npm install
+```
 
-### Installation
-- Ensure you have node.js (>=14) and npm installed.
-- Clone the repository.
-- Run `npm install` to install all dependencies.
+### Available Scripts
 
-### Running the Project
+From `package.json`, the scripts are:
 
-- **Development Mode:**
-  ```bash
-  npm run start:dev
-  ```
-  Starts the server with live-reload.
+- **start:** Runs the app in production mode
+- **start:dev:** Runs the app with hot reload for development
+- **test:** Runs the test suite
 
-- **Production Mode:**
-  ```bash
-  npm run start:prod
-  ```
-  Builds and runs the server optimized.
+### How to Run
 
-- **Test Mode:**
-  ```bash
-  npm run test
-  ```
-  Runs all the unit tests.
+#### Development Mode
+```bash
+npm run start:dev
+```
+Starts the server with live reload to facilitate development.
 
-### Environment Setup
-- Create `.env` file if needed for environment variables. (No env variables defined in the provided files.)
+#### Production Mode
+```bash
+npm start
+```
+Starts the server optimized for production.
 
-### Dependencies
-- Core dependencies include NestJS.* Framework packages as per `package.json`.
-- Other dependencies are installed automatically by `npm install`.
+#### Testing
+```bash
+npm test
+```
+Runs automated tests.
 
-### Start Contributing
-- After setup, run the server in dev mode.
-- Add features or fix bugs by adding controllers, services, and DTOs as per Developer Guide.
-- Test your code with `npm run test`.
-- Follow code style and project conventions.
+## Dependencies
 
-You are now ready to develop and contribute to the project!
+From `package.json`:
+
+- `@nestjs/common`
+- `@nestjs/core`
+- `@nestjs/platform-express`
+- `class-validator`
+- `class-transformer`
+- `reflect-metadata`
+- `rxjs`
+- `typescript`
+- `ts-node`
+- `@types/node`
+
+These ensure framework core functionality, validation, type support, and runtime.
