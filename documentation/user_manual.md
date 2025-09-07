@@ -1,84 +1,46 @@
 ## User Manual
 
-**Version:** 04d39232b7f955392abbb0a13145ce0e90ada880
+**Version:** 7f2eec614b7c99282052440ca6a0ba82bee672fa
 
 ---
 
-Welcome to the system! This manual will guide you on how to interact with the system's APIs to manage your data and perform common tasks. No prior technical knowledge is required.
+Welcome to the system! This manual will guide you on how to interact with our services.
 
 ### How to Use the System
 
-The system is primarily accessed through a set of HTTPS API endpoints. You can use tools like Postman or simple command line utilities like `curl` to send requests.
+You will primarily interact with the system through web API calls. Here's what you need to know:
 
-### Examples
+1. **Retrieve Users:**
+   - To see the list of all users, you simply send a GET request to `/users`.
+   - Example: Open your browser or API tool and access `https://your-api.com/users`.
+   - You will receive a list of users including their IDs, names, and email addresses.
 
-#### 1. View All Users
+2. **Create a New User:**
+   - To add a new user, send a POST request to `/users` with user details.
+   - Example Request body:
+     ```json
+     {
+       "name": "Jane Doe",
+       "email": "jane@example.com",
+       "password": "your_password"
+     }
+     ```
+   - The system will respond with the created user's information.
 
-- **What it does:** Retrieves a list of all users in the system.
-- **How to do it:** Send a GET request to `/users`.
+3. **Login:**
+   - To log in, send your email and password to `/auth/login`.
+   - If successful, you'll receive a JWT token to use for authenticated requests.
 
-**Sample Request:**
+4. **View Your Profile:**
+   - After logging in, retrieve your profile info via GET `/profile` with your token.
+   - Include the JWT token in the header like this: `Authorization: Bearer your_token`.
 
-```bash
-curl https://api.example.com/users
-```
+### Example Interaction in Simple Terms
 
-**Sample Response:**
+- You want to create a user: tell the system the user's name, email, and a password.
+- To login, provide your email and password.
+- Using the token received, ask the system to show your personal profile info.
 
-```json
-[
-  {"id": "u1", "name": "Alice Smith", "email": "alice.smith@example.com"},
-  {"id": "u2", "name": "Bob Jones", "email": "bob.jones@example.com"}
-]
-```
+This approach allows you to manage users easily.
 
-#### 2. See Details for a Single User
-
-- **What it does:** Shows detailed information about a specific user.
-- **How to do it:** Send a GET request to `/users/{id}` where `{id}` is the user’s unique ID.
-
-**Sample Request:**
-
-```bash
-curl https://api.example.com/users/u1
-```
-
-**Sample Response:**
-
-```json
-{
-  "id": "u1",
-  "name": "Alice Smith",
-  "email": "alice.smith@example.com",
-  "createdAt": "2023-04-15T12:00:00Z"
-}
-```
-
-#### 3. Add a New User
-
-- **What it does:** Creates a new user account.
-- **How to do it:** Send a POST request to `/users` with the user’s name and email.
-
-**Sample Request:**
-
-```bash
-curl -X POST https://api.example.com/users \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Charlie Brown", "email":"charlie.brown@example.com"}'
-```
-
-**Sample Response:**
-
-```json
-{
-  "id": "u3",
-  "name": "Charlie Brown",
-  "email": "charlie.brown@example.com"
-}
-```
-
----
-
-If you encounter any issues or need help, contact your system administrator.
-
-Happy managing!
+*Please contact support if you need help with HTTP tools or have difficulties using the system.*
