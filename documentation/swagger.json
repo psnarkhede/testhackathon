@@ -1,1 +1,100 @@
-"{\n  \"openapi\": \"3.0.0\",\n  \"info\": {\n    \"title\": \"NestJS API\",\n    \"version\": \"c66abb2e7c1c0b62d3131cbc72ed8f9a47ac1149\"\n  },\n  \"paths\": {\n    \"/\": {\n      \"get\": {\n        \"summary\": \"GetHelloWorld\",\n        \"operationId\": \"GetHelloWorld\",\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Successful Response\"\n          }\n        }\n      }\n    },\n    \"/bookings\": {\n      \"post\": {\n        \"summary\": \"GetBookings\",\n        \"operationId\": \"GetBookings\",\n        \"requestBody\": {\n          \"required\": true,\n          \"content\": {\n            \"application/json\": {\n              \"schema\": {\n                \"$ref\": \"#/components/schemas/BookingRequestDto\"\n              }\n            }\n          }\n        },\n        \"responses\": {\n          \"200\": {\n            \"description\": \"Booking Response\",\n            \"content\": {\n              \"application/json\": {\n                \"schema\": {\n                  \"$ref\": \"#/components/schemas/BookingResponseDto\"\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  },\n  \"components\": {\n    \"schemas\": {\n      \"BookingRequestDto\": {\n        \"type\": \"object\",\n        \"required\": [\"mobileNumber\", \"uuid\"],\n        \"properties\": {\n          \"mobileNumber\": {\n            \"type\": \"string\"\n          },\n          \"uuid\": {\n            \"type\": \"string\",\n            \"format\": \"uuid\"\n          }\n        }\n      },\n      \"BookingResponseDto\": {\n        \"type\": \"object\",\n        \"required\": [\"vehicle\", \"uuid\"],\n        \"properties\": {\n          \"vehicle\": {\n            \"type\": \"string\"\n          },\n          \"uuid\": {\n            \"type\": \"string\",\n            \"format\": \"uuid\"\n          },\n          \"amount\": {\n            \"type\": \"number\"\n          },\n          \"pinode\": {\n            \"type\": \"number\"\n          }\n        }\n      }\n    }\n  }\n}"
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Booking API",
+    "version": "ad7b209673a0468c5fb1392a28b13495d49dadc3",
+    "description": "API for booking related operations"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Get Hello World",
+        "operationId": "GetHelloWorld",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bookings": {
+      "post": {
+        "summary": "Get Bookings",
+        "operationId": "GetBookings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Booking response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BookingRequestDto": {
+        "type": "object",
+        "properties": {
+          "mobileNumber": {
+            "type": "string",
+            "description": "Mobile phone number"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier UUID"
+          }
+        },
+        "required": ["mobileNumber", "uuid"]
+      },
+      "BookingResponseDto": {
+        "type": "object",
+        "properties": {
+          "vehicle": {
+            "type": "string",
+            "description": "Vehicle type"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier UUID"
+          },
+          "amount": {
+            "type": "number",
+            "nullable": true,
+            "description": "Amount value"
+          },
+          "pinode": {
+            "type": "number",
+            "nullable": true,
+            "description": "Pinode value"
+          }
+        },
+        "required": ["vehicle", "uuid"]
+      }
+    }
+  }
+}
