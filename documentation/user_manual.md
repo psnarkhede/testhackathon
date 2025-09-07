@@ -1,5 +1,17 @@
-# User Manual - Version: 
+# User Manual - Version: [object Object]
 
-_No API usage instructions or examples are provided._
+## Using the API
 
-_No error handling information is included in the provided input data._
+- **Get Items:**
+
+  `GET /items` to list all items.
+
+- **Create Item:**
+
+  `POST /items` with body `{ "name": "item name", "price": 100 }`.
+
+## Error Handling
+
+- Responses include HTTP status codes.
+- 400 for bad requests.
+- 500 for server errors.
