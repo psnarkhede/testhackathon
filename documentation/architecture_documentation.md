@@ -1,16 +1,12 @@
-# Architecture Documentation - Version: [object Object]
+# Architecture Documentation - Version: 1.0.0
 
-## Project Structure
+This project follows a simple architecture suitable for a basic REST API.
 
-- Modularized into routes and models.
+## Structure Overview
 
-## Technology Stack
+- `src/index.js`: Initializes an Express web server and sets up the API route `/hello`.
+- `src/controllers/helloController.js`: Contains the business logic for responding to `/hello` requests.
 
-- Node.js
-- Express framework
+The project uses Express.js (as found from the code requiring `express`) to handle HTTP requests and responses.
 
-## Deployment
-
-- Deployable on Node.js supported platforms.
-
-- Use environment variables for configuration.
+No database or middleware layers are apparent from the given files.
