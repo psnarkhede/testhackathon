@@ -1,39 +1,11 @@
-# API Documentation - Version: [object Object]
+# API Documentation - Version: 1.0.0
 
 ## Endpoints
 
-### GET /items
-Retrieve list of items.
+| Method | Path          | Function Name    |
+|--------|---------------|------------------|
+| GET    | /hello        | sayHello         |
 
-**Request:** None
+## Data Transfer Objects (DTOs)
 
-**Response:**
-```json
-[
-  {
-    "id": "string",
-    "name": "string",
-    "price": 0
-  }
-]
-```
-
-### POST /items
-Create a new item.
-
-**Request:**
-```json
-{
-  "name": "string",
-  "price": 0
-}
-```
-
-**Response:**
-```json
-{
-  "id": "string",
-  "name": "string",
-  "price": 0
-}
-```
+No DTOs found in the provided source files.
