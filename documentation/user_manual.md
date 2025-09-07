@@ -1,46 +1,65 @@
 ## User Manual
 
-**Version:** 7f2eec614b7c99282052440ca6a0ba82bee672fa
+**Version:** 5c715563a7e7387859534267039d1b3b45b89854
 
 ---
 
-Welcome to the system! This manual will guide you on how to interact with our services.
+This system allows you to login and manage your user profile via the provided API endpoints.
 
-### How to Use the System
+### Logging In
 
-You will primarily interact with the system through web API calls. Here's what you need to know:
+To use the system, you first need to authenticate by calling the `POST /api/auth/login` endpoint with your username and password.
 
-1. **Retrieve Users:**
-   - To see the list of all users, you simply send a GET request to `/users`.
-   - Example: Open your browser or API tool and access `https://your-api.com/users`.
-   - You will receive a list of users including their IDs, names, and email addresses.
+**Example Request:**
+```json
+{
+  "username": "johndoe",
+  "password": "mypassword123"
+}
+```
 
-2. **Create a New User:**
-   - To add a new user, send a POST request to `/users` with user details.
-   - Example Request body:
-     ```json
-     {
-       "name": "Jane Doe",
-       "email": "jane@example.com",
-       "password": "your_password"
-     }
-     ```
-   - The system will respond with the created user's information.
+On successful authentication, you will receive an access token and refresh token. Use the access token to authorize subsequent requests.
 
-3. **Login:**
-   - To log in, send your email and password to `/auth/login`.
-   - If successful, you'll receive a JWT token to use for authenticated requests.
+**Example Response:**
+```json
+{
+  "accessToken": "eyJhbGci...",
+  "refreshToken": "dGhpc2lz..."
+}
+```
 
-4. **View Your Profile:**
-   - After logging in, retrieve your profile info via GET `/profile` with your token.
-   - Include the JWT token in the header like this: `Authorization: Bearer your_token`.
+### Viewing Your Profile
 
-### Example Interaction in Simple Terms
+Once logged in, you can retrieve your profile information by sending a GET request to `/api/users/profile` with your access token.
 
-- You want to create a user: tell the system the user's name, email, and a password.
-- To login, provide your email and password.
-- Using the token received, ask the system to show your personal profile info.
+**Example Response:**
+```json
+{
+  "id": "12345",
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "createdAt": "2023-05-01T10:00:00Z"
+}
+```
 
-This approach allows you to manage users easily.
+### Updating Your Profile
 
-*Please contact support if you need help with HTTP tools or have difficulties using the system.*
+You can update your email and password by sending a PUT request to `/api/users/profile` with the new values in the body.
+
+**Example Request:**
+```json
+{
+  "email": "john.newemail@example.com",
+  "password": "newpassword456"
+}
+```
+
+**Example Response:**
+```json
+{
+  "success": true,
+  "message": "Profile updated successfully."
+}
+```
+
+Use these endpoints responsibly and keep your authentication tokens secure.
