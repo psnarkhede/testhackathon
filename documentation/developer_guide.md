@@ -1,52 +1,52 @@
 ## Developer Guide
 
-**Version:** 04d39232b7f955392abbb0a13145ce0e90ada880
+**Version:** 7f2eec614b7c99282052440ca6a0ba82bee672fa
 
 ---
 
-This guide helps developers understand how to extend or modify the system.
+Welcome developers! This guide provides insights to extend or modify the system.
 
-### Key Modules and Files
+### Key Components
 
-- **`src/services/userService.ts`** — Contains business logic for user operations such as creating, reading, and managing user data.
-- **`src/controllers/userController.ts`** — Handles routing and API endpoint implementations related to users.
-- **`src/dto/user.dto.ts`** — Defines data transfer objects for user-related API requests and responses.
-- **`src/app.module.ts`** — Root module that imports and initializes all submodules and services.
+- **API Controllers:** Located in `/src/controllers/`, these handle incoming HTTP requests.
+- **Services:** Logic encapsulated under `/src/services/`, dealing with business rules and data transformations.
+- **DTOs (Data Transfer Objects):** Found in `/src/dtos/`, they define the structure of requests and responses.
+- **Authentication Module:** Manages login and JWT token handling under `/src/auth/`.
 
-### Extending the System
+### How to Extend
 
-To add a new feature, for example, "deleting users":
+1. **Adding a New API Endpoint:**
+   - Create a new controller file in `/src/controllers/`.
+   - Define DTOs for request/response in `/src/dtos/`.
+   - Implement logic in the corresponding service under `/src/services/`.
 
-1. **Add new service methods** in `userService.ts`:
+2. **Modifying Existing Features:**
+   - Locate the relevant controller and service files.
+   - Update DTOs as needed.
+
+### Code Snippet Example
+
+Here is an example from the authentication service to validate user credentials:
 
 ```typescript
-async deleteUser(id: string): Promise<boolean> {
-  const result = await this.userRepository.delete(id);
-  return result.affected > 0;
+async validateUser(email: string, password: string): Promise<User | null> {
+  const user = await this.userService.findByEmail(email);
+  if (user && await bcrypt.compare(password, user.passwordHash)) {
+    return user;
+  }
+  return null;
 }
 ```
 
-2. **Add new controller endpoint** in `userController.ts`:
+### Testing
 
-```typescript
-@Delete(':id')
-async remove(@Param('id') id: string) {
-  const success = await this.userService.deleteUser(id);
-  if (!success) throw new NotFoundException('User not found');
-  return { message: 'User deleted successfully' };
-}
-```
+- Tests are located in `/test/`.
+- Use `npm test` to run the test suite.
 
-3. **Define necessary DTOs** if request or response needs custom shapes.
+### Notes
 
-4. **Update and add tests** to cover new functionality.
+- Follow existing code styles and patterns.
+- Use proper error handling and logging.
+- Update API documentation when adding or changing endpoints.
 
-### Important Notes
-
-- The system uses **TypeScript** and **NestJS** framework for backend.
-- All services use dependency injection; follow existing patterns for consistency.
-- Use **class-validator** decorators in DTOs to enforce validation.
-
----
-
-Refer to the `developerGuide` source files for more code examples and project structure insights.
+Feel free to reach out if you need any setup support or code walkthroughs.
