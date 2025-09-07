@@ -1,82 +1,60 @@
 # Onboarding Document
 
-**Version:** c66abb2e7c1c0b62d3131cbc72ed8f9a47ac1149
+**Version:** ad7b209673a0468c5fb1392a28b13495d49dadc3
 
 ---
 
-## Step 1: Clone the Repository
+Welcome! This guide will help you set up and run the project locally.
 
-Clone the project repository to your local machine.
+## Prerequisites
+- Node.js (preferably latest LTS)
+- npm (comes with Node.js)
+- Git
 
+## Step 1: Clone the repository
 ```bash
 git clone <repository-url>
 cd <repository-folder>
 ```
 
-## Step 2: Install Dependencies
+## Step 2: Install dependencies
 
-Run the following command to install all required dependencies:
-
+Run:
 ```bash
 npm install
 ```
+This will install all required packages as per `package.json`.
 
-## Step 3: Understand Project Structure
+## Step 3: Understand the project structure
 
-- **src/**: Source code including controllers, services, and DTOs.
-- **dto/**: Data Transfer Objects used for validating and typing API payloads.
-- **main.ts**: Entry point for the NestJS application.
+- Source code is inside the `src/` folder.
+- Main files:
+  - `src/main.ts`: Entry point to bootstrap the application.
+  - `src/app.module.ts`: Main application module.
+  - `src/app.controller.ts`: Defines API routes.
+  - `src/app.service.ts`: Contains business logic.
+  - `src/dto/`: Data Transfer Object definitions.
 
-## Step 4: Running the Application Locally
+## Step 4: Running the application
 
-Use one of the following npm scripts to start the server:
+Start the application in development mode with:
+```bash
+npm run start:dev
+```
 
-- For development mode with watch support:
+This will start the NestJS server and watch for file changes.
 
-  ```bash
-  npm run start:dev
-  ```
+By default, the server listens on port `3000` or the port set via the `PORT` environment variable.
 
-- For normal development run:
+## Step 5: Running tests
 
-  ```bash
-  npm run start
-  ```
+Run unit tests:
+```bash
+npm run test
+```
 
-- For production mode:
+## Additional Notes
 
-  ```bash
-  npm run start:prod
-  ```
-
-The app will listen on port 3000 by default or on the port specified by the environment variable `PORT`.
-
-## Step 5: Running Tests
-
-- To run unit tests:
-
-  ```bash
-  npm run test
-  ```
-
-- To run e2e tests:
-
-  ```bash
-  npm run test:e2e
-  ```
-
-- For test coverage report:
-
-  ```bash
-  npm run test:cov
-  ```
-
-## Additional Resources
-
-Refer to the README.md file for general info and useful links:
-
-- Official NestJS Documentation: https://docs.nestjs.com
-- Discord Support Channel: https://discord.gg/G7Qnnhy
-- Deployment instructions and more.
+Refer to the included [README.md](README.md) for more information and resources.
 
 ---
