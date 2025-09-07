@@ -2,72 +2,60 @@
 
 **Version:** 1.0.0
 
----
-
 ## Endpoints
 
-### 1. GET /
+### 1. Get Home
 
 - **Method:** GET
 - **Path:** /
-- **Function:** getHello
+- **Function Name:** getHome
 - **Request DTO:** None
-- **Response DTO:** HelloResponse
+- **Response DTO:** HomeResponseDto
+  - **Properties:**
+    - message: string
 
-#### HelloResponse DTO
-| Property | Type   |
-|----------|--------|
-| message  | string |
+**Sample Request:**
+```http
+GET /
+```
 
-#### Example Response
+**Sample Response:**
 ```json
 {
-  "message": "Hello World!"
+  "message": "Welcome to the Booking API!"
 }
 ```
 
 ---
 
-### 2. POST /bookings
+### 2. Create Booking
 
 - **Method:** POST
 - **Path:** /bookings
-- **Function:** createBooking
-- **Request DTO:** BookingRequest
-- **Response DTO:** BookingResponse
+- **Function Name:** createBooking
+- **Request DTO:** CreateBookingDto
+  - **Properties:**
+    - userId: string
+    - roomId: string
+    - date: string
+- **Response DTO:** BookingResponseDto
+  - **Properties:**
+    - bookingId: string
+    - status: string
 
-#### BookingRequest DTO
-| Property   | Type   |
-|------------|--------|
-| user       | string |
-| date       | string (ISO 8601 date)
-| location   | string |
-
-#### BookingResponse DTO
-| Property   | Type   |
-|------------|--------|
-| id         | string |
-| user       | string |
-| date       | string (ISO 8601 date)
-| location   | string |
-| status     | string |
-
-#### Example Request
+**Sample Request:**
 ```json
 {
-  "user": "john.doe",
-  "date": "2023-08-15",
-  "location": "New York"
+  "userId": "user123",
+  "roomId": "room456",
+  "date": "2024-07-01"
 }
 ```
 
-#### Example Response
+**Sample Response:**
 ```json
 {
-  "id": "1",
-  "user": "john.doe",
-  "date": "2023-08-15",
-  "location": "New York",
+  "bookingId": "booking789",
   "status": "confirmed"
 }
 ```
