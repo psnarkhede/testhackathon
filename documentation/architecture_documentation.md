@@ -1,43 +1,53 @@
 ## Architecture Documentation
 
-**Version:** 04d39232b7f955392abbb0a13145ce0e90ada880
+**Version:** 7f2eec614b7c99282052440ca6a0ba82bee672fa
 
 ---
 
-### System Overview
+### Overview
 
-The system is a modular backend application built on **NestJS** framework, using **TypeScript**. It follows the **layered architecture pattern** with clear separation of concerns among controllers, services, and data layers.
+The system is designed as a modular backend API application leveraging a layered architecture:
 
-### Module Structure
+- **Controllers:** API-entry points that handle HTTP requests and responses.
+- **Services:** Contain business logic, orchestrate data manipulation and validation.
+- **Data Transfer Objects (DTOs):** Define the shape of data flowing through the system.
+- **Authentication Module:** Provides secure token-based authentication using JWT.
 
-- **Controllers:** Handle incoming HTTP requests and forward them to the appropriate services.
-- **Services:** Contain core business logic and interact with repositories for data handling.
-- **DTOs:** Define the structure of data for request validation and response shaping.
+### Project Structure
 
-### Data Flow
-
-1. **Incoming Request:** Hits the controller.
-2. **Validation:** Request DTOs validate and parse input data.
-3. **Business Logic:** Controllers call services to process data.
-4. **Persistence:** Services interact with database repositories.
-5. **Response:** Processed data returned to users via controllers.
+```
+/src
+  /controllers    # API route handlers
+  /services       # Business logic
+  /dtos           # Data schemas
+  /auth           # Authentication handling
+  main.ts         # Application entry
+/tests           # Unit and integration tests
+package.json      # Project dependencies and scripts
+README.md         # Project overview and docs
+```
 
 ### Configuration
 
-- Centralized config files manage environment variables and app settings.
-- Uses ORM for database abstraction.
+- Environment variables are used to keep secrets and configuration flexible.
+- The JWT secret and database URLs must be set in `.env`.
 
-### Tests
+### Data Flow
 
-- Unit and integration tests cover controllers and services.
-- Tests use mocks and in-memory data stores for isolation.
+1. API clients send HTTP requests to **Controllers**.
+2. Controllers validate inputs via DTOs.
+3. Requests are passed to **Services** for core logic.
+4. Services interact with data stores or other services.
+5. Responses are formed and returned through Controllers to the client.
 
-### README Highlights
+### Authentication Flow
 
-- Installation instructions
-- Environment variable requirements
-- How to run the project locally and deploy
+- The `/auth/login` endpoint issues JWTs after validating user credentials.
+- Protected routes (e.g., `/profile`) require a valid token in HTTP headers.
 
----
+### Testing
 
-The system emphasizes scalability and maintainability by strict adherence to clean code principles and design patterns.
+- Tests are structured to cover controllers and services.
+- Continuous integration setup ensures quality on code changes.
+
+This modular design ensures maintainability, scalability, and security of the system.
