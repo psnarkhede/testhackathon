@@ -1,32 +1,51 @@
-# Developer Guide - Version: 1.0.0
+**Developer Guide**
 
-## Project Structure
+**Version:** [object Object].version
 
-- `src/`
-  - `index.js`: Entry point of the application, sets up the server.
-  - `controllers/helloController.js`: Contains the function `sayHello` that handles GET requests to `/hello`.
+This guide covers how to extend and modify the system.
 
-## Setup Steps
+### Key Files and Modules
 
-1. Clone the repository.
-2. Run `npm install` to install dependencies.
-3. Start the server using `node src/index.js`.
+- **src/main.ts**: Entry point of the application.
+- **src/app.module.ts**: Root module defining imports and providers.
+- **src/users/**: Contains controllers, services, and DTOs for managing users.
 
-## Minimal Example
+### Extending the User Module
 
-```js
-// src/controllers/helloController.js
-exports.sayHello = (req, res) => {
-  res.json({ message: 'Hello, World!' });
-};
+To add a feature:
+1. Modify `users.controller.ts` to add new endpoints.
+2. Update `users.service.ts` with business logic.
+3. Define request/response shapes in DTO files (`create-user.dto.ts`, `update-user.dto.ts`).
 
-// src/index.js
-const express = require('express');
-const { sayHello } = require('./controllers/helloController');
+### Example: Adding a new service method
 
-const app = express();
-
-app.get('/hello', sayHello);
-
-app.listen(3000, () => console.log('Server running on port 3000'));
+```typescript
+// users.service.ts
+public async findByEmail(email: string): Promise<User | undefined> {
+  return this.userRepository.findOne({ email });
+}
 ```
+
+### Example: Updating the controller
+
+```typescript
+// users.controller.ts
+@Get('email/:email')
+async getUserByEmail(@Param('email') email: string) {
+  return this.usersService.findByEmail(email);
+}
+```
+
+### Testing
+
+Tests can be found in `test/` directory.
+Use Jest to run tests:
+```
+npm test
+```
+
+### Important Notes
+
+- Follow existing architecture and coding style.
+- Use DTOs for data validation.
+- Update API documentation after changes.
