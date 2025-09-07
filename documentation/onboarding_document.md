@@ -1,55 +1,54 @@
-## Onboarding Document
+**Onboarding Document**
 
-### Version: 1.4.2-release
-
-Welcome to the development team! Follow these steps to set up your development environment.
+**Version:** {{version}}
 
 ---
 
-### 1. Prerequisites
-- Node.js version 16.x or above
-- npm version 8.x or above
-- Git installed on your machine
+Welcome to the project! Follow these steps to set up your environment and run the project locally.
 
----
+### Prerequisites
+- Node.js (version specified in `package.json` engines section, e.g., >=14.0.0).
+- npm or yarn package manager.
+- Git client.
 
-### 2. Clone the Repository
+### Steps
+
+1. **Clone the repository**
+```bash
+git clone <repository_url>
+cd <repository_folder>
 ```
-git clone https://github.com/example/project.git
-cd project
-```
 
----
-
-### 3. Install Dependencies
+2. **Install dependencies**
 ```bash
 npm install
+# or
+# yarn install
 ```
 
----
-
-### 4. Environment Setup
+3. **Set up environment variables**
 - Copy `.env.example` to `.env`
-- Configure environment variables as needed (e.g., DB connection strings, API keys)
+- Edit `.env` with your configuration (database URL, API keys, etc.)
 
----
-
-### 5. Running the Application Locally
+4. **Run the application locally**
 ```bash
 npm run start
+# or
+# yarn start
 ```
-This runs the server listening on port 3000 by default.
+- The server will start on the port specified in `.env` or default in `main.ts`.
+
+5. **Running tests**
+```bash
+npm run test
+# or
+# yarn test
+```
+
+### Notes from README.md
+- The main entry point is `src/main.ts`.
+- Use scripts defined in `package.json` for running, building, and testing.
 
 ---
 
-### 6. Useful Scripts from package.json
-- `npm run start` - starts the app
-- `npm run build` - builds the production bundle
-- `npm run test` - runs all tests
-
----
-
-### 7. Entry Point
-The main entry file is `src/main.ts`, which bootstraps the application using NestJS.
-
-You're all set! Happy coding.
+You are ready to start developing!
