@@ -2,72 +2,49 @@
 
 **Version:** 1.0.0
 
----
+## API Usage
 
-## Using the API
+### 1. Get Home
 
-This API exposes two main endpoints for end users:
+- **Endpoint:** `GET /`
+- **Description:** Retrieve welcome message.
 
-### 1. GET /
-
-- **Description:** Returns a greeting message.
-- **How to call:** Send a GET request to the root path.
-
-#### Example Request
-```
+**Example Request:**
+```http
 GET /
 ```
 
-#### Example Response
+**Example Response:**
 ```json
 {
-  "message": "Hello World!"
+  "message": "Welcome to the Booking API!"
 }
 ```
 
 ---
 
-### 2. POST /bookings
+### 2. Create Booking
 
-- **Description:** Creates a new booking with given user, date, and location.
-- **How to call:** Send a POST request to `/bookings` with JSON body.
+- **Endpoint:** `POST /bookings`
+- **Description:** Create a new booking record.
+- **Request Body:**
+  - `userId` (string): The ID of the user making the booking.
+  - `roomId` (string): The ID of the room to book.
+  - `date` (string): Booking date in ISO format.
 
-#### Expected Request Body
+**Example Request:**
 ```json
 {
-  "user": "string",
-  "date": "YYYY-MM-DD",
-  "location": "string"
+  "userId": "user123",
+  "roomId": "room456",
+  "date": "2024-07-01"
 }
 ```
 
-#### Example Request
+**Example Response:**
 ```json
 {
-  "user": "john.doe",
-  "date": "2023-08-15",
-  "location": "New York"
-}
-```
-
-#### Example Response
-```json
-{
-  "id": "1",
-  "user": "john.doe",
-  "date": "2023-08-15",
-  "location": "New York",
+  "bookingId": "booking789",
   "status": "confirmed"
 }
 ```
-
----
-
-## Notes on Inputs and Outputs
-- `user`: a string identifying the user making the booking.
-- `date`: must be a valid date string formatted as ISO 8601 (YYYY-MM-DD).
-- `location`: a string representing the location of the booking.
-- `id`: string, unique booking identifier.
-- `status`: string, status of the booking (normally "confirmed").
-
-Make sure your requests have valid JSON and correct formatting.
