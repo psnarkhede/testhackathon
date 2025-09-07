@@ -1,28 +1,26 @@
 # API Documentation
 
-**Version:** c66abb2e7c1c0b62d3131cbc72ed8f9a47ac1149
+**Version:** ad7b209673a0468c5fb1392a28b13495d49dadc3
 
 ---
 
 ## Endpoint: GET /
 
 - **Method:** GET
-- **Path:** /
-- **Function Name:** GetHelloWorld
+- **Path:** `/`
+- **Function Name:** `GetHelloWorld`
 - **Request DTO:** None
 - **Response DTO:** None
 
 ### Description
-Returns a simple Hello World string.
+Returns a simple "Hello World" string.
 
-### Example
-
-#### Request
-```
+### Example Request
+```http
 GET /
 ```
 
-#### Response
+### Example Response
 ```
 Hello World
 ```
@@ -32,39 +30,36 @@ Hello World
 ## Endpoint: POST /bookings
 
 - **Method:** POST
-- **Path:** /bookings
-- **Function Name:** GetBookings
-- **Request DTO:** BookingRequestDto
-- **Response DTO:** BookingResponseDto
+- **Path:** `/bookings`
+- **Function Name:** `GetBookings`
+- **Request DTO:** `BookingRequestDto`
 
-### Request DTO: BookingRequestDto
-| Property     | Type   | Required |
-|--------------|--------|----------|
-| mobileNumber | string | Yes      |
-| uuid         | string | Yes      |
+| Property     | Type   | Required | Description           |
+|--------------|--------|----------|-----------------------|
+| mobileNumber | string | Yes      | Mobile phone number   |
+| uuid         | string | Yes      | Unique identifier UUID|
 
-### Response DTO: BookingResponseDto
-| Property | Type   | Required | Description                   |
-|----------|--------|----------|-------------------------------|
-| vehicle  | string | Yes      | Vehicle associated with booking|
-| uuid     | string | Yes      | UUID for the booking           |
-| amount   | number | No       | Amount related to the booking  |
-| pinode   | number | No       | An optional number field       |
+- **Response DTO:** `BookingResponseDto`
+
+| Property | Type   | Required | Description                        |
+|----------|--------|----------|----------------------------------|
+| vehicle  | string | Yes      | Vehicle type (e.g., Car)          |
+| uuid     | string | Yes      | Unique identifier UUID             |
+| amount   | number | No       | Amount value (optional)            |
+| pinode   | number | No       | Pinode value (optional)            |
 
 ### Description
-Handles booking requests given user mobile number and UUID and returns booking details including vehicle, booking UUID, possibly amount and a pinode value.
+Returns booking information for the given mobile number and UUID.
 
-### Example
-
-#### Request (JSON):
+### Example Request
 ```json
 {
   "mobileNumber": "+1234567890",
-  "uuid": "550e8400-e29b-41d4-a716-446655440000"
+  "uuid": "123e4567-e89b-12d3-a456-426614174000"
 }
 ```
 
-#### Response (JSON):
+### Example Response
 ```json
 {
   "vehicle": "Car",
