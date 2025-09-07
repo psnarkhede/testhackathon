@@ -1,36 +1,52 @@
-**Developer Guide**
+## Developer Guide
 
-**Version:** {{version}}
+**Version:** 04d39232b7f955392abbb0a13145ce0e90ada880
 
 ---
 
-This guide is for developers who want to modify or extend the system.
+This guide helps developers understand how to extend or modify the system.
 
-### Project Structure
-- `src/controllers/userController.ts`: Handles all user-related API requests.
-- `src/services/userService.ts`: Contains business logic for user data manipulation.
-- `src/models/userModel.ts`: Database schema and data representation of users.
+### Key Modules and Files
 
-### Extending the API
-To add a new feature:
-1. Create or update DTOs in `src/dtos/`.
-2. Implement the business logic in `userService.ts`.
-3. Add endpoint handlers in `userController.ts`.
+- **`src/services/userService.ts`** — Contains business logic for user operations such as creating, reading, and managing user data.
+- **`src/controllers/userController.ts`** — Handles routing and API endpoint implementations related to users.
+- **`src/dto/user.dto.ts`** — Defines data transfer objects for user-related API requests and responses.
+- **`src/app.module.ts`** — Root module that imports and initializes all submodules and services.
 
-### Code Snippet
-From the developerGuide section:
+### Extending the System
+
+To add a new feature, for example, "deleting users":
+
+1. **Add new service methods** in `userService.ts`:
+
 ```typescript
-// Example userService method to add a user
-async function addUser(createUserDto: CreateUserDto): Promise<User> {
-    // Validate input
-    // Save to database
-    // Return saved user
+async deleteUser(id: string): Promise<boolean> {
+  const result = await this.userRepository.delete(id);
+  return result.affected > 0;
 }
 ```
 
-### Testing
-Add your tests under `tests/`. Use existing tests as a reference.
+2. **Add new controller endpoint** in `userController.ts`:
+
+```typescript
+@Delete(':id')
+async remove(@Param('id') id: string) {
+  const success = await this.userService.deleteUser(id);
+  if (!success) throw new NotFoundException('User not found');
+  return { message: 'User deleted successfully' };
+}
+```
+
+3. **Define necessary DTOs** if request or response needs custom shapes.
+
+4. **Update and add tests** to cover new functionality.
+
+### Important Notes
+
+- The system uses **TypeScript** and **NestJS** framework for backend.
+- All services use dependency injection; follow existing patterns for consistency.
+- Use **class-validator** decorators in DTOs to enforce validation.
 
 ---
 
-Remember to keep your code well-typed and follow existing coding conventions.
+Refer to the `developerGuide` source files for more code examples and project structure insights.
