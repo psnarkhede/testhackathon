@@ -1,3 +1,3 @@
 # Onboarding Guide - Version: 
 
-_No input data provided; cannot provide quick start guide, environment setup, or workflows._
+_No quick start guide, environment setup, key files or workflow information is available in the input data._
