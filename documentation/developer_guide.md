@@ -1,3 +1,3 @@
 # Developer Guide - Version: 
 
-_No input data provided; cannot provide setup instructions, code examples, or project structure._
+_No setup instructions, code examples, project structure or components details provided in the input data._
