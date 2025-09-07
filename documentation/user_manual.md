@@ -1,9 +1,3 @@
-# User Manual
+# User Manual - Version: 
 
-**Version:** Not Provided
-
-
-## API Endpoints
-
-No endpoints documented.
-
+_No input data provided; cannot provide usage instructions or error handling information._
