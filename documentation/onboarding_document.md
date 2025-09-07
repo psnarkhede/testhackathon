@@ -1,70 +1,82 @@
 ## Onboarding Document
 
-**Version:** 04d39232b7f955392abbb0a13145ce0e90ada880
+**Version:** 7f2eec614b7c99282052440ca6a0ba82bee672fa
 
 ---
 
-Welcome aboard! This document will walk you through setting up your local environment to start developing.
+Welcome to the development team! Follow these steps to set up your environment and run the project locally.
 
-### Step 1: Clone the Repository
+### 1. Prerequisites
+
+- Install [Node.js](https://nodejs.org/) (version 18 or above recommended).
+- Install [Git](https://git-scm.com/) to clone repositories.
+
+### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/example/project.git
-cd project
+git clone https://github.com/your-org/your-project.git
+cd your-project
 ```
 
-### Step 2: Install Dependencies
+### 3. Install Dependencies
 
-Make sure you have **Node.js (v16 or later)** and **npm** installed.
+Run the following command in the project root directory:
 
 ```bash
 npm install
 ```
 
-### Step 3: Set up Environment Variables
+This installs all required packages as specified in `package.json`.
 
-Copy `.env.example` to `.env` and fill in necessary values:
+### 4. Environment Configuration
 
-```bash
-cp .env.example .env
-```
+- Copy `.env.example` to `.env`:
+  ```bash
+  cp .env.example .env
+  ```
+- Edit `.env` to specify environment variables such as database connection strings and API keys.
 
-Edit `.env` to configure database connection, API keys, and other configs as per the README.
+### 5. Running the Project Locally
 
-### Step 4: Running the Application
-
-Start the backend server locally:
+- The entry point is `src/main.ts`.
+- To start in development mode with auto-reload:
 
 ```bash
 npm run start:dev
 ```
 
-This uses **`main.ts`** as the entry point. You can access the API at `http://localhost:3000`.
+- To build and run production:
 
-### Step 5: Running Tests
+```bash
+npm run build
+npm run start
+```
 
-To run all automated tests:
+### 6. Running Tests
+
+Use the command:
 
 ```bash
 npm test
 ```
 
-### Step 6: Linting and Formatting
+### 7. Useful Scripts From `package.json`
 
-Check code style compliance:
-
-```bash
-npm run lint
+```json
+{
+  "scripts": {
+    "start": "node dist/main.js",
+    "start:dev": "ts-node-dev src/main.ts",
+    "build": "tsc",
+    "test": "jest"
+  }
+}
 ```
 
-Auto-format source files:
+### 8. Helpful Tips
 
-```bash
-npm run format
-```
+- Ensure Node version matches project requirements.
+- Use VSCode or your preferred IDE with TypeScript support.
+- Refer to `README.md` for detailed project information.
 
----
-
-Consult the README.md in the root directory for more details or project-specific instructions.
-
-Welcome to the team!
+Welcome aboard and happy coding!
