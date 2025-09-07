@@ -1,13 +1,3 @@
-# Developer Guide
+# Developer Guide - Version: 
 
-**Version:** Not Provided
-
-
-## Code Structure
-
-Not Provided
-
-
-## Extending the Project
-
-To add a new controller, service, or DTO, create respective files in the appropriate folders following the existing code conventions. Then, update the module definitions to include the new components.
+_No input data provided; cannot provide setup instructions, code examples, or project structure._
