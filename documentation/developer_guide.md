@@ -1,70 +1,36 @@
-## Developer Guide
+**Developer Guide**
 
-### Version: 1.4.2-release
-
-This guide is for developers looking to extend or modify the system.
+**Version:** {{version}}
 
 ---
+
+This guide is for developers who want to modify or extend the system.
 
 ### Project Structure
-- `src/` - Core application files
-- `src/controllers/` - Handles incoming API requests
-- `src/services/` - Business logic and data processing
-- `src/dtos/` - Data Transfer Objects (DTOs) definitions
+- `src/controllers/userController.ts`: Handles all user-related API requests.
+- `src/services/userService.ts`: Contains business logic for user data manipulation.
+- `src/models/userModel.ts`: Database schema and data representation of users.
 
----
+### Extending the API
+To add a new feature:
+1. Create or update DTOs in `src/dtos/`.
+2. Implement the business logic in `userService.ts`.
+3. Add endpoint handlers in `userController.ts`.
 
-### Key Files and Modules
-- **`src/controllers/user.controller.ts`**: Manages user-related API endpoints.
-- **`src/services/auth.service.ts`**: Handles authentication logic.
-- **`src/dtos/login.dto.ts`**: DTO for login requests.
-
----
-
-### Extending the Login Endpoint
-
-To add new fields to the login process:
-
-1. Update the DTO in `src/dtos/login.dto.ts`:
-
+### Code Snippet
+From the developerGuide section:
 ```typescript
-export class LoginDto {
-  username: string;
-  password: string;
-  // Add new field here
-  otpCode?: string;
+// Example userService method to add a user
+async function addUser(createUserDto: CreateUserDto): Promise<User> {
+    // Validate input
+    // Save to database
+    // Return saved user
 }
 ```
 
-2. Modify the controller in `src/controllers/user.controller.ts`:
-
-```typescript
-@Post('login')
-async login(@Body() loginDto: LoginDto) {
-  // validate otp code if provided
-  if (loginDto.otpCode) {
-    await this.authService.validateOtp(loginDto.username, loginDto.otpCode);
-  }
-  return this.authService.login(loginDto.username, loginDto.password);
-}
-```
+### Testing
+Add your tests under `tests/`. Use existing tests as a reference.
 
 ---
 
-### Sample Code Snippet for a Service Method
-
-```typescript
-@Injectable()
-export class AuthService {
-  async login(username: string, password: string): Promise<{ token: string; expiresIn: number }> {
-    const user = await this.userRepository.findByUsername(username);
-    if (!user || !this.verifyPassword(user, password)) {
-      throw new UnauthorizedException();
-    }
-    const token = this.generateJwt(user);
-    return { token, expiresIn: 3600 };
-  }
-}
-```
-
-Please refer to the code comments for further insights.
+Remember to keep your code well-typed and follow existing coding conventions.
