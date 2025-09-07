@@ -1,3 +1,3 @@
 # User Manual - Version: 
 
-_No input data provided; cannot provide usage instructions or error handling information._
+_No API usage instructions, examples or error handling information available in the input data._
