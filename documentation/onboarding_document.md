@@ -1,44 +1,47 @@
-## Onboarding Document
+# Onboarding Document
 
-**Version:** 5c715563a7e7387859534267039d1b3b45b89854
+**Version:** 1.0.0
 
 ---
+
+## Project Setup
 
 ### Installation
+- Ensure you have node.js (>=14) and npm installed.
+- Clone the repository.
+- Run `npm install` to install all dependencies.
 
-1. Clone the repository:
-```
-git clone <repository_url>
-cd <repository_folder>
-```
+### Running the Project
 
-2. Install dependencies:
-```
-npm install
-```
+- **Development Mode:**
+  ```bash
+  npm run start:dev
+  ```
+  Starts the server with live-reload.
 
----
+- **Production Mode:**
+  ```bash
+  npm run start:prod
+  ```
+  Builds and runs the server optimized.
+
+- **Test Mode:**
+  ```bash
+  npm run test
+  ```
+  Runs all the unit tests.
 
 ### Environment Setup
+- Create `.env` file if needed for environment variables. (No env variables defined in the provided files.)
 
-Create a `.env` file in the root directory with the following minimum configuration:
-```
-JWT_SECRET=your_jwt_secret
-DATABASE_URL=your_database_connection_string
-PORT=3000
-```
+### Dependencies
+- Core dependencies include NestJS.* Framework packages as per `package.json`.
+- Other dependencies are installed automatically by `npm install`.
 
-Adjust these values according to your environment.
+### Start Contributing
+- After setup, run the server in dev mode.
+- Add features or fix bugs by adding controllers, services, and DTOs as per Developer Guide.
+- Test your code with `npm run test`.
+- Follow code style and project conventions.
 
----
-
-### Running Locally
-
-Launch the application in development mode:
-```
-npm run start:dev
-```
-
-The server will start at `http://localhost:3000`.
-
-You can now access the API endpoints as documented.
+You are now ready to develop and contribute to the project!
