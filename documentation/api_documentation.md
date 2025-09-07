@@ -1,125 +1,154 @@
-## API Documentation
+# API Documentation
 
-**Version:** 04d39232b7f955392abbb0a13145ce0e90ada880
-
----
-
-### 1. `/users` - User Management Endpoint
-
-- **Method:** GET
-- **Description:** Retrieves a list of all users.
-- **Response DTO:**
-  ```json
-  [
-    {
-      "id": "string",
-      "name": "string",
-      "email": "string"
-    }
-  ]
-  ```
-
-- **Example:**
-  ```http
-  GET /users HTTP/1.1
-  Host: api.example.com
-  ```
-
-  **Response:**
-  ```json
-  [
-    {
-      "id": "u1",
-      "name": "Alice Smith",
-      "email": "alice.smith@example.com"
-    },
-    {
-      "id": "u2",
-      "name": "Bob Jones",
-      "email": "bob.jones@example.com"
-    }
-  ]
-  ```
+**Version:** 7f2eec614b7c99282052440ca6a0ba82bee672fa
 
 ---
 
-### 2. `/users/{id}` - Get User Details
+## 1. User Management API
 
+### Endpoint: `/users`
 - **Method:** GET
-- **Description:** Retrieves detailed information about a single user by their ID.
-- **Request DTO:**
-  - `id` (path parameter): string
+- **Description:** Retrieve a list of users.
 
-- **Response DTO:**
-  ```json
+#### Request Parameters:
+- None
+
+#### Response DTO:
+```json
+[
   {
     "id": "string",
     "name": "string",
-    "email": "string",
-    "createdAt": "string (ISO 8601 date)"
+    "email": "string"
   }
-  ```
+]
+```
 
-- **Example:**
-  ```http
-  GET /users/u1 HTTP/1.1
-  Host: api.example.com
-  ```
-
-  **Response:**
-  ```json
+#### Example Response:
+```json
+[
   {
-    "id": "u1",
+    "id": "u123",
     "name": "Alice Smith",
-    "email": "alice.smith@example.com",
-    "createdAt": "2023-04-15T12:00:00Z"
+    "email": "alice@example.com"
+  },
+  {
+    "id": "u124",
+    "name": "Bob Jones",
+    "email": "bob@example.com"
   }
-  ```
+]
+```
 
 ---
 
-### 3. `/users` - Create New User
-
+### Endpoint: `/users`
 - **Method:** POST
-- **Description:** Creates a new user in the system.
-- **Request DTO:**
-  ```json
-  {
-    "name": "string",
-    "email": "string"
-  }
-  ```
+- **Description:** Create a new user.
 
-- **Response DTO:**
-  ```json
-  {
-    "id": "string",
-    "name": "string",
-    "email": "string"
-  }
-  ```
+#### Request DTO:
+```json
+{
+  "name": "string",
+  "email": "string",
+  "password": "string"
+}
+```
 
-- **Example:**
-  ```http
-  POST /users HTTP/1.1
-  Host: api.example.com
-  Content-Type: application/json
+#### Response DTO:
+```json
+{
+  "id": "string",
+  "name": "string",
+  "email": "string"
+}
+```
 
-  {
-    "name": "Charlie Brown",
-    "email": "charlie.brown@example.com"
-  }
-  ```
+#### Example Request:
+```json
+{
+  "name": "Charlie Brown",
+  "email": "charlie@example.com",
+  "password": "password123"
+}
+```
 
-  **Response:**
-  ```json
-  {
-    "id": "u3",
-    "name": "Charlie Brown",
-    "email": "charlie.brown@example.com"
-  }
-  ```
+#### Example Response:
+```json
+{
+  "id": "u125",
+  "name": "Charlie Brown",
+  "email": "charlie@example.com"
+}
+```
 
 ---
 
-(Additional endpoints can be documented similarly based on the full API documentation input.)
+## 2. Authentication API
+
+### Endpoint: `/auth/login`
+- **Method:** POST
+- **Description:** Authenticate user and obtain JWT token.
+
+#### Request DTO:
+```json
+{
+  "email": "string",
+  "password": "string"
+}
+```
+
+#### Response DTO:
+```json
+{
+  "token": "string",
+  "expiresIn": "number"
+}
+```
+
+#### Example Request:
+```json
+{
+  "email": "alice@example.com",
+  "password": "password123"
+}
+```
+
+#### Example Response:
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR...",
+  "expiresIn": 3600
+}
+```
+
+---
+
+## 3. Profile API
+
+### Endpoint: `/profile`
+- **Method:** GET
+- **Description:** Fetch the logged in user's profile.
+- **Headers:** `Authorization: Bearer <token>`
+
+#### Response DTO:
+```json
+{
+  "id": "string",
+  "name": "string",
+  "email": "string"
+}
+```
+
+#### Example Response:
+```json
+{
+  "id": "u123",
+  "name": "Alice Smith",
+  "email": "alice@example.com"
+}
+```
+
+---
+
+*Note: This documentation covers the primary API endpoints along with their methods, request and response data contracts, and sample data to guide consumers.*
