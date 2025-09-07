@@ -1,3 +1,5 @@
 # Architecture Documentation - Version: 
 
-_No project structure, technology stack or deployment architecture details provided in the input data._
+_No project structure or technology stack details are provided._
+
+_No deployment architecture information is available in the input data._
