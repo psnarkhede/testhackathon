@@ -1,52 +1,64 @@
 ## Developer Guide
 
-**Version:** 7f2eec614b7c99282052440ca6a0ba82bee672fa
+**Version:** 5c715563a7e7387859534267039d1b3b45b89854
 
 ---
 
-Welcome developers! This guide provides insights to extend or modify the system.
-
-### Key Components
-
-- **API Controllers:** Located in `/src/controllers/`, these handle incoming HTTP requests.
-- **Services:** Logic encapsulated under `/src/services/`, dealing with business rules and data transformations.
-- **DTOs (Data Transfer Objects):** Found in `/src/dtos/`, they define the structure of requests and responses.
-- **Authentication Module:** Manages login and JWT token handling under `/src/auth/`.
-
-### How to Extend
-
-1. **Adding a New API Endpoint:**
-   - Create a new controller file in `/src/controllers/`.
-   - Define DTOs for request/response in `/src/dtos/`.
-   - Implement logic in the corresponding service under `/src/services/`.
-
-2. **Modifying Existing Features:**
-   - Locate the relevant controller and service files.
-   - Update DTOs as needed.
-
-### Code Snippet Example
-
-Here is an example from the authentication service to validate user credentials:
+### Authentication Service (`auth.service.ts`)
 
 ```typescript
-async validateUser(email: string, password: string): Promise<User | null> {
-  const user = await this.userService.findByEmail(email);
-  if (user && await bcrypt.compare(password, user.passwordHash)) {
-    return user;
+@Injectable()
+export class AuthService {
+  async validateUser(username: string, pass: string): Promise<any> {
+    const user = await this.usersService.findOne(username);
+    if (user && user.password === pass) {
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
   }
-  return null;
+
+  async login(user: any) {
+    const payload = { username: user.username, sub: user.userId };
+    return {
+      accessToken: this.jwtService.sign(payload),
+      refreshToken: this.refreshService.createToken(user.userId),
+    };
+  }
 }
 ```
 
-### Testing
+---
 
-- Tests are located in `/test/`.
-- Use `npm test` to run the test suite.
+### User Controller (`user.controller.ts`)
 
-### Notes
+```typescript
+@Controller('users')
+export class UserController {
+  @Get('profile')
+  getProfile(@Request() req) {
+    return this.userService.findProfile(req.user.userId);
+  }
 
-- Follow existing code styles and patterns.
-- Use proper error handling and logging.
-- Update API documentation when adding or changing endpoints.
+  @Put('profile')
+  updateProfile(@Request() req, @Body() updateDto: UpdateProfileDto) {
+    return this.userService.updateProfile(req.user.userId, updateDto);
+  }
+}
+```
 
-Feel free to reach out if you need any setup support or code walkthroughs.
+---
+
+### DTOs
+
+```typescript
+export class LoginDto {
+  username: string;
+  password: string;
+}
+
+export class UpdateProfileDto {
+  email?: string;
+  password?: string;
+}
+```
