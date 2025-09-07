@@ -1,48 +1,39 @@
-## Architecture Documentation
+# Architecture Document
 
-**Version:** 5c715563a7e7387859534267039d1b3b45b89854
-
----
-
-### High-Level Overview
-
-This project is a RESTful API server that provides user authentication and profile management functionalities. It follows a modular architecture with clear separation of concerns between authentication, user management, and token handling.
+**Version:** 1.0.0
 
 ---
 
-### Project Structure
+## Overview
 
-```
-/src
-  /auth
-    auth.service.ts
-    auth.controller.ts
-  /users
-    user.service.ts
-    user.controller.ts
-  /common
-    dto
-    guards
-  main.ts
-/package.json
-/README.md
-```
+This project is based on the NestJS framework, which organizes applications into **modules**, **controllers**, **services**, and **DTOs**.
 
-- `auth/`: Handles authentication logic.
-- `users/`: Manages user profiles.
-- `common/`: Contains shared DTOs and guards.
 
----
+## Components
 
-### Configuration
+- **main.ts:** Bootstraps and launches the NestJS application. Sets up the HTTP server.
 
-- Environment variables control JWT secrets, database connections, and port numbers.
-- `main.ts` bootstrap the application and applies global middleware.
+- **app.module.ts:** The root module of the app, which imports and ties together all components.
 
----
+- **Controllers (`app.controller.ts`):** Handle HTTP requests and route them. Example endpoints implemented include `GET /` and `POST /bookings`.
+    - The `AppController` defines handlers like `getHello()` which returns greeting and `createBooking()` which handles booking creation.
 
-### Tests & Miscellaneous Files
+- **Services (`app.service.ts`):** Contains business logic. `AppService` has methods that the controller calls to fulfill requests.
 
-- Unit tests are located alongside respective service and controller files.
-- Testing uses Jest framework.
-- Miscellaneous scripts for deployment and linting are included as npm scripts in `package.json`.
+- **DTOs (Data Transfer Objects):** Define request and response data shapes. Located in `dto/` folder:
+    - `HelloResponse` for returning greetings.
+    - `BookingRequest` for incoming booking data.
+    - `BookingResponse` for sending booking confirmations.
+
+## Interactions
+
+- When a client sends a request to the API, the **Controller** mapped to that route receives it.
+- The Controller method then uses the **Service** to process the business logic, for example, creating a booking or returning a hello message.
+- Inputs and outputs are validated/typed by **DTOs**.
+
+## Dependencies (from `package.json`)
+
+- **@nestjs/core, @nestjs/common, @nestjs/platform-express:** Core NestJS framework modules.
+- **Typescript:** For static typing.
+
+This setup ensures modularity, testability, and maintainability.
