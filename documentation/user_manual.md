@@ -1,52 +1,46 @@
-**User Manual**
+# User Manual
 
-**Version:** c66abb2e7c1c0b62d3131cbc72ed8f9a47ac1149
+**Version:** ad7b209673a0468c5fb1392a28b13495d49dadc3
 
 ---
 
-### Overview
-This system provides simple API endpoints to interact with booking information.
+This document explains how you as an end user can interact with the system via its APIs.
 
-### How Users Interact with the System
+## How to Use the System
 
-#### Accessing the Greeting Endpoint
-- You can access a greeting at the root URL.
-- Simply send a GET request to `/`.
-- You will receive a friendly 'Hello World' response.
+The system provides a simple set of HTTP APIs to get greetings and to retrieve booking information.
 
-##### Example
+### 1. Get a greeting message
 
-Send a GET request:
+- Send a `GET` request to `/`.
+- You will receive the message **"Hello World"**.
+
+Example:
+
+- Request:
 ```
-GET https://yourserver.com/
+GET http://your-server-address/
 ```
-Response:
+- Response:
 ```
 Hello World
 ```
 
-#### Creating a Booking Request
-- You can submit a booking query via a POST request to `/bookings`.
-- You need to provide your mobile number and booking UUID in the request.
-- The system will return booking details such as the vehicle type and amount.
+### 2. Retrieve Booking Information
 
-##### What to Send
-- Your **mobile phone number**.
-- The **UUID** for your booking.
+- Send a `POST` request to `/bookings` with JSON containing your mobile number and a UUID.
+- The system will provide details about your booking such as the vehicle type, UUID, the amount charged, and optionally some other data.
 
-##### Example Request
-```
-POST https://yourserver.com/bookings
-Content-Type: application/json
-
+Example request body:
+```json
 {
   "mobileNumber": "+1234567890",
-  "uuid": "550e8400-e29b-41d4-a716-446655440000"
+  "uuid": "123e4567-e89b-12d3-a456-426614174000"
 }
 ```
 
-##### Example Response
-```
+Example response:
+```json
 {
   "vehicle": "Car",
   "uuid": "123e4567-e89b-12d3-a456-426614174000",
@@ -54,9 +48,9 @@ Content-Type: application/json
 }
 ```
 
-### Summary
-- Use GET `/` for a simple greeting.
-- Use POST `/bookings` with required details to get booking info.
-- The response will contain the vehicle and booking details.
+### Notes
+- Make sure you supply a valid phone number and UUID in the request.
+- The system validates these inputs.
+- Amount and pinode fields may be absent in some responses.
 
 ---
