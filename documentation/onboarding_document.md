@@ -1,25 +1,30 @@
-## Onboarding Document
+# Onboarding Document
 
-### Version: Not Provided
+**Version:** Not Provided
 
-### Installation
 
-Not Provided
-
-### Scripts
+## Installation
 
 Not Provided
 
-### Running
 
-- **Development:** Not Provided
-- **Production:** Not Provided
-- **Testing:** Not Provided
-
-### Dependencies
+## Scripts
 
 Not Provided
 
-### DevDependencies
+
+## Running the Application
+
+- Development: Not Provided
+- Production: Not Provided
+- Testing: Not Provided
+
+
+## Dependencies
+
+Not Provided
+
+
+## DevDependencies
 
 Not Provided
