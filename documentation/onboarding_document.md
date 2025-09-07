@@ -1,39 +1,82 @@
-## Onboarding Document
+# Onboarding Document
 
-**Version:** [version]
+**Version:** c66abb2e7c1c0b62d3131cbc72ed8f9a47ac1149
 
 ---
 
-*Note: Detailed setup instructions based on package.json, main.ts, and README.md are not available from the current input.*
+## Step 1: Clone the Repository
 
-Typical onboarding step-by-step for new developers:
+Clone the project repository to your local machine.
 
-1. **Prerequisites:** Ensure you have Node.js and npm/yarn installed.
-2. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-   ```
-3. **Install dependencies:**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-4. **Environment setup:**
-   - Copy `.env.example` to `.env`
-   - Configure environment variables as needed.
-5. **Running the application locally:**
-   ```bash
-   npm run start
-   # or
-   yarn start
-   ```
-6. **Testing:**
-   ```bash
-   npm run test
-   # or
-   yarn test
-   ```
+```bash
+git clone <repository-url>
+cd <repository-folder>
+```
 
-Please provide relevant artifacts for package.json, main.ts, and README.md to produce detailed onboarding content.
+## Step 2: Install Dependencies
+
+Run the following command to install all required dependencies:
+
+```bash
+npm install
+```
+
+## Step 3: Understand Project Structure
+
+- **src/**: Source code including controllers, services, and DTOs.
+- **dto/**: Data Transfer Objects used for validating and typing API payloads.
+- **main.ts**: Entry point for the NestJS application.
+
+## Step 4: Running the Application Locally
+
+Use one of the following npm scripts to start the server:
+
+- For development mode with watch support:
+
+  ```bash
+  npm run start:dev
+  ```
+
+- For normal development run:
+
+  ```bash
+  npm run start
+  ```
+
+- For production mode:
+
+  ```bash
+  npm run start:prod
+  ```
+
+The app will listen on port 3000 by default or on the port specified by the environment variable `PORT`.
+
+## Step 5: Running Tests
+
+- To run unit tests:
+
+  ```bash
+  npm run test
+  ```
+
+- To run e2e tests:
+
+  ```bash
+  npm run test:e2e
+  ```
+
+- For test coverage report:
+
+  ```bash
+  npm run test:cov
+  ```
+
+## Additional Resources
+
+Refer to the README.md file for general info and useful links:
+
+- Official NestJS Documentation: https://docs.nestjs.com
+- Discord Support Channel: https://discord.gg/G7Qnnhy
+- Deployment instructions and more.
+
+---
