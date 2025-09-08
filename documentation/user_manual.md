@@ -1,56 +1,57 @@
 # User Manual
 
-**Version:** ad7b209673a0468c5fb1392a28b13495d49dadc3
+**Version:** a69daa75ed359dfb29965abddd40909638342a9f
 
 ---
 
-This document explains how you as an end user can interact with the system via its APIs.
+This system allows users to book a vehicle through a simple API interface.
 
-## How to Use the System
+### How to Use the System
 
-The system provides a simple set of HTTP APIs to get greetings and to retrieve booking information.
+1. **Greeting**
+   - You can verify the system is running by sending a simple GET request to the root `/` endpoint.
+   - This will return a friendly "Hello World" message.
 
-### 1. Get a greeting message
+2. **Making a Booking**
+   - To make a booking, send a POST request to the `/bookings` endpoint.
+   - You must provide your mobile phone number and a unique ID (UUID) in the request.
 
-- Send a `GET` request to `/`.
-- You will receive the message **"Hello World"**.
+### Example Usage
 
-Example:
-
+#### Check system availability:
 - Request:
-```
-GET http://your-server-address/
-```
+  - Method: GET
+  - URL: `/`
+
 - Response:
-```
-Hello World
-```
+  - "Hello World"
 
-### 2. Retrieve Booking Information
+#### Submit a booking:
+- Request:
+  - Method: POST
+  - URL: `/bookings`
+  - Body Example:
+  ```json
+  {
+    "mobileNumber": "+1234567890",
+    "uuid": "550e8400-e29b-41d4-a716-446655440000"
+  }
+  ```
 
-- Send a `POST` request to `/bookings` with JSON containing your mobile number and a UUID.
-- The system will provide details about your booking such as the vehicle type, UUID, the amount charged, and optionally some other data.
+- If successful, you will receive a confirmation like:
+  ```json
+  {
+    "vehicle": "Car",
+    "uuid": "123e4567-e89b-12d3-a456-426614174000",
+    "amount": 100
+  }
+  ```
 
-Example request body:
-```json
-{
-  "mobileNumber": "+1234567890",
-  "uuid": "123e4567-e89b-12d3-a456-426614174000"
-}
-```
+### Notes:
+- Please ensure the mobile number is a valid phone number.
+- The UUID should be generated uniquely for each request.
+- The response may include additional optional information such as the amount charged.
 
-Example response:
-```json
-{
-  "vehicle": "Car",
-  "uuid": "123e4567-e89b-12d3-a456-426614174000",
-  "amount": 100
-}
-```
-
-### Notes
-- Make sure you supply a valid phone number and UUID in the request.
-- The system validates these inputs.
-- Amount and pinode fields may be absent in some responses.
+This user manual helps you interact with the basic booking features of the system.
 
 ---
