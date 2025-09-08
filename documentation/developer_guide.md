@@ -1,27 +1,17 @@
 # Developer Guide
 
-**Version:** ad7b209673a0468c5fb1392a28b13495d49dadc3
+**Version:** a69daa75ed359dfb29965abddd40909638342a9f
 
 ---
 
-This guide provides an overview of how to extend or modify the system.
+This guide helps developers understand, extend, and modify the system.
 
-## Project Structure
+### Core Components
 
-- **src/app.controller.ts**: Defines API endpoints and their handlers.
-- **src/app.service.ts**: Business logic layer providing response data.
-- **src/app.module.ts**: The main application module that brings controllers and providers together.
-- **src/dto/**: Contains Data Transfer Objects (DTOs) which describe the shape of request and response payloads.
-
-## Key Files and Usage
-
-### app.controller.ts
-
-- Defines two endpoints: `GET /` and `POST /bookings`.
-- Uses decorators from `@nestjs/common` to define routes.
-- Calls `AppService` for business logic.
-
-**Excerpt:**
+- **app.controller.ts**
+  - Defines API endpoints using NestJS decorators (`@Get`, `@Post`).
+  - Handles routing and input validation via DTOs.
+  - Example snippet:
 
 ```typescript
 import { Controller, Get, Post } from '@nestjs/common';
@@ -45,12 +35,9 @@ export class AppController {
 }
 ```
 
-### app.service.ts
-
-- Implements the logic provided to the controller.
-- The `getHello()` method returns a fixed booking response.
-
-**Excerpt:**
+- **app.service.ts**
+  - Contains business logic.
+  - `getHello()` method returns a mock `BookingResponseDto`.
 
 ```typescript
 import { Injectable } from '@nestjs/common';
@@ -69,20 +56,22 @@ export class AppService {
 }
 ```
 
-### DTOs
-
-- `BookingRequestDto` and `BookingResponseDto` define the structure and validation rules for API data.
-- Decorators from `class-validator` are used for input validation.
+- **DTOs (Data Transfer Objects)**
+  - **BookingRequestDto** validates input fields such as `mobileNumber` and `uuid`.
+  - **BookingResponseDto** defines the structure of a response.
+  - Use `class-validator` decorators to enforce validation rules (e.g., `@IsUUID()`, `@IsMobilePhone()`).
 
 ### Extending the System
 
-- To add new endpoints, update `app.controller.ts` with new methods and routes.
-- Business logic should be implemented or extended in `app.service.ts`.
-- Define new DTO classes in the `dto/` folder as necessary.
+- To add a new endpoint, extend `app.controller.ts` with a new method and appropriate decorators.
+- Add any business logic to `app.service.ts`.
+- Define any new DTOs in the `dto` folder, ensuring validation decorators.
 
-### Notes
+### Modules and Providers
 
-- Watch for the import paths for DTOs – note a probable typo in "bookinig-response.dto.ts" (should be "booking-response.dto.ts"). Ensure consistent naming.
-- Use NestJS modules and dependency injection principles to add providers and services.
+- Entry point is the `AppModule` defined in `app.module.ts`.
+- Controllers and Services must be declared as providers in this module.
+
+By following this structure, developers can efficiently maintain and extend the application.
 
 ---
