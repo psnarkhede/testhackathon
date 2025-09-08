@@ -1,23 +1,23 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Booking API",
-    "version": "ad7b209673a0468c5fb1392a28b13495d49dadc3",
-    "description": "API for booking related operations"
+    "title": "API Documentation",
+    "version": "a69daa75ed359dfb29965abddd40909638342a9f",
+    "description": "Generated API spec"
   },
   "paths": {
     "/": {
       "get": {
-        "summary": "Get Hello World",
-        "operationId": "GetHelloWorld",
+        "summary": "GetHelloWorld",
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Returns greeting string",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "string"
-                }
+                },
+                "example": "Hello World"
               }
             }
           }
@@ -26,14 +26,17 @@
     },
     "/bookings": {
       "post": {
-        "summary": "Get Bookings",
-        "operationId": "GetBookings",
+        "summary": "GetBookings",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/BookingRequestDto"
+              },
+              "example": {
+                "mobileNumber": "+1234567890",
+                "uuid": "550e8400-e29b-41d4-a716-446655440000"
               }
             }
           }
@@ -45,6 +48,11 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BookingResponseDto"
+                },
+                "example": {
+                  "vehicle": "Car",
+                  "uuid": "123e4567-e89b-12d3-a456-426614174000",
+                  "amount": 100
                 }
               }
             }
@@ -60,12 +68,12 @@
         "properties": {
           "mobileNumber": {
             "type": "string",
-            "description": "Mobile phone number"
+            "description": "User's mobile phone number"
           },
           "uuid": {
             "type": "string",
             "format": "uuid",
-            "description": "Unique identifier UUID"
+            "description": "Unique identifier for the booking request"
           }
         },
         "required": ["mobileNumber", "uuid"]
@@ -74,23 +82,19 @@
         "type": "object",
         "properties": {
           "vehicle": {
-            "type": "string",
-            "description": "Vehicle type"
+            "type": "string"
           },
           "uuid": {
             "type": "string",
-            "format": "uuid",
-            "description": "Unique identifier UUID"
+            "format": "uuid"
           },
           "amount": {
             "type": "number",
-            "nullable": true,
-            "description": "Amount value"
+            "nullable": true
           },
           "pinode": {
             "type": "number",
-            "nullable": true,
-            "description": "Pinode value"
+            "nullable": true
           }
         },
         "required": ["vehicle", "uuid"]
