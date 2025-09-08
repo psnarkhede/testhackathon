@@ -1,60 +1,79 @@
 # Onboarding Document
 
-**Version:** ad7b209673a0468c5fb1392a28b13495d49dadc3
+**Version:** a69daa75ed359dfb29965abddd40909638342a9f
 
 ---
 
-Welcome! This guide will help you set up and run the project locally.
+Welcome to the project! Follow these steps to setup and run the application locally.
 
-## Prerequisites
-- Node.js (preferably latest LTS)
-- npm (comes with Node.js)
-- Git
+### Step 1: Clone the Repository
 
-## Step 1: Clone the repository
 ```bash
 git clone <repository-url>
-cd <repository-folder>
+cd <repository-directory>
 ```
 
-## Step 2: Install dependencies
+### Step 2: Install Dependencies
+
+The project uses Node.js and NestJS framework.
 
 Run:
+
 ```bash
 npm install
 ```
-This will install all required packages as per `package.json`.
 
-## Step 3: Understand the project structure
+This will install dependencies as defined in `package.json`.
 
-- Source code is inside the `src/` folder.
-- Main files:
-  - `src/main.ts`: Entry point to bootstrap the application.
-  - `src/app.module.ts`: Main application module.
-  - `src/app.controller.ts`: Defines API routes.
-  - `src/app.service.ts`: Contains business logic.
-  - `src/dto/`: Data Transfer Object definitions.
+### Step 3: Run the Application
 
-## Step 4: Running the application
+You can run the application in development mode with watching enabled:
 
-Start the application in development mode with:
 ```bash
 npm run start:dev
 ```
 
-This will start the NestJS server and watch for file changes.
+This will start the app and reload on file changes.
 
-By default, the server listens on port `3000` or the port set via the `PORT` environment variable.
+Alternatively, run for production:
 
-## Step 5: Running tests
+```bash
+npm run start:prod
+```
 
-Run unit tests:
+### Step 4: Understand the Main Entry
+
+The main bootstrap file is `src/main.ts`:
+
+```typescript
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  await app.listen(process.env.PORT ?? 3000);
+}
+bootstrap();
+```
+
+This starts the NestJS app listening on port 3000 by default.
+
+### Step 5: Running Tests
+
+To run unit tests:
+
 ```bash
 npm run test
 ```
 
-## Additional Notes
+To watch tests during development:
 
-Refer to the included [README.md](README.md) for more information and resources.
+```bash
+npm run test:watch
+```
+
+### Additional Help
+
+Refer to the `README.md` for more details and usage instructions.
 
 ---
