@@ -1,19 +1,19 @@
 import { Controller, Get, Post } from '@nestjs/common';
-import { AppService } from './app.service';
 import { BookingRequestDto } from './dto/booking-request.dto';
 import { BookingResponseDto } from './dto/bookinig-response.dto';
+import { AppService } from './Services/app.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get("/")
-  GetHelloWorld(): string {
-    return 'Hello World';
+  @Post("bookings")
+  CreateBookings(request: BookingRequestDto): BookingResponseDto {
+    return this.appService.createBooking(request);
   }
 
-  @Post("bookings")
-  GetBookings(request: BookingRequestDto): BookingResponseDto {
-    return this.appService.getHello();
+  @Get("/bookings")
+  GetBookings(uuid: string): BookingRequestDto {
+    return this.appService.GetBooking(uuid);
   }
 }

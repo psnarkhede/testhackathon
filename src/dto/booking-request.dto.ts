@@ -1,10 +1,22 @@
-// booking-request.dto.ts
-import { IsString, IsUUID, IsMobilePhone } from 'class-validator';
+import { Type } from 'class-transformer';
+import { ValidateNested, IsNotEmpty } from 'class-validator';
+import { VehicleDto } from './vehicle.dto';
+import { PaymentDto } from './payment.dto';
+import { CustomerDto } from './custromer.dto';
 
 export class BookingRequestDto {
-  @IsMobilePhone()
-  mobileNumber: string;
+  @ValidateNested()
+  @Type(() => CustomerDto)
+  @IsNotEmpty()
+  customer: CustomerDto;
 
-  @IsUUID()
-  uuid: string;
+  @ValidateNested()
+  @Type(() => VehicleDto)
+  @IsNotEmpty()
+  vehicle: VehicleDto;
+
+  @ValidateNested()
+  @Type(() => PaymentDto)
+  @IsNotEmpty()
+  payment: PaymentDto;
 }

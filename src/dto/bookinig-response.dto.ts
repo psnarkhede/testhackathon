@@ -1,14 +1,11 @@
-// booking-request.dto.ts
-import { IsString, IsUUID, IsMobilePhone, IsNumber, IsOptional } from 'class-validator';
+import { IsUUID, IsString, IsNotEmpty } from 'class-validator';
 
 export class BookingResponseDto {
   @IsString()
-  vehicle: string;
+  @IsNotEmpty()
+  message: string;
 
   @IsUUID()
+  @IsNotEmpty()
   uuid: string;
-
-  @IsNumber()
-  @IsOptional()
-  amount?: number;
 }
