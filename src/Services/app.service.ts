@@ -3,6 +3,7 @@ import { BookingResponseDto } from '../dto/bookinig-response.dto';
 import { BookingRequestDto } from '../dto/booking-request.dto';
 import { VehicleType } from '../dto/vehicle.dto';
 import { PaymentMode, PaymentType } from '../dto/payment.dto';
+import { BookingRetrievalDto } from '../dto/booking-retrieval.dto';
 
 @Injectable()
 export class AppService {
@@ -14,7 +15,7 @@ export class AppService {
     return bookingResponse;
   }
 
-  GetBooking(UUID: string): BookingRequestDto {
+  GetBooking(request: BookingRetrievalDto): BookingRequestDto {
     const bookingResponse: BookingRequestDto = {
       customer: {
         name : "John Doe",

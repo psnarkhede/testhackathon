@@ -2,6 +2,7 @@ import { Controller, Get, Post, Query } from '@nestjs/common';
 import { BookingRequestDto } from './dto/booking-request.dto';
 import { BookingResponseDto } from './dto/bookinig-response.dto';
 import { AppService } from './Services/app.service';
+import { BookingRetrievalDto } from './dto/booking-retrieval.dto';
 
 @Controller()
 export class AppController {
@@ -13,7 +14,7 @@ export class AppController {
   }
 
   @Get("/bookings")
-  GetBookings(@Query('uuid') uuid: string): BookingRequestDto {
-    return this.appService.GetBooking(uuid);
+  GetBookings(request:BookingRetrievalDto): BookingRequestDto {
+    return this.appService.GetBooking(request);
   }
 }
