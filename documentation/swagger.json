@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.0.0",
   "info": {
     "version": "196b5f7a1711cfd1008124dd1cd1f9243e5a4498",
     "title": "API Documentation"
@@ -10,6 +10,7 @@
         "tags": [
           "app.controller.ts"
         ],
+        "summary": "CreateBookings",
         "operationId": "CreateBookings",
         "requestBody": {
           "required": true,
@@ -38,6 +39,7 @@
         "tags": [
           "app.controller.ts"
         ],
+        "summary": "GetBookings",
         "operationId": "GetBookings",
         "parameters": [
           {
@@ -76,11 +78,6 @@
     "schemas": {
       "BookingRequestDto": {
         "type": "object",
-        "required": [
-          "customer",
-          "vehicle",
-          "payment"
-        ],
         "properties": {
           "customer": {
             "$ref": "#/components/schemas/CustomerDto"
@@ -91,17 +88,15 @@
           "payment": {
             "$ref": "#/components/schemas/PaymentDto"
           }
-        }
+        },
+        "required": [
+          "customer",
+          "vehicle",
+          "payment"
+        ]
       },
       "CustomerDto": {
         "type": "object",
-        "required": [
-          "name",
-          "email",
-          "mobilenumber",
-          "address",
-          "pincode"
-        ],
         "properties": {
           "name": {
             "type": "string"
@@ -118,17 +113,17 @@
           "pincode": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "name",
+          "email",
+          "mobilenumber",
+          "address",
+          "pincode"
+        ]
       },
       "VehicleDto": {
         "type": "object",
-        "required": [
-          "modelId",
-          "partId",
-          "vehicleType",
-          "onRoadPrice",
-          "exShowroomPrice"
-        ],
         "properties": {
           "modelId": {
             "type": "string"
@@ -145,19 +140,17 @@
           "exShowroomPrice": {
             "type": "number"
           }
-        }
+        },
+        "required": [
+          "modelId",
+          "partId",
+          "vehicleType",
+          "onRoadPrice",
+          "exShowroomPrice"
+        ]
       },
       "PaymentDto": {
         "type": "object",
-        "required": [
-          "paymentId",
-          "transactionId",
-          "paymentDate",
-          "merchant",
-          "amountPaid",
-          "paymentType",
-          "paymentMode"
-        ],
         "properties": {
           "paymentId": {
             "type": "string"
@@ -180,14 +173,19 @@
           "paymentMode": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "paymentId",
+          "transactionId",
+          "paymentDate",
+          "merchant",
+          "amountPaid",
+          "paymentType",
+          "paymentMode"
+        ]
       },
       "BookingResponseDto": {
         "type": "object",
-        "required": [
-          "message",
-          "uuid"
-        ],
         "properties": {
           "message": {
             "type": "string"
@@ -195,14 +193,14 @@
           "uuid": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "message",
+          "uuid"
+        ]
       },
       "BookingRetrievalDto": {
         "type": "object",
-        "required": [
-          "mobileNumber",
-          "uuid"
-        ],
         "properties": {
           "mobileNumber": {
             "type": "string"
@@ -210,7 +208,11 @@
           "uuid": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "mobileNumber",
+          "uuid"
+        ]
       }
     }
   }
