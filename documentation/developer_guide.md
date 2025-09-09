@@ -1,10 +1,10 @@
-# Project Version
-
-**Commit:** 196b5f7a1711cfd1008124dd1cd1f9243e5a4498
+# Project Version: 196b5f7a1711cfd1008124dd1cd1f9243e5a4498
 
 ---
 
-# 1. Project Structure
+# Developer Guide
+
+## 1. Project Structure
 
 ```
 src/
@@ -16,17 +16,15 @@ src/
 │   ├── BookingRetrievalDto.ts
 │   ├── CustomerDto.ts
 │   ├── PaymentDto.ts
-│   ├── VehicleDto.ts
+│   └── VehicleDto.ts
 ├── app.controller.ts
 └── app.module.ts
 ```
 
----
+## 2. Modules
 
-# 2. Modules
-
-## AppModule
-The root module of the application. It imports no additional modules but includes the main controller and service.
+### AppModule
+The root module of the application. It imports necessary modules, declares controllers, and provides services.
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -41,20 +39,15 @@ import { AppService } from './Services/app.service';
 export class AppModule {}
 ```
 
-- **Purpose:** Bootstraps the application by linking the `AppController` and `AppService` together.
 
----
+## 3. Services
 
-# 3. Services
+### AppService
+This service handles booking creation and retrieval operations. It acts as the business logic layer for bookings.
 
-## AppService
-Responsible for handling the core business logic related to bookings.
+- **createBooking**: Accepts a booking request DTO and returns a booking response DTO indicating success and a generated UUID.
+- **GetBooking**: Accepts a booking retrieval DTO and returns the booking details as a BookingRequestDto.
 
-### Purpose:
-- Create a booking.
-- Retrieve a booking based on given criteria.
-
-### Code:
 ```typescript
 import { Injectable } from '@nestjs/common';
 import { BookingResponseDto } from '../dto/bookinig-response.dto';
@@ -105,26 +98,17 @@ export class AppService {
 }
 ```
 
----
 
-# 4. Controllers
+## 4. Controllers
 
-## AppController
-The main controller handling HTTP requests related to bookings.
+### AppController
+This controller provides HTTP endpoints to create and retrieve bookings.
 
-### Constructor:
-```typescript
-constructor(private readonly appService: AppService) {}
-```
+| Endpoint       | HTTP Method | Request DTO           | Response DTO          | Purpose                       |
+|----------------|-------------|-----------------------|-----------------------|-------------------------------|
+| POST /bookings | POST        | `BookingRequestDto`   | `BookingResponseDto`  | Create a new booking           |
+| GET /bookings  | GET         | `BookingRetrievalDto` | `BookingRequestDto`   | Retrieve existing booking info |
 
-### Endpoints:
-
-| Endpoint       | HTTP Method | Request DTO          | Response DTO        | Purpose                        |
-|----------------|-------------|----------------------|---------------------|--------------------------------|
-| `/bookings`    | POST        | BookingRequestDto    | BookingResponseDto   | Create a new booking            |
-| `/bookings`    | GET         | BookingRetrievalDto  | BookingRequestDto    | Retrieve booking information   |
-
-### Code:
 ```typescript
 import { Controller, Get, Post, Query } from '@nestjs/common';
 import { BookingRequestDto } from './dto/booking-request.dto';
@@ -148,40 +132,21 @@ export class AppController {
 }
 ```
 
-### Examples:
+**Example Usage:**
 
-- **Create booking (POST /bookings):**
-  ```json
-  Request Body: BookingRequestDto (see DTO section)
-  Response:
-  {
-    "message": "Booking Created Sucessfully",
-    "uuid": "123e4567-e89b-12d3-a456-426614174000"
-  }
-  ```
+- Creating a booking: Send a POST request to `/bookings` with a JSON body matching `BookingRequestDto`.
+- Retrieving a booking: Send a GET request to `/bookings` with query parameters matching `BookingRetrievalDto` (e.g., `mobileNumber` and/or `uuid`).
 
-- **Get booking (GET /bookings):**
-  ```json
-  Query Parameters: BookingRetrievalDto
-  Response Body: BookingRequestDto (full booking details)
-  ```
-
----
-
-# 5. DTOs (Data Transfer Objects)
-
-Below is a list of DTOs used by the controllers, with their properties, types, and whether they are required.
-
----
+## 5. DTOs
 
 ### BookingRequestDto
-Represents the booking input data including customer, vehicle, and payment info.
+Represents a booking request containing customer, vehicle, and payment details.
 
-| Property  | Type           | Required |
-|-----------|----------------|----------|
-| customer  | CustomerDto    | Yes      |
-| vehicle   | VehicleDto     | Yes      |
-| payment   | PaymentDto     | Yes      |
+| Property | Type           | Required |
+|----------|----------------|----------|
+| customer | `CustomerDto`  | Yes      |
+| vehicle  | `VehicleDto`   | Yes      |
+| payment  | `PaymentDto`   | Yes      |
 
 ```typescript
 export class BookingRequestDto {
@@ -194,7 +159,7 @@ export class BookingRequestDto {
 ---
 
 ### CustomerDto
-Details of the customer.
+Customer personal details for the booking.
 
 | Property    | Type   | Required |
 |-------------|--------|----------|
@@ -217,15 +182,15 @@ export class CustomerDto {
 ---
 
 ### VehicleDto
-Information about the vehicle.
+Vehicle details related to the booking.
 
-| Property       | Type        | Required |
-|----------------|-------------|----------|
-| modelId        | string      | Yes      |
-| partId         | string      | Yes      |
-| vehicleType    | VehicleType | Yes      |
-| onRoadPrice    | number      | Yes      |
-| exShowroomPrice| number      | Yes      |
+| Property       | Type         | Required |
+|----------------|--------------|----------|
+| modelId        | string       | Yes      |
+| partId         | string       | Yes      |
+| vehicleType    | VehicleType  | Yes      |
+| onRoadPrice    | number       | Yes      |
+| exShowroomPrice| number       | Yes      |
 
 ```typescript
 export class VehicleDto {
@@ -240,17 +205,17 @@ export class VehicleDto {
 ---
 
 ### PaymentDto
-Details of the payment made for the booking.
+Payment transaction details.
 
-| Property       | Type         | Required |
-|----------------|--------------|----------|
-| paymentId      | string       | Yes      |
-| transactionId  | string       | Yes      |
-| paymentDate    | string       | Yes      |
-| merchant       | string       | Yes      |
-| amountPaid     | number       | Yes      |
-| paymentType    | PaymentType  | Yes      |
-| paymentMode    | PaymentMode  | Yes      |
+| Property      | Type         | Required |
+|---------------|--------------|----------|
+| paymentId     | string       | Yes      |
+| transactionId | string       | Yes      |
+| paymentDate   | string       | Yes      |
+| merchant      | string       | Yes      |
+| amountPaid    | number       | Yes      |
+| paymentType   | PaymentType  | Yes      |
+| paymentMode   | PaymentMode  | Yes      |
 
 ```typescript
 export class PaymentDto {
@@ -267,7 +232,7 @@ export class PaymentDto {
 ---
 
 ### BookingResponseDto
-Confirmation response after booking creation.
+Response returned after booking creation.
 
 | Property | Type   | Required |
 |----------|--------|----------|
@@ -284,12 +249,12 @@ export class BookingResponseDto {
 ---
 
 ### BookingRetrievalDto
-Parameters for retrieving an existing booking.
+DTO used to fetch booking information.
 
-| Property     | Type   | Required |
-|--------------|--------|----------|
-| mobileNumber | string | Yes      |
-| uuid         | string | Yes      |
+| Property    | Type   | Required |
+|-------------|--------|----------|
+| mobileNumber| string | Yes      |
+| uuid        | string | Yes      |
 
 ```typescript
 export class BookingRetrievalDto {
@@ -297,13 +262,3 @@ export class BookingRetrievalDto {
   uuid: string;
 }
 ```
-
----
-
-# Notes:
-- `VehicleType`, `PaymentType`, and `PaymentMode` are enums imported from related DTO files but their exact definitions are not part of this extract.
-- Some DTO properties in `BookingRequestDto` are noted as `[object Object]` in the source; this indicates they should correspond to the detailed DTO classes (CustomerDto, VehicleDto, PaymentDto) defined separately.
-
----
-
-This concludes the developer guide for getting started with this booking system project.
