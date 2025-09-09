@@ -6,7 +6,12 @@ import { BookingRetrievalDto } from './dto/booking-retrieval.dto';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
+
+  @Get('/')
+  GetHelloWorld(@Query('uuid') uuid: string): string {
+    return `Hello World, your uuid is ${uuid}`;
+  }
 
   @Post("bookings")
   CreateBookings(request: BookingRequestDto): BookingResponseDto {
@@ -14,7 +19,7 @@ export class AppController {
   }
 
   @Get("/bookings")
-  GetBookings(request:BookingRetrievalDto): BookingRequestDto {
+  GetBookings(request: BookingRetrievalDto): BookingRequestDto {
     return this.appService.GetBooking(request);
   }
 }
