@@ -5,95 +5,109 @@
 ---
 
 ## POST /bookings
+
 - **Controller:** app.controller.ts
 - **Function Name:** CreateBookings
 
 ### Request DTO: BookingRequestDto
+
 | Property | Type | Required |
-|----------|------|----------|
+| -------- | ---- | -------- |
 | customer | CustomerDto | Yes |
 | vehicle | VehicleDto | Yes |
 | payment | PaymentDto | Yes |
 
-#### CustomerDto
-| Property | Type | Required |
-|----------|------|----------|
-| name | string | Yes |
-| email | string | Yes |
-| mobilenumber | string | Yes |
-| address | string | Yes |
-| pincode | string | Yes |
+**CustomerDto properties:**
 
-#### VehicleDto
-| Property | Type | Required |
-|----------|------|----------|
-| modelId | string | Yes |
-| partId | string | Yes |
-| vehicleType | VehicleType | Yes |
-| onRoadPrice | number | Yes |
-| exShowroomPrice | number | Yes |
+| Property    | Type   | Required |
+| ----------- | ------ | -------- |
+| name        | string | Yes      |
+| email       | string | Yes      |
+| mobilenumber| string | Yes      |
+| address     | string | Yes      |
+| pincode     | string | Yes      |
 
-#### PaymentDto
-| Property | Type | Required |
-|----------|------|----------|
-| paymentId | string | Yes |
-| transactionId | string | Yes |
-| paymentDate | string | Yes |
-| merchant | string | Yes |
-| amountPaid | number | Yes |
-| paymentType | PaymentType | Yes |
-| paymentMode | PaymentMode | Yes |
+**VehicleDto properties:**
+
+| Property       | Type         | Required |
+| -------------- | ------------ | -------- |
+| modelId        | string       | Yes      |
+| partId         | string       | Yes      |
+| vehicleType    | VehicleType  | Yes      |
+| onRoadPrice    | number       | Yes      |
+| exShowroomPrice| number       | Yes      |
+
+**PaymentDto properties:**
+
+| Property      | Type        | Required |
+| ------------- | ----------- | -------- |
+| paymentId     | string      | Yes      |
+| transactionId | string      | Yes      |
+| paymentDate   | string      | Yes      |
+| merchant      | string      | Yes      |
+| amountPaid    | number      | Yes      |
+| paymentType   | PaymentType | Yes      |
+| paymentMode   | PaymentMode | Yes      |
 
 ### Response DTO: BookingResponseDto
-| Property | Type | Required |
-|----------|------|----------|
-| message | string | Yes |
-| uuid | string | Yes |
+
+| Property | Type   | Required |
+| -------- | ------ | -------- |
+| message  | string | Yes      |
+| uuid     | string | Yes      |
 
 ---
 
 ## GET /bookings
+
 - **Controller:** app.controller.ts
 - **Function Name:** GetBookings
 
 ### Request DTO: BookingRetrievalDto
-| Property | Type | Required |
-|----------|------|----------|
-| mobileNumber | string | Yes |
-| uuid | string | Yes |
+
+| Property     | Type   | Required |
+| ------------ | ------ | -------- |
+| mobileNumber | string | Yes      |
+| uuid         | string | Yes      |
 
 ### Response DTO: BookingRequestDto
-| Property | Type | Required |
-|----------|------|----------|
-| customer | CustomerDto | Yes |
-| vehicle | VehicleDto | Yes |
-| payment | PaymentDto | Yes |
 
-#### CustomerDto
-| Property | Type | Required |
-|----------|------|----------|
-| name | string | Yes |
-| email | string | Yes |
-| mobilenumber | string | Yes |
-| address | string | Yes |
-| pincode | string | Yes |
+| Property | Type        | Required |
+| -------- | ----------- | -------- |
+| customer | CustomerDto | Yes      |
+| vehicle  | VehicleDto  | Yes      |
+| payment  | PaymentDto  | Yes      |
 
-#### VehicleDto
-| Property | Type | Required |
-|----------|------|----------|
-| modelId | string | Yes |
-| partId | string | Yes |
-| vehicleType | VehicleType | Yes |
-| onRoadPrice | number | Yes |
-| exShowroomPrice | number | Yes |
+**CustomerDto properties:**
 
-#### PaymentDto
-| Property | Type | Required |
-|----------|------|----------|
-| paymentId | string | Yes |
-| transactionId | string | Yes |
-| paymentDate | string | Yes |
-| merchant | string | Yes |
-| amountPaid | number | Yes |
-| paymentType | PaymentType | Yes |
-| paymentMode | PaymentMode | Yes |
+| Property    | Type   | Required |
+| ----------- | ------ | -------- |
+| name        | string | Yes      |
+| email       | string | Yes      |
+| mobilenumber| string | Yes      |
+| address     | string | Yes      |
+| pincode     | string | Yes      |
+
+**VehicleDto properties:**
+
+| Property       | Type         | Required |
+| -------------- | ------------ | -------- |
+| modelId        | string       | Yes      |
+| partId         | string       | Yes      |
+| vehicleType    | VehicleType  | Yes      |
+| onRoadPrice    | number       | Yes      |
+| exShowroomPrice| number       | Yes      |
+
+**PaymentDto properties:**
+
+| Property      | Type        | Required |
+| ------------- | ----------- | -------- |
+| paymentId     | string      | Yes      |
+| transactionId | string      | Yes      |
+| paymentDate   | string      | Yes      |
+| merchant      | string      | Yes      |
+| amountPaid    | number      | Yes      |
+| paymentType   | PaymentType | Yes      |
+| paymentMode   | PaymentMode | Yes      |
+
+---
