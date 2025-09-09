@@ -1,30 +1,37 @@
-# Project Version: 196b5f7a1711cfd1008124dd1cd1f9243e5a4498
+# Project Version
+
+**Version:** cd033e7f2eeffe6d4053e35cab8d03cb0d721491
 
 ---
 
-# Developer Guide
-
-## 1. Project Structure
+# Project Structure
 
 ```
 src/
-├── Services/
-│   └── app.service.ts
-├── dto/
-│   ├── BookingRequestDto.ts
-│   ├── BookingResponseDto.ts
-│   ├── BookingRetrievalDto.ts
-│   ├── CustomerDto.ts
-│   ├── PaymentDto.ts
-│   └── VehicleDto.ts
-├── app.controller.ts
-└── app.module.ts
+  ├── Services/
+  │    └── app.service.ts
+  ├── app.controller.ts
+  ├── app.module.ts
+  dto/
+  │    ├── BookingRequestDto.ts
+  │    ├── BookingResponseDto.ts
+  │    ├── BookingRetrievalDto.ts
+  │    ├── CustomerDto.ts
+  │    ├── PaymentDto.ts
+  │    └── VehicleDto.ts
 ```
 
-## 2. Modules
+---
 
-### AppModule
-The root module of the application. It imports necessary modules, declares controllers, and provides services.
+# Modules
+
+## AppModule
+
+**Purpose:**
+
+The root module of the application. It declares the controllers and providers (services) used in this application.
+
+**Code:**
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -39,14 +46,20 @@ import { AppService } from './Services/app.service';
 export class AppModule {}
 ```
 
+---
 
-## 3. Services
+# Services
 
-### AppService
-This service handles booking creation and retrieval operations. It acts as the business logic layer for bookings.
+## AppService
 
-- **createBooking**: Accepts a booking request DTO and returns a booking response DTO indicating success and a generated UUID.
-- **GetBooking**: Accepts a booking retrieval DTO and returns the booking details as a BookingRequestDto.
+**Purpose:**
+
+Provides core business logic for booking creation and retrieval.
+
+- `createBooking` handles creating a booking and returns a booking response.
+- `GetBooking` retrieves booking information based on a request.
+
+**Code:**
 
 ```typescript
 import { Injectable } from '@nestjs/common';
@@ -98,16 +111,54 @@ export class AppService {
 }
 ```
 
+---
 
-## 4. Controllers
+# Controllers
 
-### AppController
-This controller provides HTTP endpoints to create and retrieve bookings.
+## AppController
 
-| Endpoint       | HTTP Method | Request DTO           | Response DTO          | Purpose                       |
-|----------------|-------------|-----------------------|-----------------------|-------------------------------|
-| POST /bookings | POST        | `BookingRequestDto`   | `BookingResponseDto`  | Create a new booking           |
-| GET /bookings  | GET         | `BookingRetrievalDto` | `BookingRequestDto`   | Retrieve existing booking info |
+**Purpose:**
+
+Handles incoming HTTP requests related to bookings and provides responses.
+
+### Endpoints
+
+| HTTP Method | Path       | Description                   | Request DTO          | Response DTO         |
+|-------------|------------|-------------------------------|----------------------|---------------------|
+| GET         | `/`        | Returns a hello message with uuid query param | Query param: `uuid` (string) | string |
+| POST        | `/bookings`| Creates a new booking           | `BookingRequestDto`  | `BookingResponseDto` |
+| GET         | `/bookings`| Retrieves booking details       | `BookingRetrievalDto`| `BookingRequestDto`  |
+
+### Example Snippets
+
+**GET /**
+
+```typescript
+@Get('/')
+GetHelloWorld(@Query('uuid') uuid: string): string {
+  return `Hello World, your uuid is ${uuid}`;
+}
+```
+
+**POST /bookings**
+
+```typescript
+@Post("bookings")
+CreateBookings(request: BookingRequestDto): BookingResponseDto {
+  return this.appService.createBooking(request);
+}
+```
+
+**GET /bookings**
+
+```typescript
+@Get("/bookings")
+GetBookings(request: BookingRetrievalDto): BookingRequestDto {
+  return this.appService.GetBooking(request);
+}
+```
+
+**Full code:**
 
 ```typescript
 import { Controller, Get, Post, Query } from '@nestjs/common';
@@ -118,7 +169,12 @@ import { BookingRetrievalDto } from './dto/booking-retrieval.dto';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
+
+  @Get('/')
+  GetHelloWorld(@Query('uuid') uuid: string): string {
+    return `Hello World, your uuid is ${uuid}`;
+  }
 
   @Post("bookings")
   CreateBookings(request: BookingRequestDto): BookingResponseDto {
@@ -126,48 +182,43 @@ export class AppController {
   }
 
   @Get("/bookings")
-  GetBookings(request:BookingRetrievalDto): BookingRequestDto {
+  GetBookings(request: BookingRetrievalDto): BookingRequestDto {
     return this.appService.GetBooking(request);
   }
 }
 ```
 
-**Example Usage:**
+---
 
-- Creating a booking: Send a POST request to `/bookings` with a JSON body matching `BookingRequestDto`.
-- Retrieving a booking: Send a GET request to `/bookings` with query parameters matching `BookingRetrievalDto` (e.g., `mobileNumber` and/or `uuid`).
+# DTOs
 
-## 5. DTOs
-
-### BookingRequestDto
-Represents a booking request containing customer, vehicle, and payment details.
+## BookingRequestDto
 
 | Property | Type           | Required |
 |----------|----------------|----------|
-| customer | `CustomerDto`  | Yes      |
-| vehicle  | `VehicleDto`   | Yes      |
-| payment  | `PaymentDto`   | Yes      |
+| customer | CustomerDto    | Yes      |
+| vehicle  | VehicleDto     | Yes      |
+| payment  | PaymentDto     | Yes      |
 
 ```typescript
 export class BookingRequestDto {
-  customer: [object Object];
-  vehicle: [object Object];
-  payment: [object Object];
+  customer: CustomerDto;
+  vehicle: VehicleDto;
+  payment: PaymentDto;
 }
 ```
 
 ---
 
-### CustomerDto
-Customer personal details for the booking.
+## CustomerDto
 
-| Property    | Type   | Required |
-|-------------|--------|----------|
-| name        | string | Yes      |
-| email       | string | Yes      |
-| mobilenumber| string | Yes      |
-| address     | string | Yes      |
-| pincode     | string | Yes      |
+| Property    | Type    | Required |
+|-------------|---------|----------|
+| name        | string  | Yes      |
+| email       | string  | Yes      |
+| mobilenumber| string  | Yes      |
+| address     | string  | Yes      |
+| pincode     | string  | Yes      |
 
 ```typescript
 export class CustomerDto {
@@ -181,8 +232,7 @@ export class CustomerDto {
 
 ---
 
-### VehicleDto
-Vehicle details related to the booking.
+## VehicleDto
 
 | Property       | Type         | Required |
 |----------------|--------------|----------|
@@ -204,18 +254,17 @@ export class VehicleDto {
 
 ---
 
-### PaymentDto
-Payment transaction details.
+## PaymentDto
 
-| Property      | Type         | Required |
-|---------------|--------------|----------|
-| paymentId     | string       | Yes      |
-| transactionId | string       | Yes      |
-| paymentDate   | string       | Yes      |
-| merchant      | string       | Yes      |
-| amountPaid    | number       | Yes      |
-| paymentType   | PaymentType  | Yes      |
-| paymentMode   | PaymentMode  | Yes      |
+| Property       | Type         | Required |
+|----------------|--------------|----------|
+| paymentId      | string       | Yes      |
+| transactionId  | string       | Yes      |
+| paymentDate    | string       | Yes      |
+| merchant       | string       | Yes      |
+| amountPaid     | number       | Yes      |
+| paymentType    | PaymentType  | Yes      |
+| paymentMode    | PaymentMode  | Yes      |
 
 ```typescript
 export class PaymentDto {
@@ -231,8 +280,7 @@ export class PaymentDto {
 
 ---
 
-### BookingResponseDto
-Response returned after booking creation.
+## BookingResponseDto
 
 | Property | Type   | Required |
 |----------|--------|----------|
@@ -248,13 +296,12 @@ export class BookingResponseDto {
 
 ---
 
-### BookingRetrievalDto
-DTO used to fetch booking information.
+## BookingRetrievalDto
 
-| Property    | Type   | Required |
-|-------------|--------|----------|
-| mobileNumber| string | Yes      |
-| uuid        | string | Yes      |
+| Property     | Type   | Required |
+|--------------|--------|----------|
+| mobileNumber | string | Yes      |
+| uuid         | string | Yes      |
 
 ```typescript
 export class BookingRetrievalDto {
