@@ -2,187 +2,165 @@
 
 ---
 
-## Version: 196b5f7a1711cfd1008124dd1cd1f9243e5a4498
+**Project Version:** 196b5f7a1711cfd1008124dd1cd1f9243e5a4498
 
 ---
 
-# 1. High-level Overview
+## 1. High-level Overview
 
-This project is a **NestJS** server-side application designed to manage vehicle booking operations. It provides RESTful API endpoints for creating and retrieving bookings, encapsulating customer, vehicle, and payment information within structured Data Transfer Objects (DTOs).
+### Purpose of the Application
+This NestJS application is designed to manage vehicle booking operations. It provides API endpoints to create bookings and retrieve booking details based on customer information. The system is structured to encapsulate request validation, business logic processing, and response shaping in a modular and maintainable way.
 
-### Purpose
+### Main Modules and System Structure
+- **AppModule:** The root module that integrates the controller and service responsible for booking operations.
+- **AppController:** Exposes REST API endpoints for booking creation and retrieval.
+- **AppService:** Contains business logic to handle the creation of bookings and fetching existing booking data.
+- **Data Transfer Objects (DTOs):** Strongly typed objects used for request validation and response shaping, including booking requests and responses, customer, vehicle, and payment information.
 
-- Facilitate vehicle booking creation and retrieval
-- Validate and transport data consistently between client requests and server responses
+### Project Setup and Startup Flow
+- **Setup:** After cloning the project, dependencies are installed via `npm install`.
+- **Development Start:** The application can be launched in development mode with `npm run start:dev` or production mode with `npm run start:prod`.
+- **Bootstrap Process:** The entry point (`src/main.ts`) uses `NestFactory` to create and run the `AppModule` on a configured port (default 3000).
 
-### System Structure
+---
 
-- The system follows a modular architecture centered around a single root module, **AppModule**.
-- The key building blocks are:
-  - **AppController**: Handles HTTP requests.
-  - **AppService**: Contains business logic related to bookings.
-  - **DTOs**: Define request/response data schemas and enforce validation.
-
-### Project Setup & Startup Flow
-
-- Dependencies are installed via `npm install`.
-- The application can run in different modes:
-  - Development: `npm run start:dev` for hot-reloading
-  - Production: `npm run start:prod` to run compiled code
-- The entry point is `src/main.ts` which bootstraps the NestJS application by:
-  1. Creating an application instance from **AppModule** using `NestFactory.create(AppModule)`.
-  2. Listening on port 3000 or a port defined in the `PORT` environment variable.
-
-# 2. Module Description
+## 2. Module Description
 
 ### AppModule
-
-- **Role:** Root module that orchestrates the application.
-- **Dependencies:** None external (does not import other feature modules).
-- **Components:**
-  - **Controllers:** [AppController]
-  - **Providers/Services:** [AppService]
-
-# 3. Controller & Service Interactions
-
-### AppController
-
-- **Responsibilities:**
-  - Defines API endpoints.
-  - Handles incoming HTTP requests.
-  - Delegates business logic to AppService.
-
-- **Endpoints:**
-  - `POST /bookings` - Creates a new booking.
-  - `GET /bookings` - Retrieves an existing booking.
-
-- **Method Signatures:**
-  - `CreateBookings(request: BookingRequestDto): BookingResponseDto`
-  - `GetBookings(request: BookingRetrievalDto): BookingRequestDto`
-
-- **Request Handling:**
-  - The controller methods accept DTO instances representing the request payload.
-  - They invoke corresponding methods on `AppService` and return DTOs representing the response.
-
-### AppService
-
-- **Responsibilities:**
-  - Implements core booking logic.
-  - Responsible for creation and retrieval of booking data.
-
-- **Methods:**
-  - `createBooking(request: BookingRequestDto): BookingResponseDto`
-    - Constructs a booking confirmation response with a success message and generated UUID.
-  - `GetBooking(request: BookingRetrievalDto): BookingRequestDto`
-    - Returns mock booking data populated with customer, vehicle, and payment details.
-
-- **Data Interaction:**
-  - Returns instances of DTO classes to enforce consistent contract.
-
-# 4. Data Flow
-
-### Incoming Request to Outgoing Response
-
-1. **Client request** arrives as HTTP POST or GET.
-2. NestJS framework deserializes and validates the data into DTO classes.
-   - For booking creation: `BookingRequestDto`
-   - For booking retrieval: `BookingRetrievalDto`
-3. **AppController** receives validated DTOs and calls respective service methods.
-4. **AppService processes the request**:
-   - For creation, it returns a `BookingResponseDto` containing confirmation message and UUID.
-   - For retrieval, returns a `BookingRequestDto` instance with sample booking details.
-5. **AppController returns** the service's response DTO.
-6. NestJS serializes the response DTO back into JSON as the API response.
-
-### DTO Structures
-
-- **BookingRequestDto**
-  - Aggregates `CustomerDto`, `VehicleDto`, and `PaymentDto`.
-  - Validates nested objects to ensure data integrity.
-
-- **CustomerDto**
-  - name, email, mobilenumber, address, pincode
-  - Strong validation on mobile number length, email format, pincode length.
-
-- **VehicleDto**
-  - modelId, partId (UUID references), vehicleType (enum), onRoadPrice, exShowroomPrice
-
-- **PaymentDto**
-  - paymentId, transactionId (UUIDs), paymentDate (ISO string), merchant, amountPaid
-  - Enums for paymentType (FULL, PARTIAL, REFUND) and paymentMode (CASH, CARD, UPI, NETBANKING, WALLET)
-
-- **BookingRetrievalDto**
-  - mobileNumber (string)
-  - uuid (UUID)
-
-- **BookingResponseDto**
-  - message (string)
-  - uuid (UUID)
-
-# 5. External Dependencies & Configuration
-
-### Package.json Dependencies
-
-- **@nestjs/common**, **@nestjs/core**, **@nestjs/platform-express**
-  - Core NestJS framework modules for application scaffolding, dependency injection, and HTTP platform support.
-
-- **class-transformer**
-  - Used for transforming plain objects into class instances and vice versa, enabling DTO validation and serialization.
-
-- **class-validator**
-  - Provides declarative validation decorators used extensively inside DTO classes to enforce data correctness.
-
-- **reflect-metadata**
-  - Enables metadata reflection required by decorators in TypeScript/NestJS.
-
-- **rxjs**
-  - Reactive Extensions library commonly used for asynchronous programming patterns in NestJS.
-
-### Development Dependencies
-
-- ESLint and Prettier related packages for linting and formatting.
-- Jest and Supertest for testing, including unit and e2e tests.
-- TypeScript and related tools for typed JavaScript development.
-
-### Nest CLI Configuration (`nest-cli.json`)
-
-- Specifies the source root directory as `src`.
-- Uses the official `@nestjs/schematics` collection for project scaffolding.
-- Configured to delete output directory on build (clean builds).
-
-### Application Bootstrap (`src/main.ts`)
-
-- Creates the Nest application from the root `AppModule`.
-- Listens on a configured port (default `3000`).
-
-# 6. Architecture Diagram Suggestions
-
-To visualize this application, consider the following diagrams:
-
-- **Component Diagram:**
-  - Show **AppModule** as the root container.
-  - Inside it, depict **AppController** and **AppService**.
-  - Represent **DTOs** as data objects flowing between controller and service.
-
-- **Sequence Diagram:**
-  - Display flow for API calls:
-    1. Client sends HTTP request
-    2. Nest controller receives & validates DTO
-    3. Controller calls service
-    4. Service processes & returns response DTO
-    5. Controller sends HTTP response
-
-- **Package/Dependency Diagram:**
-  - Show major external dependencies (`@nestjs/*`, `class-validator/transformer`, `rxjs`) and their responsibilities.
+- **Description:** The root module that wires together the controller and service layer.
+- **Dependencies:** Does not import additional modules.
+- **Controllers:** `AppController` handles incoming HTTP requests.
+- **Providers/Services:** `AppService` contains the core booking business logic.
 
 ---
 
-# Summary
+## 3. Controller & Service Interactions
 
-This is a foundational NestJS application focused on vehicle booking management via REST endpoints. It leverages NestJS dependency injection and modularity, uses decorators for validation with DTOs, and cleanly separates HTTP concerns (controllers) from business logic (services).
+### AppController
+- **Endpoints:**
+  - `POST /bookings`: Accepts a booking creation request with payload validated against `BookingRequestDto`.
+  - `GET /bookings`: Expects query parameters validated via `BookingRetrievalDto` to fetch booking details.
 
-All data contracts and validation rules are strictly defined using **class-validator** annotations within DTOs. The application can be easily extended with additional modules, controllers, and services for scalability.
+- **Methods:**
+  - `CreateBookings(request: BookingRequestDto): BookingResponseDto`:
+    - Receives a validated booking creation request DTO.
+    - Calls `AppService.createBooking`.
+    - Returns a `BookingResponseDto` containing success message and booking UUID.
 
-The project is primed for professional development workflows, including testing and deployment, as indicated by the supplied scripts and dependencies.
+  - `GetBookings(request: BookingRetrievalDto): BookingRequestDto`:
+    - Receives validated booking retrieval query DTO.
+    - Calls `AppService.GetBooking`.
+    - Returns the full `BookingRequestDto` representing the booking details.
+
+### AppService
+- **Methods:**
+  - `createBooking(request: BookingRequestDto): BookingResponseDto`:
+    - Processes booking creation logic.
+    - Returns a confirmation with a fixed UUID (mock implementation).
+
+  - `GetBooking(request: BookingRetrievalDto): BookingRequestDto`:
+    - Retrieves booking details based on mobile number and booking UUID.
+    - Returns a mock booking data object structured as `BookingRequestDto`.
+
+- **Business Logic:**
+  - Currently mocked, serving as placeholders to demonstrate data flow.
+
+### DTOs Used
+- **Request DTOs:**
+  - `BookingRequestDto`:
+    - Composite object containing `CustomerDto`, `VehicleDto`, and `PaymentDto`.
+  - `BookingRetrievalDto`:
+    - Contains `mobileNumber` (string) and `uuid` (UUID) to identify a booking.
+
+- **Response DTOs:**
+  - `BookingResponseDto`:
+    - Contains a confirmation message and UUID.
+  - `BookingRequestDto` (also serves as a response structure for retrieval):
+    - Represents the detailed booking data including customer, vehicle, and payment information.
+
+- **Supporting DTOs:**
+  - `CustomerDto` - customer information like name, email, mobile number, address, pincode.
+  - `VehicleDto` - vehicle identification, type, and pricing.
+  - `PaymentDto` - payment metadata including IDs, amount, type, and mode.
+
+- **Validation:**
+  - DTO classes utilize `class-validator` decorators to enforce payload validity.
+  - `class-transformer` is used for nested object transformation.
+
+---
+
+## 4. Data Flow
+
+1. **Booking Creation (`POST /bookings`):**
+   - Incoming HTTP POST request payload is validated against `BookingRequestDto`.
+   - Controller `CreateBookings` method receives the DTO and delegates to `AppService.createBooking`.
+   - Service processes the request (currently returns a hardcoded success response).
+   - `BookingResponseDto` with confirmation message and UUID is returned to the client.
+
+2. **Booking Retrieval (`GET /bookings`):**
+   - Incoming HTTP GET request query parameters are validated against `BookingRetrievalDto`.
+   - Controller `GetBookings` method invokes `AppService.GetBooking` with validated parameters.
+   - Service retrieves a mock booking record returned as a `BookingRequestDto`.
+   - Detailed booking information (customer, vehicle, payment) is sent back in the response.
+
+3. **Validation and Transformation:**
+   - Nested DTOs ensure structured and validated data for both requests and responses.
+   - Validation errors (not shown here) would typically result in client errors prior to controller logic execution.
+
+---
+
+## 5. External Dependencies & Config
+
+### Key Dependencies (from `package.json`)
+- `@nestjs/common`, `@nestjs/core`, `@nestjs/platform-express`:
+  - Core framework packages enabling the modular NestJS architecture and HTTP server.
+- `class-validator` & `class-transformer`:
+  - Perform input validation and class-to-plain-object transformation, ensuring data integrity.
+- `rxjs`:
+  - Supports reactive programming paradigms intrinsic to NestJS and async data streams.
+- `reflect-metadata`:
+  - Required for decorators and runtime type reflection in TypeScript.
+
+### Dev Dependencies
+- Tools for linting (`eslint`), formatting (`prettier`), testing (`jest`, `ts-jest`, `@nestjs/testing`), and TypeScript support (`typescript`, `ts-node`).
+
+### Configuration Files
+- **`nest-cli.json`**
+  - Defines the source root directory as `src`.
+  - Configures compiler options such as directory cleanup before builds.
+
+- **`main.ts`**
+  - Bootstraps the application by creating the Nest app instance with `AppModule`.
+  - Listens on environment variable `PORT` or defaults to port 3000.
+
+- **`package.json` Scripts**
+  - `start`: Runs the compiled application.
+  - `start:dev`: Runs the app in watch mode for hot-reloading during development.
+  - `test` and variants provide comprehensive testing capabilities.
+
+---
+
+## 6. Architecture Diagram Suggestions
+
+To visualize this system, a UML component or deployment diagram could illustrate:
+
+- **Modules:**
+  - AppModule containing AppController and AppService.
+
+- **Interactions:**
+  - Client → AppController: HTTP requests (`POST /bookings`, `GET /bookings`).
+  - AppController → AppService: Service method calls with DTOs.
+  - AppService → Data (mocked/stubbed for now): Business logic layer.
+
+- **DTO flow:**
+  - Incoming HTTP payloads → Validated DTO instances.
+  - Service processes DTOs → Returns DTO instances as HTTP responses.
+
+This diagram would highlight the clear separation of concerns, request flow, and validation layers.
+
+---
+
+## Summary
+This NestJS application is a well-structured, modular system for vehicle booking management. It leverages strong typing and validation through DTOs and class-validator to ensure data correctness. Although currently using mocked service implementations, the architecture facilitates easy expansion to integrate persistence layers or external APIs. The clear separation between controllers, services, and DTOs aligns with NestJS best practices for scalable server-side applications.
 
 ---
