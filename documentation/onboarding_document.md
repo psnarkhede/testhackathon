@@ -2,169 +2,169 @@
 
 ---
 
-### Version: 196b5f7a1711cfd1008124dd1cd1f9243e5a4498
+**Project Version:** 196b5f7a1711cfd1008124dd1cd1f9243e5a4498
 
 ---
 
 ## 1. Project Overview
 
-Welcome to the **project-test**! This is a starter NestJS project aimed at providing a scalable and efficient server-side application built with modern TypeScript.
+### Description
+This project is a starter repository built with the [NestJS](https://github.com/nestjs/nest) framework. NestJS is a progressive Node.js framework designed for building efficient, scalable, and maintainable server-side applications using TypeScript.
 
-- **Purpose:** To offer a clean structure and starter kit using the [NestJS](https://nestjs.com/) framework, helping developers build backend APIs quickly and maintainably.
+### Technologies and Frameworks Used
+- **Node.js:** Backend runtime environment.
+- **NestJS:** A TypeScript framework for scalable Node.js applications.
+- **TypeScript:** Typed superset of JavaScript used throughout the project.
+- **Jest:** Testing framework for unit and end-to-end (e2e) tests.
+- **ESLint & Prettier:** For code linting and formatting.
+- **RxJS:** For reactive programming.
+- **Class-validator & Class-transformer:** For input validation and transforming plain objects.
 
-- **Technologies & Framework:**
-  - [NestJS](https://nestjs.com/) (v11.x) - A progressive Node.js framework for building efficient and scalable server-side applications.
-  - TypeScript - typed superset of JavaScript for improved developer experience.
-  - RxJS - Reactive Extensions library for reactive programming.
-  - class-validator & class-transformer - for validating and transforming request data.
-  - Jest - Testing framework.
-  - ESLint & Prettier - Code formatting and linting tools.
+The project follows the architectural style and best practices encouraged by NestJS.
+
 
 ---
 
 ## 2. Setup Instructions
 
-### Installing Dependencies
-Make sure you have [Node.js](https://nodejs.org/) installed.
-
-To install required dependencies, run the following command in the project root directory:
+### Install Dependencies
+Run this command in the project root directory to install all required packages:
 
 ```bash
 npm install
 ```
 
-### Running the Project
-Use the following npm scripts:
+### Run the Project
 
-- **Development mode:**
-  ```bash
-  npm run start
-  ```
-  Runs the project normally.
-
-- **Watch mode (automatic restart on code changes):**
+- **Development Mode:** Start the server with hot-reload for faster development.
   ```bash
   npm run start:dev
   ```
-  Very useful during active development.
 
-- **Production mode:**
+- **Production Mode:** Compile and run the application in production.
   ```bash
   npm run start:prod
   ```
-  Executes the compiled JavaScript from `dist` folder for production deployment.
+
+- **Normal Start:** Start the application normally (usually development without watch).
+  ```bash
+  npm run start
+  ```
 
 ### Running Tests
-The project uses Jest to run tests.
 
-- **Run all unit tests:**
+- **Run Unit Tests:** Execute all unit tests.
   ```bash
   npm run test
   ```
 
-- **Run e2e (end-to-end) tests:**
+- **Run E2E Tests:** Execute end-to-end test cases.
   ```bash
   npm run test:e2e
   ```
 
-- **Test coverage report:**
+- **Test Coverage:** Get a coverage report for tests.
   ```bash
   npm run test:cov
   ```
 
-- **Watch mode for tests:**
-  ```bash
-  npm run test:watch
-  ```
 
 ---
 
 ## 3. Project Structure
 
-The main source code is located in the `src` folder.
-
 ### Important Files
-
 - **`src/main.ts`**
-  - The application entry point.
-  - Creates and starts the NestJS application using the `AppModule`.
-  - Listens on a port (default 3000 or from `process.env.PORT`).
-
+  - Application entry point.
+  - Responsible for bootstrapping the NestJS application and starting the server.
+  
 - **`src/app.module.ts`**
-  - Root module that imports all other modules.
-  - Responsible for application-level providers and configurations.
+  - Root module of the application.
+  - Bundles different modules, controllers, and providers into one cohesive unit.
 
 - **`src/app.controller.ts`**
-  - Defines route handlers (endpoints) for the application.
-  - Maps HTTP requests to functions.
+  - Defines request handlers for incoming API requests.
+  - Routes calls to appropriate service methods.
 
 - **`src/app.service.ts`**
-  - Contains the business logic.
-  - Called by the controller to process requests.
+  - Contains business logic.
+  - Provides data or performs operations requested by controllers.
 
-### DTOs (Data Transfer Objects)
-- DTOs define the shape of data for incoming requests and outgoing responses.
-- They help with validation and transformation of data.
-- Typically created using TypeScript classes decorated with validation decorators from `class-validator`.
-- Using DTOs improves code safety and clarity.
+### Data Transfer Objects (DTOs)
+- DTOs are TypeScript classes that define the shape of data for requests or responses.
+- They help validate incoming data and document the structure expected by the API.
+- Typically reside alongside controllers and services.
 
-### Other Important Folders/Files
-- **`test/`** - Contains end-to-end and unit test files.
-- **`package.json`** - Defines dependencies, scripts, and build tools.
-- **`nest-cli.json`** - Configuration for Nest CLI including source root directory.
+### Other Folders and Files
+- **`src/`**
+  - Contains source TypeScript files.
+  - Includes modules, controllers, services, and DTOs.
+
+- **`test/`**
+  - Contains test files, including e2e test specifications.
+
+- **`nest-cli.json`**
+  - Nest CLI configuration specifying source root and build options.
+
+- **`package.json`**
+  - Lists project dependencies, scripts, and versioning.
+
 
 ---
 
 ## 4. API Endpoints Overview
 
-> **Note:** As only base project files are provided (`main.ts` and config files), there are no additional controllers with endpoints beyond the default ones. Typically, `app.controller.ts` would contain routes. Please check that file to expand this section when endpoints are implemented.
+> **Note:** Specific controllers and endpoints are inferred based on typical NestJS starters and provided files.
 
-Example for default root endpoint (usually present in minimal starter):
+### Root Endpoint
+- **HTTP Method:** GET
+- **Path:** `/`
+- **Request DTO:** None
+- **Response DTO:** String message
 
-| HTTP Method | Path | Request DTO       | Response DTO      | Description                      |
-|-------------|-------|------------------|------------------|---------------------------------|
-| GET         | `/`   | None             | `{ message: string }` | Returns a welcome message or basic info |
+#### What it does:
+Returns a simple welcome message or status indicating that the API is running.
 
-> You can add your project-specific endpoints here with details about methods, paths, request/response DTOs, and description.
+### Additional Endpoints
+- Since only default starter files are included, no custom endpoints are defined yet. New endpoints will be added in `*.controller.ts` files.
+
+> **Tip:** Look for files ending with `.controller.ts` to find API routes and their corresponding methods.
+
 
 ---
 
 ## 5. Testing
 
-### Test Structure
-- The project uses [Jest](https://jestjs.io/) as its testing framework.
-- Tests are located in the `test` folder or alongside source files with `.spec.ts` extensions.
-- Unit tests focus on individual services and modules.
-- E2E tests simulate full scenarios by running the app and sending real HTTP requests.
+### Testing Structure
+- Unit tests are written using **Jest**, located within the `src` folder with filenames ending in `.spec.ts`.
+- End-to-end (e2e) tests are placed in the `test` directory and use Jest configuration from `test/jest-e2e.json`.
 
-### Running Tests
-Run tests with:
-```bash
-npm run test
-```
+### How to Run Tests
+- Run unit tests:
+  ```bash
+  npm run test
+  ```
 
-For end-to-end tests:
-```bash
-npm run test:e2e
-```
+- Run e2e tests:
+  ```bash
+  npm run test:e2e
+  ```
 
-To see coverage report:
-```bash
-npm run test:cov
-```
+- Run tests in watch mode (reruns tests on file changes):
+  ```bash
+  npm run test:watch
+  ```
 
-### Example - app.e2e-spec.ts
-
-An example e2e test might look like this:
+### Example from `app.e2e-spec.ts`
+> (File not provided but generally would include tests such as):
 
 ```typescript
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
 describe('AppController (e2e)', () => {
-  let app: INestApplication;
+  let app;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -179,7 +179,7 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect({ message: 'Hello World!' });
+      .expect('Hello World!');
   });
 
   afterAll(async () => {
@@ -188,27 +188,36 @@ describe('AppController (e2e)', () => {
 });
 ```
 
-- This tests the root GET endpoint `/` returns expected status and response.
+This confirms that the root endpoint `/` returns a 200 OK status and the expected string message.
+
 
 ---
 
 ## 6. Resources & References
 
-For further learning and support, refer to the links included in `README.md`:
+The following resources are included in the `README.md` to help you get started and deepen your understanding:
 
-- [NestJS Official Documentation](https://docs.nestjs.com)
-- [NestJS GitHub](https://github.com/nestjs/nest)
-- [NestJS Discord Channel](https://discord.gg/G7Qnnhy)
-- [NestJS Video Courses](https://courses.nestjs.com/)
-- [NestJS Mau Deployment Platform](https://mau.nestjs.com)
-- [NestJS Devtools](https://devtools.nestjs.com)
-- [Enterprise Support](https://enterprise.nestjs.com)
-- [NestJS Twitter](https://twitter.com/nestframework)
-- [NestJS LinkedIn](https://linkedin.com/company/nestjs)
-- [NestJS Jobs Board](https://jobs.nestjs.com)
+- [NestJS Official Website](https://nestjs.com) - The main page for the framework.
+- [NestJS Documentation](https://docs.nestjs.com) - Comprehensive guides and API references.
+- [Discord Channel](https://discord.gg/G7Qnnhy) - Community support and discussion.
+- [Official Video Courses](https://courses.nestjs.com/) - Hands-on tutorials for learning.
+- [NestJS Mau (AWS Deployment Platform)](https://mau.nestjs.com) - For quick deployment to AWS.
+- [NestJS Devtools](https://devtools.nestjs.com) - Tooling for real-time application insights.
+- [Enterprise Support](https://enterprise.nestjs.com) - For professional assistance.
+- Official social and career pages:
+  - [Twitter @nestframework](https://twitter.com/nestframework)
+  - [LinkedIn](https://linkedin.com/company/nestjs)
+  - [Jobs Board](https://jobs.nestjs.com)
 
 ---
 
-Welcome aboard! Feel free to explore the codebase and reach out if you have questions.
+## Summary
+By following this guide, you should be able to:
+- Understand the purpose and technologies behind the project.
+- Set up the environment and run the application in different modes.
+- Know where to find and how to extend the project structure.
+- Understand the basics of API routes and how to add new endpoints.
+- Run tests to verify your changes.
+- Utilize community and official resources for help and learning.
 
-Happy coding! 🚀
+Welcome aboard, and happy coding with NestJS!
