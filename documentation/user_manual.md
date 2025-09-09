@@ -1,53 +1,54 @@
 # User Manual
 
+---
+
 ## Version
 
-196b5f7a1711cfd1008124dd1cd1f9243e5a4498
+`cd033e7f2eeffe6d4053e35cab8d03cb0d721491`
 
 ---
 
 ## Project Overview
 
-This project is a TypeScript starter repository for the [Nest](https://github.com/nestjs/nest) framework, which is a progressive Node.js framework designed for building efficient and scalable server-side applications.
+Nest is a progressive Node.js framework designed for building efficient and scalable server-side applications. This project is a TypeScript starter repository for the Nest framework, providing a solid foundation for developing backend applications with modern architecture and design principles.
 
 ---
 
 ## Installation & Setup
 
-1. **Install Node.js** (if not already installed).
-2. **Install dependencies:**
+1. Ensure you have [Node.js](http://nodejs.org) installed.
+2. Clone the repository and navigate to the project directory.
+3. Install the project dependencies by running:
 
-   ```bash
-   npm install
-   ```
-
-3. The project uses scripts defined in `package.json` to build, format, lint, run, and test the application.
+```bash
+npm install
+```
 
 ---
 
 ## Running the Application
 
-You can run the application in different modes using the npm scripts:
+The project can be run in multiple modes based on your development needs.
 
-- **Development mode:**
+- **Development mode:** Starts the application normally.
 
   ```bash
   npm run start
   ```
 
-- **Watch mode (auto restarts on file changes):**
+- **Watch mode:** Automatically restarts the application upon file changes.
 
   ```bash
   npm run start:dev
   ```
 
-- **Debug mode with watch:**
+- **Debug mode:** Starts the application with debugging enabled and watch mode.
 
   ```bash
   npm run start:debug
   ```
 
-- **Production mode:**
+- **Production mode:** Runs the compiled JavaScript code from the `dist` directory.
 
   ```bash
   npm run start:prod
@@ -57,33 +58,33 @@ You can run the application in different modes using the npm scripts:
 
 ## Testing Instructions
 
-Run tests using the following npm scripts:
+You can perform different types of tests using the available npm scripts:
 
-- **Unit tests:**
+- **Unit tests:** Run all unit tests.
 
   ```bash
   npm run test
   ```
 
-- **Watch mode for tests:**
-
-  ```bash
-  npm run test:watch
-  ```
-
-- **Test coverage report:**
-
-  ```bash
-  npm run test:cov
-  ```
-
-- **E2E (end-to-end) tests:**
+- **End-to-end (e2e) tests:** Run e2e tests using a specific Jest config.
 
   ```bash
   npm run test:e2e
   ```
 
-- **Debug tests:**
+- **Test coverage:** Generate a coverage report for your tests.
+
+  ```bash
+  npm run test:cov
+  ```
+
+- **Test watch mode:** Re-run tests on file changes.
+
+  ```bash
+  npm run test:watch
+  ```
+
+- **Test debug mode:** Run tests with debugging enabled.
 
   ```bash
   npm run test:debug
@@ -93,43 +94,43 @@ Run tests using the following npm scripts:
 
 ## Deployment Instructions
 
-When ready for production deployment, consult the [NestJS deployment documentation](https://docs.nestjs.com/deployment) for best practices to ensure efficient running of your application.
+To deploy your NestJS application efficiently in a production environment, refer to the official deployment documentation at:
 
-### Deploying with Mau
+- [NestJS Deployment Documentation](https://docs.nestjs.com/deployment)
 
-NestJS offers an official cloud platform named Mau for AWS deployments. You can deploy easily by:
+For cloud-based deployment on AWS, you can use the official platform Mau. It simplifies deployment with just a few commands:
 
 ```bash
 npm install -g @nestjs/mau
 mau deploy
 ```
 
-Mau simplifies deployment by handling infrastructure, enabling you to focus on developing features.
+Mau allows quick and easy deployment, freeing you to focus on development instead of infrastructure management.
 
 ---
 
 ## Available NPM Scripts
 
-| Script        | Description                                          |
-|---------------|------------------------------------------------------|
-| `build`       | Builds the NestJS project.                           |
-| `format`      | Formats source and test TypeScript files with Prettier. |
-| `start`       | Starts the application in development mode.         |
-| `start:dev`   | Starts the application in watch mode (auto restart on changes). |
-| `start:debug` | Starts the application with debugger enabled in watch mode. |
-| `start:prod`  | Runs the built application in production mode.       |
-| `lint`        | Runs ESLint to analyze and auto-fix linting issues.  |
-| `test`        | Runs Jest unit tests.                                 |
-| `test:watch`  | Runs Jest tests in watch mode.                        |
-| `test:cov`    | Runs Jest and generates test coverage report.       |
-| `test:debug`  | Runs Jest tests with Node.js inspector for debugging.| 
-| `test:e2e`    | Runs end-to-end (e2e) tests using Jest.              |
+| Script         | Description                                                    |
+|----------------|----------------------------------------------------------------|
+| `build`        | Builds the NestJS application using the Nest CLI (`nest build`).|
+| `format`       | Runs Prettier to format all TypeScript files in `src` and `test` folders.
+| `start`        | Starts the application in development mode.
+| `start:dev`    | Starts the application in watch mode, restarting on source changes.
+| `start:debug`  | Starts the application in debug mode with watch enabled.
+| `start:prod`   | Runs the compiled JavaScript output from the `dist` directory.
+| `lint`         | Runs ESLint to analyze and fix code issues in source and test files.
+| `test`         | Runs all unit tests using Jest.
+| `test:watch`   | Runs Jest in watch mode, rerunning tests on changes.
+| `test:cov`     | Runs tests and outputs a code coverage report.
+| `test:debug`   | Runs tests with Node.js debugger attached.
+| `test:e2e`     | Runs end-to-end tests using a custom Jest configuration.
 
 ---
 
 ## Dependencies
 
-### Runtime Dependencies
+### Dependencies
 
 - @nestjs/common: ^11.0.1
 - @nestjs/core: ^11.0.1
@@ -139,7 +140,7 @@ Mau simplifies deployment by handling infrastructure, enabling you to focus on d
 - reflect-metadata: ^0.2.2
 - rxjs: ^7.8.1
 
-### Development Dependencies
+### DevDependencies
 
 - @eslint/eslintrc: ^3.2.0
 - @eslint/js: ^9.18.0
@@ -169,33 +170,34 @@ Mau simplifies deployment by handling infrastructure, enabling you to focus on d
 
 ## Resources / Links
 
-- [NestJS Documentation](https://docs.nestjs.com)
-- [NestJS GitHub Repository](https://github.com/nestjs/nest)
-- [Discord Channel for Support](https://discord.gg/G7Qnnhy)
-- [Official Video Courses](https://courses.nestjs.com/)
-- [NestJS Mau (AWS Deployment)](https://mau.nestjs.com)
-- [NestJS Devtools](https://devtools.nestjs.com)
-- [Enterprise Support](https://enterprise.nestjs.com)
-- [Twitter: @nestframework](https://twitter.com/nestframework)
-- [LinkedIn](https://linkedin.com/company/nestjs)
-- [Jobs Board](https://jobs.nestjs.com)
+- [NestJS Documentation](https://docs.nestjs.com) - Comprehensive framework docs.
+- [Discord Channel](https://discord.gg/G7Qnnhy) - Community support and discussion.
+- [Official Video Courses](https://courses.nestjs.com/) - Learn NestJS through interactive courses.
+- [NestJS Mau](https://mau.nestjs.com) - Official AWS deployment platform.
+- [NestJS Devtools](https://devtools.nestjs.com) - Visualize and interact with Nest applications.
+- [Enterprise Support](https://enterprise.nestjs.com) - Professional support plans.
+- [Twitter @nestframework](https://twitter.com/nestframework) - Follow for updates.
+- [LinkedIn](https://linkedin.com/company/nestjs) - Company page.
+- [Jobs Board](https://jobs.nestjs.com) - Employment opportunities.
 
 ---
 
 ## Support
 
-Nest is an MIT-licensed open source project that grows thanks to its sponsors and backers. To contribute or support the project, see [NestJS Support Documentation](https://docs.nestjs.com/support).
+Nest is an MIT-licensed open source project maintained thanks to sponsors and backers. To support the project, visit:
+
+- [Support NestJS](https://docs.nestjs.com/support)
 
 ---
 
 ## Stay in Touch
 
 - Author: [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website: [https://nestjs.com](https://nestjs.com/)
+- Official Website: [https://nestjs.com](https://nestjs.com/)
 - Twitter: [@nestframework](https://twitter.com/nestframework)
 
 ---
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is licensed under the MIT License. For more details, see the [LICENSE file](https://github.com/nestjs/nest/blob/master/LICENSE).
