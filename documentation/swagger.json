@@ -1,16 +1,39 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.3",
   "info": {
-    "version": "196b5f7a1711cfd1008124dd1cd1f9243e5a4498",
-    "title": "API Documentation"
+    "title": "API",
+    "version": "cd033e7f2eeffe6d4053e35cab8d03cb0d721491"
   },
   "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "app.controller.ts"
+        ],
+        "operationId": "GetHelloWorld",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {}
+          }
+        }
+      }
+    },
     "/bookings": {
       "post": {
         "tags": [
           "app.controller.ts"
         ],
-        "summary": "CreateBookings",
         "operationId": "CreateBookings",
         "requestBody": {
           "required": true,
@@ -24,7 +47,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Booking created successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -39,29 +62,20 @@
         "tags": [
           "app.controller.ts"
         ],
-        "summary": "GetBookings",
         "operationId": "GetBookings",
-        "parameters": [
-          {
-            "name": "mobileNumber",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "uuid",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingRetrievalDto"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
-            "description": "Successful Response",
+            "description": "Successful booking retrieval",
             "content": {
               "application/json": {
                 "schema": {
