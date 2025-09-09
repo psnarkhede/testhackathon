@@ -1,0 +1,217 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "196b5f7a1711cfd1008124dd1cd1f9243e5a4498",
+    "title": "API Documentation"
+  },
+  "paths": {
+    "/bookings": {
+      "post": {
+        "tags": [
+          "app.controller.ts"
+        ],
+        "operationId": "CreateBookings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookingRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "app.controller.ts"
+        ],
+        "operationId": "GetBookings",
+        "parameters": [
+          {
+            "name": "mobileNumber",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingRequestDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BookingRequestDto": {
+        "type": "object",
+        "required": [
+          "customer",
+          "vehicle",
+          "payment"
+        ],
+        "properties": {
+          "customer": {
+            "$ref": "#/components/schemas/CustomerDto"
+          },
+          "vehicle": {
+            "$ref": "#/components/schemas/VehicleDto"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/PaymentDto"
+          }
+        }
+      },
+      "CustomerDto": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "mobilenumber",
+          "address",
+          "pincode"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "mobilenumber": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "pincode": {
+            "type": "string"
+          }
+        }
+      },
+      "VehicleDto": {
+        "type": "object",
+        "required": [
+          "modelId",
+          "partId",
+          "vehicleType",
+          "onRoadPrice",
+          "exShowroomPrice"
+        ],
+        "properties": {
+          "modelId": {
+            "type": "string"
+          },
+          "partId": {
+            "type": "string"
+          },
+          "vehicleType": {
+            "type": "string"
+          },
+          "onRoadPrice": {
+            "type": "number"
+          },
+          "exShowroomPrice": {
+            "type": "number"
+          }
+        }
+      },
+      "PaymentDto": {
+        "type": "object",
+        "required": [
+          "paymentId",
+          "transactionId",
+          "paymentDate",
+          "merchant",
+          "amountPaid",
+          "paymentType",
+          "paymentMode"
+        ],
+        "properties": {
+          "paymentId": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "paymentDate": {
+            "type": "string"
+          },
+          "merchant": {
+            "type": "string"
+          },
+          "amountPaid": {
+            "type": "number"
+          },
+          "paymentType": {
+            "type": "string"
+          },
+          "paymentMode": {
+            "type": "string"
+          }
+        }
+      },
+      "BookingResponseDto": {
+        "type": "object",
+        "required": [
+          "message",
+          "uuid"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "BookingRetrievalDto": {
+        "type": "object",
+        "required": [
+          "mobileNumber",
+          "uuid"
+        ],
+        "properties": {
+          "mobileNumber": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
