@@ -1,165 +1,171 @@
 # API Documentation
 
-**Version:** cd033e7f2eeffe6d4053e35cab8d03cb0d721491
+**Version:** a471a6bebe64570d91bbaa4fb356251c883fe416
 
 ---
 
-## Endpoint: GetHelloWorld
+## Endpoint 1
+
 - **HTTP Method:** GET
 - **Path:** /
 - **Controller:** app.controller.ts
 - **Function Name:** GetHelloWorld
+- **Parameters:**
+  - `uuid` (string) - query parameter
 - **Request DTO:** None
 - **Response DTO:** None
-- **Parameters:**
-  - `uuid` (string, query parameter)
+
+**Sample Request:**
+```
+GET /?uuid=123e4567-e89b-12d3-a456-426614174000
+```
 
 ---
 
-## Endpoint: CreateBookings
+## Endpoint 2
+
 - **HTTP Method:** POST
 - **Path:** /bookings
 - **Controller:** app.controller.ts
 - **Function Name:** CreateBookings
 - **Request DTO:** BookingRequestDto
 
-    Properties:
+| Property | Type | Required |
+|---|---|---|
+| customer | CustomerDto | Yes |
+| vehicle | VehicleDto | Yes |
+| payment | PaymentDto | Yes |
 
-    - customer (CustomerDto) - required
 
-      - name (string) - required
+### CustomerDto
 
-      - email (string) - required
+| Property | Type | Required |
+|---|---|---|
+| name | string | Yes |
+| email | string | Yes |
+| mobilenumber | string | Yes |
+| address | string | Yes |
+| pincode | string | Yes |
 
-      - mobilenumber (string) - required
+### VehicleDto
 
-      - address (string) - required
+| Property | Type | Required |
+|---|---|---|
+| modelId | string | Yes |
+| partId | string | Yes |
+| vehicleType | VehicleType | Yes |
+| onRoadPrice | number | Yes |
+| exShowroomPrice | number | Yes |
 
-      - pincode (string) - required
+### PaymentDto
 
-    - vehicle (VehicleDto) - required
-
-      - modelId (string) - required
-
-      - partId (string) - required
-
-      - vehicleType (VehicleType) - required
-
-      - onRoadPrice (number) - required
-
-      - exShowroomPrice (number) - required
-
-    - payment (PaymentDto) - required
-
-      - paymentId (string) - required
-
-      - transactionId (string) - required
-
-      - paymentDate (string) - required
-
-      - merchant (string) - required
-
-      - amountPaid (number) - required
-
-      - paymentType (PaymentType) - required
-
-      - paymentMode (PaymentMode) - required
+| Property | Type | Required |
+|---|---|---|
+| paymentId | string | Yes |
+| transactionId | string | Yes |
+| paymentDate | string | Yes |
+| merchant | string | Yes |
+| amountPaid | number | Yes |
+| paymentType | PaymentType | Yes |
+| paymentMode | PaymentMode | Yes |
 
 - **Response DTO:** BookingResponseDto
 
-    Properties:
+| Property | Type | Required |
+|---|---|---|
+| message | string | Yes |
+| uuid | string | Yes |
 
-    - message (string) - required
-
-    - uuid (string) - required
-
-- **Sample Request Example:**
-
+**Sample Request:**
 ```json
 {
   "customer": {
     "name": "John Doe",
     "email": "john.doe@example.com",
-    "mobilenumber": "1234567890",
+    "mobilenumber": "9876543210",
     "address": "123 Main St",
-    "pincode": "123456"
+    "pincode": "560001"
   },
   "vehicle": {
     "modelId": "model123",
     "partId": "part456",
-    "vehicleType": "SUV",
-    "onRoadPrice": 25000.5,
-    "exShowroomPrice": 22000
+    "vehicleType": "VehicleType",
+    "onRoadPrice": 1500000,
+    "exShowroomPrice": 1400000
   },
   "payment": {
     "paymentId": "pay789",
     "transactionId": "txn101112",
-    "paymentDate": "2024-06-01T12:00:00Z",
-    "merchant": "MerchantX",
-    "amountPaid": 25000.5,
-    "paymentType": "CreditCard",
-    "paymentMode": "Online"
+    "paymentDate": "2024-06-01T10:00:00Z",
+    "merchant": "MerchantName",
+    "amountPaid": 1500000,
+    "paymentType": "PaymentType",
+    "paymentMode": "PaymentMode"
   }
 }
 ```
 
 ---
 
-## Endpoint: GetBookings
+## Endpoint 3
+
 - **HTTP Method:** GET
 - **Path:** /bookings
 - **Controller:** app.controller.ts
 - **Function Name:** GetBookings
 - **Request DTO:** BookingRetrievalDto
 
-    Properties:
+| Property | Type | Required |
+|---|---|---|
+| mobileNumber | string | Yes |
+| uuid | string | Yes |
 
-    - mobileNumber (string) - required
+- **Response DTO:** BookingRequestDto
 
-    - uuid (string) - required
+| Property | Type | Required |
+|---|---|---|
+| customer | CustomerDto | Yes |
+| vehicle | VehicleDto | Yes |
+| payment | PaymentDto | Yes |
 
-- **Response DTO:** BookingRequestDto (same structure as in CreateBookings)
+### CustomerDto (Response)
 
-- **Sample Request Example:**
+| Property | Type | Required |
+|---|---|---|
+| name | string | Yes |
+| email | string | Yes |
+| mobilenumber | string | Yes |
+| address | string | Yes |
+| pincode | string | Yes |
 
-(As this is a GET endpoint, assume parameters are passed as query parameters or request body depending on implementation.)
+### VehicleDto (Response)
 
+| Property | Type | Required |
+|---|---|---|
+| modelId | string | Yes |
+| partId | string | Yes |
+| vehicleType | VehicleType | Yes |
+| onRoadPrice | number | Yes |
+| exShowroomPrice | number | Yes |
+
+### PaymentDto (Response)
+
+| Property | Type | Required |
+|---|---|---|
+| paymentId | string | Yes |
+| transactionId | string | Yes |
+| paymentDate | string | Yes |
+| merchant | string | Yes |
+| amountPaid | number | Yes |
+| paymentType | PaymentType | Yes |
+| paymentMode | PaymentMode | Yes |
+
+**Sample Request:**
 ```json
 {
-  "mobileNumber": "1234567890",
-  "uuid": "unique-uuid-1234"
+  "mobileNumber": "9876543210",
+  "uuid": "123e4567-e89b-12d3-a456-426614174000"
 }
 ```
 
-- **Sample Response Example:**
-
-```json
-{
-  "customer": {
-    "name": "John Doe",
-    "email": "john.doe@example.com",
-    "mobilenumber": "1234567890",
-    "address": "123 Main St",
-    "pincode": "123456"
-  },
-  "vehicle": {
-    "modelId": "model123",
-    "partId": "part456",
-    "vehicleType": "SUV",
-    "onRoadPrice": 25000.5,
-    "exShowroomPrice": 22000
-  },
-  "payment": {
-    "paymentId": "pay789",
-    "transactionId": "txn101112",
-    "paymentDate": "2024-06-01T12:00:00Z",
-    "merchant": "MerchantX",
-    "amountPaid": 25000.5,
-    "paymentType": "CreditCard",
-    "paymentMode": "Online"
-  }
-}
-
 ---
-
-# API Version: cd033e7f2eeffe6d4053e35cab8d03cb0d721491
