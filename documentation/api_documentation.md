@@ -1,104 +1,109 @@
 # API Documentation
 
-**Version:** a471a6bebe64570d91bbaa4fb356251c883fe416
+**Version:** c811bf1cdbd8581ea3bdf7c993cd66dcb54f9226
 
 ---
 
-## Endpoint 1
-
+## Endpoint: GET /
+- **Controller:** app.controller.ts
+- **Function:** GetHelloWorld
 - **HTTP Method:** GET
 - **Path:** /
-- **Controller:** app.controller.ts
-- **Function Name:** GetHelloWorld
-- **Parameters:**
-  - `uuid` (string) - query parameter
-- **Request DTO:** None
-- **Response DTO:** None
 
-**Sample Request:**
+### Parameters:
+| Name | Type | Source | Required |
+|-------|------|--------|----------|
+| uuid | string | query | yes |
+
+### Request DTO:
+- None
+
+### Response DTO:
+- None
+
+### Sample Request Example:
 ```
 GET /?uuid=123e4567-e89b-12d3-a456-426614174000
 ```
 
 ---
 
-## Endpoint 2
-
+## Endpoint: POST /bookings
+- **Controller:** app.controller.ts
+- **Function:** CreateBookings
 - **HTTP Method:** POST
 - **Path:** /bookings
-- **Controller:** app.controller.ts
-- **Function Name:** CreateBookings
-- **Request DTO:** BookingRequestDto
 
+### Parameters:
+| Name | Type | Source | Required |
+|-------|------|--------|----------|
+| request | BookingRequestDto | body | yes |
+
+### Request DTO: BookingRequestDto
 | Property | Type | Required |
-|---|---|---|
-| customer | CustomerDto | Yes |
-| vehicle | VehicleDto | Yes |
-| payment | PaymentDto | Yes |
+|----------|------|----------|
+| customer | CustomerDto | yes |
+| vehicle | VehicleDto | yes |
+| payment | PaymentDto | yes |
 
-
-### CustomerDto
-
+#### CustomerDto
 | Property | Type | Required |
-|---|---|---|
-| name | string | Yes |
-| email | string | Yes |
-| mobilenumber | string | Yes |
-| address | string | Yes |
-| pincode | string | Yes |
+|----------|------|----------|
+| name | string | yes |
+| email | string | yes |
+| mobilenumber | string | yes |
+| address | string | yes |
+| pincode | string | yes |
 
-### VehicleDto
-
+#### VehicleDto
 | Property | Type | Required |
-|---|---|---|
-| modelId | string | Yes |
-| partId | string | Yes |
-| vehicleType | VehicleType | Yes |
-| onRoadPrice | number | Yes |
-| exShowroomPrice | number | Yes |
+|----------|------|----------|
+| modelId | string | yes |
+| partId | string | yes |
+| vehicleType | VehicleType | yes |
+| onRoadPrice | number | yes |
+| exShowroomPrice | number | yes |
 
-### PaymentDto
-
+#### PaymentDto
 | Property | Type | Required |
-|---|---|---|
-| paymentId | string | Yes |
-| transactionId | string | Yes |
-| paymentDate | string | Yes |
-| merchant | string | Yes |
-| amountPaid | number | Yes |
-| paymentType | PaymentType | Yes |
-| paymentMode | PaymentMode | Yes |
+|----------|------|----------|
+| paymentId | string | yes |
+| transactionId | string | yes |
+| paymentDate | string | yes |
+| merchant | string | yes |
+| amountPaid | number | yes |
+| paymentType | PaymentType | yes |
+| paymentMode | PaymentMode | yes |
 
-- **Response DTO:** BookingResponseDto
-
+### Response DTO: BookingResponseDto
 | Property | Type | Required |
-|---|---|---|
-| message | string | Yes |
-| uuid | string | Yes |
+|----------|------|----------|
+| message | string | yes |
+| uuid | string | yes |
 
-**Sample Request:**
+### Sample Request Example:
 ```json
 {
   "customer": {
     "name": "John Doe",
-    "email": "john.doe@example.com",
-    "mobilenumber": "9876543210",
+    "email": "john@example.com",
+    "mobilenumber": "1234567890",
     "address": "123 Main St",
-    "pincode": "560001"
+    "pincode": "123456"
   },
   "vehicle": {
     "modelId": "model123",
     "partId": "part456",
     "vehicleType": "VehicleType",
-    "onRoadPrice": 1500000,
-    "exShowroomPrice": 1400000
+    "onRoadPrice": 25000.5,
+    "exShowroomPrice": 24000.0
   },
   "payment": {
     "paymentId": "pay789",
     "transactionId": "txn101112",
     "paymentDate": "2024-06-01T10:00:00Z",
     "merchant": "MerchantName",
-    "amountPaid": 1500000,
+    "amountPaid": 25000.5,
     "paymentType": "PaymentType",
     "paymentMode": "PaymentMode"
   }
@@ -107,65 +112,92 @@ GET /?uuid=123e4567-e89b-12d3-a456-426614174000
 
 ---
 
-## Endpoint 3
-
+## Endpoint: GET /bookings
+- **Controller:** app.controller.ts
+- **Function:** GetBookings
 - **HTTP Method:** GET
 - **Path:** /bookings
-- **Controller:** app.controller.ts
-- **Function Name:** GetBookings
-- **Request DTO:** BookingRetrievalDto
 
+### Parameters:
+| Name | Type | Source | Required |
+|-------|------|--------|----------|
+| request | BookingRetrievalDto | body | yes |
+
+### Request DTO: BookingRetrievalDto
 | Property | Type | Required |
-|---|---|---|
-| mobileNumber | string | Yes |
-| uuid | string | Yes |
+|----------|------|----------|
+| mobileNumber | string | yes |
+| uuid | string | yes |
 
-- **Response DTO:** BookingRequestDto
-
+### Response DTO: BookingRequestDto
 | Property | Type | Required |
-|---|---|---|
-| customer | CustomerDto | Yes |
-| vehicle | VehicleDto | Yes |
-| payment | PaymentDto | Yes |
+|----------|------|----------|
+| customer | CustomerDto | yes |
+| vehicle | VehicleDto | yes |
+| payment | PaymentDto | yes |
 
-### CustomerDto (Response)
-
+#### CustomerDto
 | Property | Type | Required |
-|---|---|---|
-| name | string | Yes |
-| email | string | Yes |
-| mobilenumber | string | Yes |
-| address | string | Yes |
-| pincode | string | Yes |
+|----------|------|----------|
+| name | string | yes |
+| email | string | yes |
+| mobilenumber | string | yes |
+| address | string | yes |
+| pincode | string | yes |
 
-### VehicleDto (Response)
-
+#### VehicleDto
 | Property | Type | Required |
-|---|---|---|
-| modelId | string | Yes |
-| partId | string | Yes |
-| vehicleType | VehicleType | Yes |
-| onRoadPrice | number | Yes |
-| exShowroomPrice | number | Yes |
+|----------|------|----------|
+| modelId | string | yes |
+| partId | string | yes |
+| vehicleType | VehicleType | yes |
+| onRoadPrice | number | yes |
+| exShowroomPrice | number | yes |
 
-### PaymentDto (Response)
-
+#### PaymentDto
 | Property | Type | Required |
-|---|---|---|
-| paymentId | string | Yes |
-| transactionId | string | Yes |
-| paymentDate | string | Yes |
-| merchant | string | Yes |
-| amountPaid | number | Yes |
-| paymentType | PaymentType | Yes |
-| paymentMode | PaymentMode | Yes |
+|----------|------|----------|
+| paymentId | string | yes |
+| transactionId | string | yes |
+| paymentDate | string | yes |
+| merchant | string | yes |
+| amountPaid | number | yes |
+| paymentType | PaymentType | yes |
+| paymentMode | PaymentMode | yes |
 
-**Sample Request:**
+### Sample Request Example:
 ```json
 {
-  "mobileNumber": "9876543210",
+  "mobileNumber": "1234567890",
   "uuid": "123e4567-e89b-12d3-a456-426614174000"
 }
 ```
 
----
+### Sample Response Example:
+```json
+{
+  "customer": {
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "mobilenumber": "1234567890",
+    "address": "456 Secondary St",
+    "pincode": "654321"
+  },
+  "vehicle": {
+    "modelId": "modelABC",
+    "partId": "partDEF",
+    "vehicleType": "VehicleType",
+    "onRoadPrice": 30000.0,
+    "exShowroomPrice": 28000.0
+  },
+  "payment": {
+    "paymentId": "pay456",
+    "transactionId": "txn131415",
+    "paymentDate": "2024-06-02T11:00:00Z",
+    "merchant": "MerchantName",
+    "amountPaid": 30000.0,
+    "paymentType": "PaymentType",
+    "paymentMode": "PaymentMode"
+  }
+}
+```
